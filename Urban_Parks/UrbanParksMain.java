@@ -1,5 +1,3 @@
-package Urban_Parks;
-
 /**
  * Starts the program for the Urban Parks user interface.
  * 
@@ -30,9 +28,9 @@ public class UrbanParksMain {
     private UrbanParksJobs jobs;
     
     public static void main(String[] args) {
-        io = new UrbanParksIO(fileName);
-        users = io.getUsers();
-        jobs = io.getJobs();
+//        io = new UrbanParksIO(fileName);
+//        users = io.getUsers();
+//        jobs = io.getJobs();
         
         // TODO stuff
     }

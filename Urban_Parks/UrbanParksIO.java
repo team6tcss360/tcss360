@@ -1,4 +1,4 @@
-package Urban_Parks;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -94,7 +94,7 @@ public class UrbanParksIO {
      * @param input the line with the user data
      */
     private void parseUserLine(String input) {
-        UrbanParksUser user = new UrbanParksUser();
+//        UrbanParksUser user = new UrbanParksUser();
     }
     
     /**
