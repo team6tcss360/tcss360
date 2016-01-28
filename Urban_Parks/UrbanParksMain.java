@@ -1,3 +1,5 @@
+package Urban_Parks;
+
 /**
  * Starts the program for the Urban Parks user interface.
  * 
