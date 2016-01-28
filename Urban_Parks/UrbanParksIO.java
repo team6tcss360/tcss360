@@ -1,3 +1,5 @@
+package Urban_Parks;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,8 +50,8 @@ public class UrbanParksIO {
      * @param inputJobs the current state of the UrbanParksJobs object
      */
     public void save(UrbanParksUsers inputUsers, UrbanParksJobs inputJobs) {
-        jobs = inputUsers;
-        users = inputJobs;
+        jobs = inputJobs;
+        users = inputUsers;
         
         // TODO Save stuff
     }
@@ -92,7 +94,7 @@ public class UrbanParksIO {
      * @param input the line with the user data
      */
     private void parseUserLine(String input) {
-        UrbanParksUser user = new UrbanParksUser()
+        UrbanParksUser user = new UrbanParksUser();
     }
     
     /**
@@ -100,8 +102,8 @@ public class UrbanParksIO {
      * 
      * @param input the line with the job data
      */
-    private void parseUserLine(String input) {
-        UrbanParksUser job = new UrbanParksJob();
+    private void parseJobLine(String input) {
+        UrbanParksJob job = new UrbanParksJob();
     }
     
     /**
