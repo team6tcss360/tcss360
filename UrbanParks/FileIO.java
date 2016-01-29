@@ -13,17 +13,22 @@ import java.util.Scanner;
  * @author Jonathan Hughes
  * @version January 27, 2016
  */
-public class UrbanParksIO {
+public class FileIO {
     
     /**
      * Contains the users that Urban Parks application will use.
      */
-    private UrbanParksUsers users;
+    private UserList users;
 
     /**
      * Contains the jobs that Urban Parks application will use.
      */
-    private UrbanParksJobs jobs;
+    private JobList jobs;
+    
+    /**
+     * Contains the parks that Urban Parks application will use.
+     */
+    private ParkList parks;
 
     /**
      * Contains the file name of the Urban Parks data.
@@ -31,33 +36,35 @@ public class UrbanParksIO {
     private String file;
     
     /**
-     * Constructs an UrbanParksIO object.
+     * Constructs an FileIO object.
      * 
      * @param inputFile the String address to the file that contains the Urban 
      * Parks data
      */
-    public UrbanParksIO(String inputFile) {
+    public FileIO(String inputFile) {
         file = inputFile;
-        users = new UrbanParksUsers();
-        jobs = new UrbanParksJobs();
+        users = new UserList();
+        jobs = new JobList();
+        parks = new ParkList();
         load(file);
     }
     
     /**
      * Saves the input users and jobs to file.
      * 
-     * @param inputUsers the current state of the UrbanParksUsers object
-     * @param inputJobs the current state of the UrbanParksJobs object
+     * @param inputUsers the current state of the UserList object
+     * @param inputJobs the current state of the JobList object
+     * @param parks 
      */
-    public void save(UrbanParksUsers inputUsers, UrbanParksJobs inputJobs) {
+    public void save(UserList inputUsers, JobList inputJobs, ParkList inputParks) {
         jobs = inputJobs;
         users = inputUsers;
-        
+        parks = inputParks;
         // TODO Save stuff
     }
     
     /**
-     * Constructs an UrbanParksIO object.
+     * Constructs an FileIO object.
      * @param inputFile the file that contains the Urban Parks data
      */
     private void load(String inputFile) {
@@ -95,7 +102,7 @@ public class UrbanParksIO {
      */
     private void parseUserLine(String input) {
         //TODO stuff
-        //UrbanParksUser user = new UrbanParksUser();
+        //User user = new User();
     }
     
     /**
@@ -105,24 +112,33 @@ public class UrbanParksIO {
      */
     private void parseJobLine(String input) {
         //TODO stuff
-        UrbanParksJob job = new UrbanParksJob();
+        Job job = new Job();
     }
     
     /**
      * Returns the users.
      * 
-     * @return the UrbanParksUsers that the IO loaded
+     * @return the UserList that the IO loaded
      */
-    public UrbanParksUsers getUsers() {
+    public UserList getUsers() {
         return users;
     }
     
     /**
      * Returns the jobs.
      * 
-     * @return the UrbanParksJobs that the IO loaded
+     * @return the JobList that the IO loaded
      */
-    public UrbanParksJobs getJobs() {
+    public JobList getJobs() {
         return jobs;
+    }
+
+    /**
+     * Returns the parks.
+     * 
+     * @return the ParkList that the IO loaded
+     */
+    public ParkList getParks() {
+        return parks;
     }    
 }
