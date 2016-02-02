@@ -15,43 +15,43 @@ import java.io.InputStreamReader;
 public class FileIO {
     
     /**
-     * The fileName for the Urban Park Application's data.
+     * The file name for the Urban Park Application's data.
      */
-    private static final String fileName = "UrbanParksData.txt";
+    private static final String FILE_NAME = "UrbanParksData.txt";
     
     /**
-     * Contains the number of variables in the User class.
+     * The number of variables in the User class.
      */
     private static final int USER_VARIABLES = 5;
 
     /**
-     * Contains the number of variables in the Job class.  This does not include
+     * The number of variables in the Job class.  This does not include
      * the volunteers.  They are listed at the end.
      */
     private static final int JOB_VARIABLES = 8;
     
     /**
-     * Contains the number of variables in the Park class.
+     * The number of variables in the Park class.
      */
     private static final int PARK_VARIABLES = 4;
 
     /**
-     * Contains the maximum amount of volunteers allowed.
+     * The maximum amount of volunteers allowed.
      */
     private static final int MAX_VOLUNTEERS = 30;
 
     /**
-     * Contains the users that Urban Parks application will use.
+     * The users that Urban Parks application will use.
      */
     private UserList users;
 
     /**
-     * Contains the jobs that Urban Parks application will use.
+     * The jobs that Urban Parks application will use.
      */
     private JobList jobs;
     
     /**
-     * Contains the parks that Urban Parks application will use.
+     * The parks that Urban Parks application will use.
      */
     private ParkList parks;
     
@@ -88,7 +88,7 @@ public class FileIO {
      */
     private void load() {
         //Bring in text file to be read
-        InputStream input = getClass().getResourceAsStream(fileName); 
+        InputStream input = getClass().getResourceAsStream(FILE_NAME); 
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         
         String line;
