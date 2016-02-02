@@ -8,11 +8,6 @@
 public class GUI {
     
     /**
-     * The fileName for the Urban Park Application's data.
-     */
-    private String fileName = "UrbanParksData.txt";
-    
-    /**
      * The file input/output object.
      */
     private FileIO fileIO;
@@ -36,12 +31,11 @@ public class GUI {
      * Constructs the GUI for the Urban Parks application.
      */
     public GUI() {
-        fileIO = new FileIO(fileName); //create fileIO object
+        fileIO = new FileIO();         //create fileIO object
         users = fileIO.getUsers();     //initialize users
         jobs = fileIO.getJobs();       //initialize jobs
         parks = fileIO.getParks();     //initialize parks
         
-      
         // TODO stuff
     }
     

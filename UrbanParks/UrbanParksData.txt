@@ -1,0 +1,5 @@
+S:John:Smith:johnsmith@gmail.com:1234567890:1:
+V:Mary:Williams:mwilliams@gmail.com:1234567899:2:
+M:George:Wilson:geogew@gmail.com:9876543210:3:
+P:Point Defiance:5400 N Pearl St, Tacoma, WA 98407:George:Wilson:
+J:1:20160301:20160301:Point Defiance:The volunteers will help pickup trash on the trails.:5:0:0:Mary:Williams:;
