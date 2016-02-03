@@ -1,9 +1,9 @@
 /**
  * Starts the program for the Urban Parks application.
- * 
- * TCSS 360, Winter 2016
- * @author Group 6: Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version January 21, 2016
+ *
+ * @author Group 6, TCSS 360, Winter 2016
+ * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
+ * @version February 3, 2016
  */
 public class UrbanParksMain {
 
@@ -12,7 +12,7 @@ public class UrbanParksMain {
      * @param args Command line args
      */
     public static void main(String[] args) {
-        GUI gui = new GUI(); //create GUI
-        gui.run();           //run GUI
+        ConsoleMain consoleMain = new ConsoleMain(); //create ConsoleMain
+        consoleMain.run();           //run ConsoleMain
     }
 }
