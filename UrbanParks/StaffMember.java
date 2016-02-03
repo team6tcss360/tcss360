@@ -1,8 +1,26 @@
-
+/**
+ * The class that contains Urban Parks staff member specific methods.
+ * 
+ * @author Group 6, TCSS 360, Winter 2016
+ * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
+ * @version February 3, 2016
+ */
 public class StaffMember extends User {
 
-    public StaffMember(String firstName, String lastName, String email, String phone, int userID) {
-        // TODO Auto-generated constructor stub
+    /**
+     * Creates a StaffMember through the User constructor.
+     */
+    public StaffMember(String inputFirstName, String inputLastName, String inputEmail, String inputPhone,
+            int inputUserID) {
+        super(inputFirstName, inputLastName, inputEmail, inputPhone, inputUserID);
     }
 
+    /**
+     * Gets a list of volunteer last names. 
+     * 
+     * @return A list of volunteer last names as a String.
+     */
+    public String getVolunteerLastNames(){
+        return null;        
+    }
 }

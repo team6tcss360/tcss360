@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 /**
  * Reads and saves data to files for the Urban Parks application.
  * 
- * TCSS 360, Winter 2016
- * @author Jonathan Hughes
- * @version January 27, 2016
+ * @author Group 6, TCSS 360, Winter 2016
+ * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
+ * @version February 3, 2016
  */
 public class FileIO {
     
@@ -86,7 +86,7 @@ public class FileIO {
      * Constructs an FileIO object.
      * @param inputFile the file that contains the Urban Parks data
      */
-    private void load() {
+    protected void load() {
         //Bring in text file to be read
         InputStream input = getClass().getResourceAsStream(FILE_NAME); 
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -123,7 +123,7 @@ public class FileIO {
      * 
      * @param input the line with the user data
      */
-    private void parseUserLine(String input) {
+    protected void parseUserLine(String input) {
         //initialize attributes
         String firstName = "";
         String lastName = "";
@@ -177,7 +177,7 @@ public class FileIO {
      * 
      * @param input the line with the job data
      */
-    private void parseJobLine(String input) {
+    protected void parseJobLine(String input) {
         //initialize attributes
         int jobID = 0;
         String startDate = "";
@@ -240,7 +240,7 @@ public class FileIO {
      * 
      * @param input the line with the park data
      */
-    private void parseParkLine(String input) {
+    protected void parseParkLine(String input) {
         //initialize attributes
         String parkName = "";
         String location = "";
