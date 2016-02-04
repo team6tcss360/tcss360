@@ -38,6 +38,7 @@ public class JobList {
     	}
     	return -1;
     }
+<<<<<<< HEAD
     public Job getJob(int jobID) {
     	for(int i = 0; i < myJobs.size(); i++) {
     		if(myJobs.get(i).getID() == jobID) {
@@ -53,4 +54,18 @@ public class JobList {
     	}
     	return ret;
     }
+=======
+    
+    /**
+     * ToString method for the Array list.
+     */
+    public String toString() {
+    	String str = " ";
+    	for(int i = 0; i < myJobs.size(); i++) {
+    		str += myJobs.toString() + "\n";
+    	}
+    	return str;
+    }
+    
+>>>>>>> origin/master
 }
