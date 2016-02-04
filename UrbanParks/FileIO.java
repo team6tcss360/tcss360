@@ -270,7 +270,7 @@ public class FileIO {
             }            
         }
         //add to park list
-        parks.add(new Park(parkName, location, parkManagerFirstName, 
+        parks.addPark(new Park(parkName, location, parkManagerFirstName, 
                 parkManagerLastName)); 
     }
     
