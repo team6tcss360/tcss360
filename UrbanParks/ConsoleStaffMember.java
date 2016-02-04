@@ -45,8 +45,8 @@ public class ConsoleStaffMember {
         System.out.println("4) Exit");  
         System.out.print(">> ");
         String input = scanner.nextLine().trim(); //Get user input
-        input = input.substring(3); //cuts off ">> "
-        
+        input = input.substring(1); //cuts off ">> "
+      
         //TODO Stuff
     }
 
