@@ -38,5 +38,19 @@ public class JobList {
     	}
     	return -1;
     }
-    
+    public Job getJob(int jobID) {
+    	for(int i = 0; i < myJobs.size(); i++) {
+    		if(myJobs.get(i).getID() == jobID) {
+    			return myJobs.get(i);
+    		}
+    	}
+    	return null;
+    }
+    public String toString() {
+    	String ret = " ";
+    	for(int i = 0; i < myJobs.size(); i++) {
+    		ret += myJobs.get(i);
+    	}
+    	return ret;
+    }
 }
