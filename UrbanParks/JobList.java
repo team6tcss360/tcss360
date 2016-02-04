@@ -39,4 +39,15 @@ public class JobList {
     	return -1;
     }
     
+    /**
+     * ToString method for the Array list.
+     */
+    public String toString() {
+    	String str = " ";
+    	for(int i = 0; i < myJobs.size(); i++) {
+    		str += myJobs.toString() + "\n";
+    	}
+    	return str;
+    }
+    
 }
