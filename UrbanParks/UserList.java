@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,8 +8,13 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class UserList<User> extends ArrayList<User>{
+public class UserList implements Serializable {
 
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 3928130769659232429L;
+   
     /**
      * The collection of users.
      */
@@ -25,20 +31,24 @@ public class UserList<User> extends ArrayList<User>{
      * Adds a user to the collection.
      * 
      * @param user the user to add
+     * @return 
      */
-    public void add(User user) {
-        users.add(user);        
+    public boolean add(User user) {
+        users.add(user);
+        //TODO fix below
+        return true;
     }
     
-    /**
-     * Removes a user from the collection.
-     * 
-     * @param user the user to remove
-     */
-    public void remove(User user) {
-        int index = findIndexFromEmail(user.getEmail()); //find user index
-        users.remove(index); //remove user at that index
-    }
+//TODO remove?    
+//    /**
+//     * Removes a user from the collection.
+//     * 
+//     * @param user the user to remove
+//     */
+//    public void remove(User user) {
+//        int index = findIndexFromEmail(user.getEmail()); //find user index
+//        users.remove(index); //remove user at that index
+//    }
 
     /**
      * Finds the user associated with an input email.
@@ -78,5 +88,26 @@ public class UserList<User> extends ArrayList<User>{
     public int size(){
     	int size = users.size();
     	return size;
+    }
+    
+    /**
+     * Gets a list of volunteer last names. 
+     * 
+     * @return A list of volunteer last names as a String.
+     */
+    public String getVolunteerLastNames(){
+        StringBuilder lastNames = new StringBuilder();
+        if(users.size()==0){
+            lastNames.append("No users!");
+        }else{
+            for(int i = 0; i< users.size(); i++){
+                if(i==users.size()-1){
+                    lastNames.append(users.get(i).getLastName());
+                }else{
+                    lastNames.append(users.get(i).getLastName()+", ");
+                }   
+            }
+        }
+        return lastNames.toString();
     }
 }

@@ -1,4 +1,6 @@
-import java.awt.List;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,11 +10,20 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class JobList {
-	ArrayList<Job> myJobs;
+public class JobList implements Serializable {
+    
+	/**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = -7707791834993383688L;
+    
+    
+    ArrayList<Job> myJobs;
+	
 	public JobList() {
 		myJobs = new ArrayList<Job>();
 	}
+	
     public void add(Job job) {
     	if(job == null) {
     		System.out.println("Invalid Job yo!");
@@ -38,23 +49,16 @@ public class JobList {
     	}
     	return -1;
     }
-<<<<<<< HEAD
+
     public Job getJob(int jobID) {
     	for(int i = 0; i < myJobs.size(); i++) {
-    		if(myJobs.get(i).getID() == jobID) {
+    		if(myJobs.get(i).getJobID() == jobID) {
     			return myJobs.get(i);
     		}
     	}
     	return null;
     }
-    public String toString() {
-    	String ret = " ";
-    	for(int i = 0; i < myJobs.size(); i++) {
-    		ret += myJobs.get(i);
-    	}
-    	return ret;
-    }
-=======
+
     
     /**
      * ToString method for the Array list.
@@ -67,5 +71,12 @@ public class JobList {
     	return str;
     }
     
->>>>>>> origin/master
+    /**
+     * This is the default implementation of writeObject.
+     */
+    private void writeObject(ObjectOutputStream aOutputStream) 
+            throws IOException {
+        //perform the default serialization for all non-transient, non-static fields
+        aOutputStream.defaultWriteObject();
+    }
 }

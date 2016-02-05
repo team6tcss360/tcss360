@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Contains information for an Urban Parks park.
  * 
@@ -5,7 +7,12 @@
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class Park {
+public class Park implements Serializable {
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = -5745395721282726488L;
 
     /**
      * The park's name.

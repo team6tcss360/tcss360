@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  * The class that contains ParkManager specific methods.
  * 
@@ -6,6 +10,11 @@
  * @version February 3, 2016
  */
 public class ParkManager extends User {
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = -5885352666198015690L;
 
     /**
      * Creates a ParkManager through the User constructor.

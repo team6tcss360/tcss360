@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -148,7 +147,8 @@ public class ConsoleParkManager {
 
 		}
 		countJobs++;
-		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, myVolunteers);
+		//TODO fix null below
+		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, null);
 		myJobs.add(job);
 
 

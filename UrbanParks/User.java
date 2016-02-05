@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  * The abstract class that contains shared methods for all user types.
  * 
@@ -5,7 +9,12 @@
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public abstract class User {
+public abstract class User implements Serializable {
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 8520622463070772155L;
 
     /** 
      * The user's first name.
@@ -123,5 +132,15 @@ public abstract class User {
      */
     public int getUserID() {
         return userID;
+    }
+    
+
+    /**
+     * This is the default implementation of writeObject.
+     */
+    private void writeObject(ObjectOutputStream aOutputStream) 
+            throws IOException {
+        //perform the default serialization for all non-transient, non-static fields
+        aOutputStream.defaultWriteObject();
     }
 }

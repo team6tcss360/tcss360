@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,14 @@ import java.util.List;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class ParkList {
+public class ParkList implements Serializable {
+    
 	/**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 870375065703530912L;
+    
+    /**
      * Park List.
      */
 	List<Park> myParks;
@@ -25,7 +34,7 @@ public class ParkList {
 	 * Add a park to the system.
 	 * @param park The park to be added to our system.
 	 */
-    public void addPark(Park park) {
+    public void add(Park park) {
     	if(park == null) {
     		System.out.println("Invalid Park Entry!");
     	}
@@ -68,5 +77,13 @@ public class ParkList {
     	return str;
     }
     
+    /**
+     * This is the default implementation of writeObject.
+     */
+    private void writeObject(ObjectOutputStream aOutputStream) 
+            throws IOException {
+        //perform the default serialization for all non-transient, non-static fields
+        aOutputStream.defaultWriteObject();
+    }
 
 }

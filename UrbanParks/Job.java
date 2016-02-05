@@ -1,4 +1,5 @@
 import java.util.List;
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
@@ -8,7 +9,12 @@ import java.util.GregorianCalendar;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 4, 2016
  */
-public class Job {
+public class Job implements Serializable {
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = -2382757831956773518L;
 
     /**
      * A job's ID number.
@@ -232,78 +238,6 @@ public class Job {
     public int getHeavyMax() {
     	return heavyMax;
     }
-    public int getID() {
-    	return this.jobID;
-    }
-	public int getJobID() {
-		return jobID;
-	}
-	public void setJobID(int jobID) {
-		this.jobID = jobID;
-	}
-	public String getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-	public String getParkName() {
-		return parkName;
-	}
-	public void setParkName(String parkName) {
-		this.parkName = parkName;
-	}
-	public String getDetails() {
-		return details;
-	}
-	public void setDetails(String details) {
-		this.details = details;
-	}
-	public int getLightMax() {
-		return lightMax;
-	}
-	public void setLightMax(int lightMax) {
-		this.lightMax = lightMax;
-	}
-	public int getLightCurrent() {
-		return lightCurrent;
-	}
-	public void setLightCurrent(int lightCurrent) {
-		this.lightCurrent = lightCurrent;
-	}
-	public int getMedMax() {
-		return medMax;
-	}
-	public void setMedMax(int medMax) {
-		this.medMax = medMax;
-	}
-	public int getMedCurrent() {
-		return medCurrent;
-	}
-	public void setMedCurrent(int medCurrent) {
-		this.medCurrent = medCurrent;
-	}
-	public int getHeavyMax() {
-		return heavyMax;
-	}
-	public void setHeavyMax(int heavyMax) {
-		this.heavyMax = heavyMax;
-	}
-	public int getHeavyCurrent() {
-		return heavyCurrent;
-	}
-	public void setHeavyCurrent(int heavyCurrent) {
-		this.heavyCurrent = heavyCurrent;
-	}
-	public List<Volunteer> getVolunteerList() {
-		return volunteerList;
-	}
 	public void setVolunteerList(List<Volunteer> volunteerList) {
 		this.volunteerList = volunteerList;
 	}
@@ -347,12 +281,5 @@ public class Job {
     	int myYear = Integer.parseInt(theDate.substring(4, 8));
     	
     	return new GregorianCalendar(myYear, myDate, myMonth);	  	
-    }
-    
-    @Override
-    public String toString() {
-    	return parkName + "\n" + details;
-    }
-
-    
+    }    
 }
