@@ -71,4 +71,12 @@ public class UserList<User> extends ArrayList<User>{
         }
         return -1; //if no match found
     }
+    
+    /**
+     * Returns the size of the UserList.
+     */
+    public int size(){
+    	int size = users.size();
+    	return size;
+    }
 }

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 /**
  * The class that contains Urban Parks staff member specific methods.
@@ -23,13 +23,16 @@ public class StaffMember extends User {
      * @return A list of volunteer last names as a String.
      */
     public String getVolunteerLastNames(UserList<User> inputList){
-    	String lastNames = "";
     	
-    	for(User u:inputList){
-    		//print out u.getLastName();
+    	StringBuilder lastNames = new StringBuilder();
+    	for(int i = 0; i< inputList.size(); i++){
+    		if(i==inputList.size()-1){
+    			lastNames.append(inputList.get(i).getLastName());
+    		}else{
+    			lastNames.append(inputList.get(i).getLastName()+", ");
+    		}	
     	}
-    	//loop over UserList and retrieve each user's last name
-		return null;
+		return lastNames.toString();
     	
     }
 }
