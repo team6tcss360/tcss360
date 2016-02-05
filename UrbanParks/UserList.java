@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class UserList {
+public class UserList<User> extends ArrayList<User>{
 
     /**
      * The collection of users.

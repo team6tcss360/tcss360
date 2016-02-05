@@ -22,8 +22,12 @@ public class StaffMember extends User {
      * 
      * @return A list of volunteer last names as a String.
      */
-    public String getVolunteerLastNames(UserList inputList){
+    public String getVolunteerLastNames(UserList<User> inputList){
     	String lastNames = "";
+    	
+    	for(User u:inputList){
+    		//print out u.getLastName();
+    	}
     	//loop over UserList and retrieve each user's last name
 		return null;
     	
