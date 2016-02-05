@@ -3,7 +3,7 @@
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 3, 2016
+ * @version February 4, 2016
  */
 public class StaffMember extends User {
 
