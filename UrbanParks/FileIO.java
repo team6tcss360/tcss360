@@ -21,7 +21,7 @@ public class FileIO {
     /**
      * The file name for the Urban Park Application's data.
      */
-    private static final String FILE_NAME = "UrbanParksData.ser";
+    private static final String FILE_NAME = "UrbanParks/UrbanParksData.txt";
 
     /**
      * The users that Urban Parks application will use.
