@@ -19,6 +19,8 @@ public class Volunteer extends User {
      * Returns a list of jobs that the User is signed up for.
      */
     public String getJobs() {
+    	
+    	
         return null;
     }
 }
