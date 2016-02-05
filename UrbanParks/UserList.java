@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class UserList {
+public class UserList<User> extends ArrayList<User>{
 
     /**
      * The collection of users.
@@ -70,5 +70,13 @@ public class UserList {
             }
         }
         return -1; //if no match found
+    }
+    
+    /**
+     * Returns the size of the UserList.
+     */
+    public int size(){
+    	int size = users.size();
+    	return size;
     }
 }
