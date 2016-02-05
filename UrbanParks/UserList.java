@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -109,5 +111,14 @@ public class UserList implements Serializable {
             }
         }
         return lastNames.toString();
+    }
+    
+    /**
+     * This is the default implementation of writeObject.
+     */
+    private void writeObject(ObjectOutputStream aOutputStream) 
+            throws IOException {
+        //perform the default serialization for all non-transient, non-static fields
+        aOutputStream.defaultWriteObject();
     }
 }

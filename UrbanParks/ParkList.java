@@ -85,5 +85,4 @@ public class ParkList implements Serializable {
         //perform the default serialization for all non-transient, non-static fields
         aOutputStream.defaultWriteObject();
     }
-
 }
