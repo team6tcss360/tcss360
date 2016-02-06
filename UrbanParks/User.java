@@ -120,4 +120,11 @@ public abstract class User implements Serializable {
         //perform the default serialization for all non-transient, non-static fields
         aOutputStream.defaultWriteObject();
     }
+    
+    @Override
+    public String toString(){
+		String toReturn = "Name: "+ firstName+ " "+ lastName + "\nE-Mail: " + email + "\nPhone: " + phone;
+		return toReturn;
+    	
+    }
 }

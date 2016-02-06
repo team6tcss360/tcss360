@@ -20,8 +20,8 @@ public class Volunteer extends User {
      */
     public String getJobs() {
     	
-    	
-    	
         return null;
     }
+    
+    
 }
