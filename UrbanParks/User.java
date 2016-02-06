@@ -37,26 +37,19 @@ public abstract class User implements Serializable {
     private String phone;
     
     /**
-     * The user's identification number.
-     */
-    private int userID;
-    
-    /**
      * Creates a User based upon input data.
      * 
      * @param firstName user's first name
      * @param lastName user's last name
      * @param email user's email address
      * @param phone user's phone number
-     * @param userID user's identification number
      */
     public User(String inputFirstName, String inputLastName, String inputEmail, 
-            String inputPhone, int inputUserID) {
+            String inputPhone) {
         firstName = inputFirstName;
         lastName = inputLastName;
         email = inputEmail;
         phone = inputPhone;
-        userID = inputUserID;
     }
     
     /**
@@ -92,14 +85,6 @@ public abstract class User implements Serializable {
     }
     
     /**
-     * Sets the user's ID number.
-     * @param inputFirstName the new ID number
-     */
-    public void setUserID(int inputUserID) {
-        userID = inputUserID;
-    }
-    
-    /**
      * Gets the user's first name.
      */
     public String getFirstName() {
@@ -127,14 +112,6 @@ public abstract class User implements Serializable {
         return phone;
     }
     
-    /**
-     * Gets the user's ID number.
-     */
-    public int getUserID() {
-        return userID;
-    }
-    
-
     /**
      * This is the default implementation of writeObject.
      */

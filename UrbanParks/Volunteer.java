@@ -11,8 +11,8 @@ public class Volunteer extends User {
      * Creates a volunteer through the User constructor.
      */
     public Volunteer(String inputFirstName, String inputLastName, 
-            String inputEmail, String inputPhone, int inputUserID) {
-        super(inputFirstName, inputLastName, inputEmail, inputPhone, inputUserID);
+            String inputEmail, String inputPhone) {
+        super(inputFirstName, inputLastName, inputEmail, inputPhone);
     }
 
     /**

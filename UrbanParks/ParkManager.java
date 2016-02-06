@@ -19,9 +19,8 @@ public class ParkManager extends User {
     /**
      * Creates a ParkManager through the User constructor.
      */
-    public ParkManager(String inputFirstName, String inputLastName, String inputEmail, String inputPhone,
-            int inputUserID) {
-        super(inputFirstName, inputLastName, inputEmail, inputPhone, inputUserID);
+    public ParkManager(String inputFirstName, String inputLastName, String inputEmail, String inputPhone) {
+        super(inputFirstName, inputLastName, inputEmail, inputPhone);
     }
 
     /**
@@ -29,13 +28,12 @@ public class ParkManager extends User {
      * 
      * @return Summaries of jobs as a String.
      */
-    public String getJobs(JobList inputJobList) {
+    public String getJobs(JobList inputJobList, ParkList inputParkList) {
     	StringBuilder jobs = new StringBuilder();
     	for(int i =0; i< inputJobList.size(); i++){
-//    		Need to access Job info to see if it matches
-//    		if(inputJobList.getJobAt(i).get){
-//    			
-//    		}
+    		Job currentJob = inputJobList.getJob(i);
+    		String parkName = currentJob.getParkName();
+    		
     	}
         return jobs.toString();
     }

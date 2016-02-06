@@ -15,8 +15,7 @@ public class StaffMember extends User {
     /**
 	 * Creates a StaffMember through the User constructor.
 	 */
-	public StaffMember(String inputFirstName, String inputLastName, String inputEmail, String inputPhone,
-			int inputUserID) {
-		super(inputFirstName, inputLastName, inputEmail, inputPhone, inputUserID);
+	public StaffMember(String inputFirstName, String inputLastName, String inputEmail, String inputPhone) {
+		super(inputFirstName, inputLastName, inputEmail, inputPhone);
 	}
 }
