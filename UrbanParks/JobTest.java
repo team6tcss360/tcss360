@@ -29,7 +29,7 @@ public class JobTest {
 		String details = "do whatever you want";
 		
 		
-		myVolunteer = new Volunteer("Weiwei", "Shi", "wshi@uw.edu", "3609903694", 1);
+		myVolunteer = new Volunteer("Weiwei", "Shi", "wshi@uw.edu", "3609903694");
 		
 		myPark = new Park("South Park", "Olympia", "Josh", "Teneburg");
 		

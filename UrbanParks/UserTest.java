@@ -25,7 +25,7 @@ public class UserTest {
      */
     @Before
     public void setUp() throws Exception {
-        user = new Volunteer(FIRST_NAME, LAST_NAME, EMAIL, PHONE, ID);
+        user = new Volunteer(FIRST_NAME, LAST_NAME, EMAIL, PHONE);
     }
 
     /**
