@@ -58,7 +58,14 @@ public class JobList implements Serializable {
     	}
     	return null;
     }
-
+    
+    public int size(){
+    	return myJobs.size();
+    }
+    
+    public Job getJobAt(int inputIndex){
+    	return myJobs.get(inputIndex);
+    }
     
     /**
      * ToString method for the Array list.

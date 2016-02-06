@@ -103,11 +103,13 @@ public class UserList implements Serializable {
             lastNames.append("No users!");
         }else{
             for(int i = 0; i< users.size(); i++){
-                if(i==users.size()-1){
-                    lastNames.append(users.get(i).getLastName());
-                }else{
-                    lastNames.append(users.get(i).getLastName()+", ");
-                }   
+            	if(users.get(i) instanceof Volunteer){
+            		if(i==users.size()-1){
+                        lastNames.append(users.get(i).getLastName());
+                    }else{
+                        lastNames.append(users.get(i).getLastName()+", ");
+                    }
+            	}  
             }
         }
         return lastNames.toString();
@@ -120,5 +122,12 @@ public class UserList implements Serializable {
             throws IOException {
         //perform the default serialization for all non-transient, non-static fields
         aOutputStream.defaultWriteObject();
+    }
+    
+   
+    @Override
+    public String toString(){
+		return null;
+    	
     }
 }
