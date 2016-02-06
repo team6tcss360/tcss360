@@ -76,6 +76,17 @@ public class ParkList implements Serializable {
     	return myParks.size();
     }
     
+    
+    /**
+     * Returns the Park at a given index in ParkList
+     * 
+     * @param inputIndex int for index.
+     * @return Park at the given index.
+     */
+    public Park getParkAt(int inputIndex){
+    	return myParks.get(inputIndex);
+    }
+    
     /**
      * ToString method for the Array list.
      */

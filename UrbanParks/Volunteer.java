@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * The class that contains volunteer specific methods.
  * 
@@ -7,12 +9,18 @@
  */
 public class Volunteer extends User {
 
+	/**
+	 * 
+	 */
+	private ArrayList<Job> volunteerJobs;
+	
     /**
      * Creates a volunteer through the User constructor.
      */
     public Volunteer(String inputFirstName, String inputLastName, 
             String inputEmail, String inputPhone) {
         super(inputFirstName, inputLastName, inputEmail, inputPhone);
+        volunteerJobs = new ArrayList<Job>();
     }
 
     /**
@@ -22,6 +30,49 @@ public class Volunteer extends User {
     	
         return null;
     }
+    
+    /**
+     * Adds a job to Volunteer's list of jobs.
+     * 
+     * @param inputJob
+     */
+    public void addJob(Job inputJob) {
+    	volunteerJobs.add(inputJob);
+    }
+    
+    /**
+     * Removes job from Volunteer's list of jobs
+     * 
+     * @param inputJob
+     */
+    public void removeJob(Job inputJob) {
+    	if(inputJob==null|| !volunteerJobs.contains(inputJob)) {
+    		//can't remove
+    	}else {
+    		int toRemove = volunteerJobs.indexOf(inputJob);
+    		volunteerJobs.remove(toRemove);
+    	}
+    }
+    
+    /**
+     * Get the jobs that a Volunteer has signed up for
+     * 
+     * @return ArrayList<Job>
+     */
+    public ArrayList<Job> getCurrentJobs() {
+		return volunteerJobs;
+    	
+    }
+    
+    /**
+     * Returns the amount of jobs a Volunteer is signed up for.
+     * @return
+     */
+    public int jobCount() {
+    	return volunteerJobs.size();
+    }
+    
+    
     
     
 }
