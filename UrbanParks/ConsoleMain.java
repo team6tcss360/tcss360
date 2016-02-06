@@ -51,9 +51,9 @@ public class ConsoleMain {
         users = new UserList();
         jobs = new JobList();  
         parks = new ParkList(); 
-        users.add(new Volunteer("Mary","Williams","mwilliams@gmail.com","1234567899",2));
-        users.add(new StaffMember("John","Smith","johnsmith@gmail.com","1234567890",1));
-        users.add(new ParkManager("George","Wilson","geogew@gmail.com","9876543210",3));
+        users.add(new Volunteer("Mary","Williams","mwilliams@gmail.com","1234567899"));
+        users.add(new StaffMember("John","Smith","johnsmith@gmail.com","1234567890"));
+        users.add(new ParkManager("George","Wilson","geogew@gmail.com","9876543210"));
         parks.add(new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "George", "Wilson"));
         jobs.add(new Job(1, "20160301", "20160301", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0, null));
     }
