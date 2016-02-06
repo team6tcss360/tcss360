@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,25 +7,26 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class JobList implements Serializable {
-    
-	/**
-     * The serial version UID.
+public class JobList {
+     
+    /**
+     * An Array of Jobs.
      */
-    private static final long serialVersionUID = -7707791834993383688L;
-    
-    
-    ArrayList<Job> myJobs;
+    ArrayList<Job> jobs;
 	
 	public JobList() {
-		myJobs = new ArrayList<Job>();
+		jobs = new ArrayList<Job>();
 	}
+	
+	public JobList(ArrayList<Job> inputArray) {
+        jobs = inputArray;
+    }
 	
     public void add(Job job) {
     	if(job == null) {
     		System.out.println("Invalid Job yo!");
     	}
-    	myJobs.add(job);
+    	jobs.add(job);
     }
     
     public void remove(Job job) {
@@ -36,14 +34,14 @@ public class JobList implements Serializable {
     	if(index == -1) {
     		System.out.println("Job doesn't exist");
     	} else {
-    		myJobs.remove(index);
+    		jobs.remove(index);
     	}
     }
     
     
     public int findIndex(Job job) {
-    	for(int i = 0; i < myJobs.size(); i++) {
-    		if(myJobs.get(i).equals(job)) {
+    	for(int i = 0; i < jobs.size(); i++) {
+    		if(jobs.get(i).equals(job)) {
     			return i;
     		}
     	}
@@ -51,20 +49,20 @@ public class JobList implements Serializable {
     }
 
     public Job getJob(int jobID) {
-    	for(int i = 0; i < myJobs.size(); i++) {
-    		if(myJobs.get(i).getJobID() == jobID) {
-    			return myJobs.get(i);
+    	for(int i = 0; i < jobs.size(); i++) {
+    		if(jobs.get(i).getJobID() == jobID) {
+    			return jobs.get(i);
     		}
     	}
     	return null;
     }
     
     public int size(){
-    	return myJobs.size();
+    	return jobs.size();
     }
     
     public Job getJobAt(int inputIndex){
-    	return myJobs.get(inputIndex);
+    	return jobs.get(inputIndex);
     }
     
     /**
@@ -72,18 +70,14 @@ public class JobList implements Serializable {
      */
     public String toString() {
     	String str = " ";
-    	for(int i = 0; i < myJobs.size(); i++) {
-    		str += myJobs.toString() + "\n";
+    	for(int i = 0; i < jobs.size(); i++) {
+    		str += jobs.get(i).toString() + "\n";
     	}
     	return str;
     }
-    
-    /**
-     * This is the default implementation of writeObject.
-     */
-    private void writeObject(ObjectOutputStream aOutputStream) 
-            throws IOException {
-        //perform the default serialization for all non-transient, non-static fields
-        aOutputStream.defaultWriteObject();
+
+    public ArrayList<Job> getArrayList() {
+        // TODO Auto-generated method stub
+        return jobs;
     }
 }

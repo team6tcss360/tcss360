@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,12 +7,7 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class UserList implements Serializable {
-
-    /**
-     * The serial version UID.
-     */
-    private static final long serialVersionUID = 3928130769659232429L;
+public class UserList {
    
     /**
      * The collection of users.
@@ -27,6 +19,13 @@ public class UserList implements Serializable {
      */
     public UserList() {
         users = new ArrayList<User>();
+    }
+    
+    /**
+     * Constructs a UserList from an Array.
+     */
+    public UserList(ArrayList<User> inputArrayList) {
+        users = inputArrayList;
     }
     
     /**
@@ -115,19 +114,7 @@ public class UserList implements Serializable {
         return lastNames.toString();
     }
     
-    /**
-     * This is the default implementation of writeObject.
-     */
-    private void writeObject(ObjectOutputStream aOutputStream) 
-            throws IOException {
-        //perform the default serialization for all non-transient, non-static fields
-        aOutputStream.defaultWriteObject();
-    }
-    
-   
-    @Override
-    public String toString(){
-		return null;
-    	
+    public ArrayList<User> getArrayList() {
+        return users;
     }
 }

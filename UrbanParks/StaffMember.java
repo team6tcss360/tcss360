@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * The class that contains Urban Parks staff member specific methods.
  * 
@@ -5,7 +7,7 @@
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 4, 2016
  */
-public class StaffMember extends User {
+public class StaffMember extends User implements Serializable {
 
 	/**
      * The serial version UID.
