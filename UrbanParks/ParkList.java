@@ -66,6 +66,16 @@ public class ParkList implements Serializable {
     	}
     	return -1;
     }
+    
+    /**
+     * Returns the size of the ParkList
+     * 
+     * @return Returns size of ParksList.
+     */
+    public int size(){
+    	return myParks.size();
+    }
+    
     /**
      * ToString method for the Array list.
      */
