@@ -1,5 +1,3 @@
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -14,7 +12,7 @@ public abstract class User implements Serializable {
     /**
      * The serial version UID.
      */
-    private static final long serialVersionUID = 8520622463070772155L;
+    private static final long serialVersionUID = -7256145705696529503L;
 
     /** 
      * The user's first name.
@@ -110,15 +108,6 @@ public abstract class User implements Serializable {
      */
     public String getPhone() {
         return phone;
-    }
-    
-    /**
-     * This is the default implementation of writeObject.
-     */
-    private void writeObject(ObjectOutputStream aOutputStream) 
-            throws IOException {
-        //perform the default serialization for all non-transient, non-static fields
-        aOutputStream.defaultWriteObject();
     }
     
     @Override

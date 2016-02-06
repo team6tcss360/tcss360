@@ -1,8 +1,4 @@
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains a collection of Urban Parks parks.
@@ -11,24 +7,26 @@ import java.util.List;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class ParkList implements Serializable {
-    
-	/**
-     * The serial version UID.
-     */
-    private static final long serialVersionUID = 870375065703530912L;
+public class ParkList {
     
     /**
      * Park List.
      */
-	List<Park> myParks;
+    ArrayList<Park> parks;
 	
 	/**
 	 * Construct the ParkList Array
 	 */
 	public ParkList() {
-		myParks = new ArrayList<Park>();
+		parks = new ArrayList<Park>();
 	}
+	
+	   /**
+     * Construct the ParkList Array
+     */
+    public ParkList(ArrayList<Park> inputArray) {
+        parks = inputArray;
+    }
 	
 	/**
 	 * Add a park to the system.
@@ -38,7 +36,7 @@ public class ParkList implements Serializable {
     	if(park == null) {
     		System.out.println("Invalid Park Entry!");
     	}
-    	myParks.add(park);
+    	parks.add(park);
     }
     
     /**
@@ -48,7 +46,7 @@ public class ParkList implements Serializable {
     public void removePark(Park park) {
     	int index = findIndex(park);
     	if(index != -1) {
-    		myParks.remove(index);
+    		parks.remove(index);
     	} else {
     		System.out.println("The park you were trying to remove doesn't exist in our system.");
     	}
@@ -59,8 +57,8 @@ public class ParkList implements Serializable {
      * @return Returns the index of where the park exists inside of the arraylist.
      */
     public int findIndex(Park park) {
-    	for(int i = 0; i < myParks.size(); i++) {
-    		if(myParks.get(i).equals(park)) {
+    	for(int i = 0; i < parks.size(); i++) {
+    		if(parks.get(i).equals(park)) {
     			return i;
     		}
     	}
@@ -73,7 +71,7 @@ public class ParkList implements Serializable {
      * @return Returns size of ParksList.
      */
     public int size(){
-    	return myParks.size();
+    	return parks.size();
     }
     
     
@@ -84,7 +82,7 @@ public class ParkList implements Serializable {
      * @return Park at the given index.
      */
     public Park getParkAt(int inputIndex){
-    	return myParks.get(inputIndex);
+    	return parks.get(inputIndex);
     }
     
     /**
@@ -92,18 +90,14 @@ public class ParkList implements Serializable {
      */
     public String toString() {
     	String str = " ";
-    	for(int i = 0; i < myParks.size(); i++) {
-    		str += myParks.toString() + "\n";
+    	for(int i = 0; i < parks.size(); i++) {
+    		str += parks.toString() + "\n";
     	}
     	return str;
     }
-    
-    /**
-     * This is the default implementation of writeObject.
-     */
-    private void writeObject(ObjectOutputStream aOutputStream) 
-            throws IOException {
-        //perform the default serialization for all non-transient, non-static fields
-        aOutputStream.defaultWriteObject();
+
+    public ArrayList<Park> getArrayList() {
+        // TODO Auto-generated method stub
+        return parks;
     }
 }

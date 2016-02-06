@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class ParkManager extends User {
+public class ParkManager extends User implements Serializable {
 
     /**
      * The serial version UID.

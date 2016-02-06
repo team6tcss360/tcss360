@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,9 +8,14 @@ import java.util.ArrayList;
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 3, 2016
  */
-public class Volunteer extends User {
+public class Volunteer extends User implements Serializable {
 
 	/**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 6857145170865256803L;
+    
+    /**
 	 * 
 	 */
 	private ArrayList<Job> volunteerJobs;

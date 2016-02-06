@@ -108,5 +108,5 @@ public class Park implements Serializable {
      */
     public String getParkManagerLastName() {
         return parkManagerLastName;
-    }   
+    }
 }

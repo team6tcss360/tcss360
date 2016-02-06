@@ -14,15 +14,30 @@ public class ConsoleParkManager {
 	 */
 	private static final Scanner scanner = new Scanner(System.in);
 
-
 	/**
 	 * The user that is currently logged in.
 	 */
 	private User user;
-	/**
-	 * JobList instance
-	 */
-	private JobList myJobs;
+	
+    /**
+     * The file input/output object.
+     */
+    private FileIO fileIO;
+    
+    /**
+     * Contains the users that Urban Parks application will use.
+     */
+    private UserList users;
+
+    /**
+     * Contains the jobs that Urban Parks application will use.
+     */
+    private JobList jobs;
+    
+    /**
+     * Contains the parks that Urban Parks application will use.
+     */
+    private ParkList parks;
 
 	/**
 	 * Used for JobID
@@ -34,12 +49,16 @@ public class ConsoleParkManager {
 	 * Constructs the Park Manager console for the current user.
 	 * 
 	 * @param currentUser the user that has logged in
+	 * @param fileIO 
 	 */
-	public ConsoleParkManager(User currentUser) {
+	public ConsoleParkManager(User currentUser, FileIO inputFileIO) {
 		scanner.useDelimiter("\\n");
 		user = currentUser;
 		countJobs = 0;
-		myJobs = new JobList();
+		fileIO = inputFileIO;
+		users = fileIO.getUsers();
+        jobs = fileIO.getJobs();
+        parks = fileIO.getParks();
 	}
 
 
@@ -149,7 +168,7 @@ public class ConsoleParkManager {
 		countJobs++;
 		//TODO fix null below
 		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, null);
-		myJobs.add(job);
+		jobs.add(job);
 
 
 	}
@@ -161,12 +180,12 @@ public class ConsoleParkManager {
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid input, needs to be a number!");
 		}
-		Job job = myJobs.getJob(jobID);
+		Job job = jobs.getJob(jobID);
 		if(job == null) {
 			System.out.println("Job doesn't exist");
 		} else {
 			System.out.println("Job exists and we are removing it!");
-			myJobs.remove(job);
+			jobs.remove(job);
 		}
 	}
 	public void editJob() {
@@ -174,7 +193,7 @@ public class ConsoleParkManager {
 
 	}
 	public void viewUpcomingJobs() {
-		System.out.println(myJobs.toString());
+		System.out.println(jobs.toString());
 
 	}
 }

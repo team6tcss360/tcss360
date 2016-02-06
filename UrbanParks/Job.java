@@ -281,5 +281,5 @@ public class Job implements Serializable {
     	int myYear = Integer.parseInt(theDate.substring(4, 8));
     	
     	return new GregorianCalendar(myYear, myDate, myMonth);	  	
-    }    
+    }        
 }

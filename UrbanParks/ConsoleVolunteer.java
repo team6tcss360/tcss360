@@ -20,12 +20,37 @@ public class ConsoleVolunteer {
     private User user;
     
     /**
+     * The file input/output object.
+     */
+    private FileIO fileIO;
+    
+    /**
+     * Contains the users that Urban Parks application will use.
+     */
+    private UserList users;
+
+    /**
+     * Contains the jobs that Urban Parks application will use.
+     */
+    private JobList jobs;
+    
+    /**
+     * Contains the parks that Urban Parks application will use.
+     */
+    private ParkList parks;
+    
+    /**
      * Constructs the volunteer console for the current user.
      * 
      * @param currentUser the user that has logged in
+     * @param fileIO 
      */
-    public ConsoleVolunteer(User currentUser) {
+    public ConsoleVolunteer(User currentUser, FileIO inputFileIO) {
         user = currentUser;
+        fileIO = inputFileIO;
+        users = fileIO.getUsers();
+        jobs = fileIO.getJobs();
+        parks = fileIO.getParks();
     }
 
     /**
