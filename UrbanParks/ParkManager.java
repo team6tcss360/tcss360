@@ -15,7 +15,7 @@ public class ParkManager extends User {
      * The serial version UID.
      */
     private static final long serialVersionUID = -5885352666198015690L;
-
+    
     /**
      * Creates a ParkManager through the User constructor.
      */
@@ -29,7 +29,14 @@ public class ParkManager extends User {
      * 
      * @return Summaries of jobs as a String.
      */
-    public String getJobs() {
-        return null;
+    public String getJobs(JobList inputJobList) {
+    	StringBuilder jobs = new StringBuilder();
+    	for(int i =0; i< inputJobList.size(); i++){
+//    		Need to access Job info to see if it matches
+//    		if(inputJobList.getJobAt(i).get){
+//    			
+//    		}
+    	}
+        return jobs.toString();
     }
 }
