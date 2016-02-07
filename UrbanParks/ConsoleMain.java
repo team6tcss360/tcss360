@@ -10,6 +10,11 @@ import java.util.Scanner;
 public class ConsoleMain {
     
     /**
+     * The file name for the Urban Park Application's data.
+     */
+    private static final String FILE_NAME = "UrbanParks/UrbanParksData.txt";
+    
+    /**
      * A scanner to use for console input.
      */
     private static final Scanner scanner = new Scanner(System.in);
@@ -38,27 +43,10 @@ public class ConsoleMain {
      * Constructs the ConsoleMain for the Urban Parks application.
      */
     public ConsoleMain() {
-        fileIO = new FileIO();         //create fileIO object   
+        fileIO = new FileIO(FILE_NAME);    //create fileIO object   
         users = fileIO.getUsers();
         jobs = fileIO.getJobs();
         parks = fileIO.getParks();
-    }
-    
-    /**
-     * Adds manual data to the user, job, and park lists.
-     */
-    private void manualData() {
-        users = new UserList();
-        jobs = new JobList();  
-        parks = new ParkList(); 
-        users.add(new Volunteer("Mary","Williams","mwilliams@gmail.com","1234567899"));
-        users.add(new Volunteer("Victor","Volunteereli","v@v.com","1234567854"));
-        users.add(new StaffMember("John","Smith","johnsmith@gmail.com","1234567890"));
-        users.add(new StaffMember("Steve","Staffy","s@s.com","1234567380"));
-        users.add(new ParkManager("George","Wilson","geogew@gmail.com","9876543210"));
-        users.add(new ParkManager("Peter","Parker","p@p.com","9876547590"));
-        parks.add(new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "George", "Wilson"));
-        jobs.add(new Job(1, "20160301", "20160301", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0, null));
     }
 
     /**
@@ -99,5 +87,23 @@ public class ConsoleMain {
             ConsoleStaffMember console = new ConsoleStaffMember(currentUser, fileIO);
             console.run();
         } 
-    }    
+    }  
+    
+    /**
+     * Adds manual data to the user, job, and park lists.  In case we want to inject more
+     * users, jobs, or parks.
+     */
+    private void addManualData() {
+        users = new UserList();
+        jobs = new JobList();  
+        parks = new ParkList(); 
+        users.add(new Volunteer("Mary","Williams","mwilliams@gmail.com","1234567899"));
+        users.add(new Volunteer("Victor","Volunteereli","v@v.com","1234567854"));
+        users.add(new StaffMember("John","Smith","johnsmith@gmail.com","1234567890"));
+        users.add(new StaffMember("Steve","Staffy","s@s.com","1234567380"));
+        users.add(new ParkManager("George","Wilson","geogew@gmail.com","9876543210"));
+        users.add(new ParkManager("Peter","Parker","p@p.com","9876547590"));
+        parks.add(new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "George", "Wilson"));
+        jobs.add(new Job(1, "20160301", "20160301", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0, null));
+    }
 }

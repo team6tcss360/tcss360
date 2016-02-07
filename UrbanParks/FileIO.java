@@ -19,7 +19,7 @@ public class FileIO {
     /**
      * The file name for the Urban Park Application's data.
      */
-    private static final String FILE_NAME = "UrbanParks/UrbanParksData.txt";
+    private String fileName;
 
     /**
      * The users that Urban Parks application will use.
@@ -42,7 +42,8 @@ public class FileIO {
      * @param inputFile the String address to the file that contains the Urban 
      * Parks data
      */
-    public FileIO() {
+    public FileIO(String inputFile) {
+        fileName = inputFile;
         users = new UserList();
         jobs = new JobList();
         parks = new ParkList();
@@ -58,7 +59,7 @@ public class FileIO {
      */
     public void save(UserList inputUsers, JobList inputJobs, ParkList inputParks) {
        try { // write objects to file
-            FileOutputStream fos = new FileOutputStream(FILE_NAME);
+            FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(inputUsers.getArrayList()); //write users
             oos.writeObject(inputJobs.getArrayList()); //write jobs
@@ -66,8 +67,10 @@ public class FileIO {
             oos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            throw new Error(e);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new Error(e);
         }
     }
     
@@ -76,10 +79,11 @@ public class FileIO {
      * 
      * @param inputFile the file that contains the Urban Parks data
      */
+    @SuppressWarnings("unchecked") //they are the object types in save method
     protected void load() {
         try {
             // read object from file
-            FileInputStream fis = new FileInputStream(FILE_NAME);
+            FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream ois = new ObjectInputStream(fis);
             users = new UserList((ArrayList<User>) ois.readObject());
             jobs = new JobList((ArrayList<Job>) ois.readObject());
@@ -87,10 +91,13 @@ public class FileIO {
             ois.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            throw new Error(e);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new Error(e);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            throw new Error(e);
         }
     }
     
