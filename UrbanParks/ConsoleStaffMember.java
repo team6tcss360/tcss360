@@ -70,6 +70,7 @@ public class ConsoleStaffMember {
 			System.out.println("1) Search volunteers by last name");
 			System.out.println("2) View a summary of all upcoming jobs.");
 			System.out.println("3) Display All Volunteers");
+			System.out.println("4) Display summary of a job by it's Job ID");
 			System.out.println("4) Back"); 
 			System.out.println("5) Exit");  
 			System.out.print(">> ");
@@ -86,11 +87,26 @@ public class ConsoleStaffMember {
 				break;
 			case "3":
 				displayVolunteers();
+				break;
+			case "4":
+				System.out.println("Enter in job ID:");
+				int jobID = scanner.nextInt();
+				getJob(jobID);
+				break;
 			}
 		} while(myInput.compareTo("5") != 0);
 	}
 
-
+	
+	public void getJob(int inputJobID) {
+		Job temp = jobs.getJob(inputJobID);
+		if(temp == null) {
+			System.out.println("Job ID doesn't exist");
+		} else {
+			System.out.println(temp.toString());
+		}
+	}
+	
 	public void displayVolunteers() {
 		for(int i = 0; i < users.size(); i++) {
 			if(users.getArrayList().get(i) instanceof Volunteer) {
@@ -98,8 +114,6 @@ public class ConsoleStaffMember {
 			}
 		}
 	}
-
-
 
 	public void displayJobs() {
 		for(int i = 0; i < jobs.size(); i++) {
