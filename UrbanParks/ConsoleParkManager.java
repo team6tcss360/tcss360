@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,11 +16,13 @@ public class ConsoleParkManager {
 	 */
 	private static final Scanner scanner = new Scanner(System.in);
 
+
 	/**
 	 * The user that is currently logged in.
 	 */
 	private User user;
-	
+
+
     /**
      * The file input/output object.
      */
@@ -34,22 +38,26 @@ public class ConsoleParkManager {
      */
     private JobList jobs;
     
-    /**
+	/**
      * Contains the parks that Urban Parks application will use.
      */
     private ParkList parks;
+
+	/**
+	 * JobList instance
+	 */
+	private JobList myJobs;
 
 	/**
 	 * Used for JobID
 	 */
 	private int countJobs;
 
-
+	private List<Volunteer> volunteerList;
 	/**
 	 * Constructs the Park Manager console for the current user.
 	 * 
 	 * @param currentUser the user that has logged in
-	 * @param fileIO 
 	 */
 	public ConsoleParkManager(User currentUser, FileIO inputFileIO) {
 		scanner.useDelimiter("\\n");
@@ -57,20 +65,23 @@ public class ConsoleParkManager {
 		countJobs = 0;
 		fileIO = inputFileIO;
 		users = fileIO.getUsers();
-        jobs = fileIO.getJobs();
-        parks = fileIO.getParks();
+        	jobs = fileIO.getJobs();
+        	parks = fileIO.getParks();
+		myJobs = new JobList();
+		volunteerList = new ArrayList<Volunteer>();
 	}
-
-
 
 	/**
 	 * Runs the Park Manager console screen.
 	 */
 	public void run() {
 		String input = " ";
+		System.out.println("Login Success!");
+		System.out.println("Welcome: ");
+		System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
+
 		do {
-			System.out.println("Login Success!");
-			System.out.println("Welcome: ");
+			
 			System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
 			System.out.println();
 			System.out.println("Please Enter a Command:");
@@ -100,19 +111,6 @@ public class ConsoleParkManager {
 		}while(input.compareTo("6") != 0);
 
 	}
-	/**
-	 *  public Job(int inputJobID, String inputStartDate, String inputEndDate, String inputParkName, 
-            String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax, 
-            String[] inputVolunteerList) {
-	 */
-
-	//So I made this catered towards the current Job constructor. Shouldn't we cater this for the user story that we 
-	//Implemented for the last sprint?
-	/**
-	 * public Job(int inputJobID, String inputStartDate, String inputEndDate, String inputParkName, 
-            String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax, 
-            String[] inputVolunteerList)
-	 */
 	public void submitJob() {
 
 		System.out.print("Enter the start date: ");
@@ -146,32 +144,18 @@ public class ConsoleParkManager {
 
 		System.out.print("Enter the number of volunteers you want");
 		int numOfVolunteers = Integer.parseInt(scanner.next());
-
-		int index = 0;
-		String myVolunteers[] = new String[numOfVolunteers];
-
-
-		String firstName = " ";
-		//for now this will just make a bunch of dummy volunteers.
+		
 		for(int i = 0; i < numOfVolunteers; i++) {
-			System.out.println("Enter in the volunteer name");
-			firstName = scanner.next();
-			if(firstName.compareTo("-1") == 0) {
-				break;
-			}
-			else {
-				myVolunteers[index] = firstName;
-				index++;
-			}
 
-		}
+			volunteerList.add(createVolunteer());
+		}	
 		countJobs++;
-		//TODO fix null below
-		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, null);
-		jobs.add(job);
+		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, volunteerList);
+		myJobs.add(job);
 
 
 	}
+
 	public void deleteJob() {
 		System.out.println("Enter the job ID you want to delete");
 		int jobID = 0;
@@ -180,20 +164,91 @@ public class ConsoleParkManager {
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid input, needs to be a number!");
 		}
-		Job job = jobs.getJob(jobID);
+		Job job = myJobs.getJob(jobID);
 		if(job == null) {
 			System.out.println("Job doesn't exist");
 		} else {
 			System.out.println("Job exists and we are removing it!");
-			jobs.remove(job);
+			myJobs.remove(job);
 		}
 	}
 	public void editJob() {
-		
+		System.out.println("Enter the job ID you want to edit");
+		int jobID = 0;
+		try {
+			jobID = Integer.parseInt(scanner.next());
+		} catch (NumberFormatException e) {
+			System.out.println("Invalid input, needs to be a number!");
+		}
+		Job job = myJobs.getJob(jobID);
+		if(job == null) {
+			System.out.println("Job doesn't exist");
+		} else {
+			System.out.println("This is the job you chose to edit " + myJobs.getJob(jobID).toString());
+			System.out.println("Choose which field to edit");
+			System.out.println("1)Start Date");
+			System.out.println("2)End Date");
+			System.out.println("3)Park Name");
+			System.out.println("4)Description");
+			System.out.println("5)Light Max");
+			System.out.println("6)Medium Max");
+			System.out.println("7)Heavy Max");
+			System.out.println("8)Volunteer List");
+			String input = scanner.next();
+			switch(input) {
+			case "1":
+				myJobs.getJob(jobID).setStartDate(scanner.next());
+				break;
+			case "2":
+				myJobs.getJob(jobID).setEndDate(scanner.next());
+				break;
+			case "3":
+				myJobs.getJob(jobID).setParkName(scanner.next());
+				break;
+			case "4":
+				myJobs.getJob(jobID).setDetails(scanner.next());
+				break;
+			case "5":
+				myJobs.getJob(jobID).setLightCurrent(scanner.nextInt());
+				break;
+			case "6":
+				myJobs.getJob(jobID).setMedCurrent(scanner.nextInt());
+				break;
+			case "7":
+				myJobs.getJob(jobID).setHeavyCurrent(scanner.nextInt());
+				break;
+			case "8":
+				//I will need to fix this later.
+				System.out.println("Enter in the number of volunteers");
+				int numVolunteers = Integer.parseInt(scanner.next());
+				String[] volunterList = new String[numVolunteers];
+				for(int i = 0; i < numVolunteers; i++) {
+					System.out.println("Enter in the name");
+					volunterList[i] = scanner.next();
+				}	
+			}
+		}
 
 	}
+	
 	public void viewUpcomingJobs() {
-		System.out.println(jobs.toString());
+		System.out.println(myJobs.toString());
 
 	}
+
+	public Volunteer createVolunteer() {
+		System.out.println("Enter the first name");
+		String firstName = scanner.next();
+		System.out.println("Enter the last name");
+		String lastName = scanner.next();
+		System.out.println("Enter the email");
+		String email = scanner.next();
+		System.out.println("Enter the phone number");
+		String phone = scanner.next();
+		Volunteer myVolunteer = new Volunteer(firstName, lastName, email, phone);
+		
+		return myVolunteer;
+				
+	}
+
 }

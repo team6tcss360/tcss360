@@ -67,7 +67,7 @@ public class Volunteer extends User implements Serializable {
      */
     public ArrayList<Job> getCurrentJobs() {
 		return volunteerJobs;
-    	
+		
     }
     
     /**

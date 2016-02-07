@@ -43,10 +43,17 @@ public class ConsoleMain {
      * Constructs the ConsoleMain for the Urban Parks application.
      */
     public ConsoleMain() {
-        fileIO = new FileIO(FILE_NAME);    //create fileIO object   
-        users = fileIO.getUsers();
-        jobs = fileIO.getJobs();
-        parks = fileIO.getParks();
+        fileIO = new FileIO(FILE_NAME); //create fileIO object   
+        users = fileIO.getUsers();      //initialize users
+        jobs = fileIO.getJobs();        //initialize jobs
+        parks = fileIO.getParks();      //initialize parks
+    }
+    
+    /**
+     * Saves the current state of the application to file.
+     */
+    protected void save() {
+        fileIO.save(users, jobs, parks);
     }
 
     /**
@@ -61,7 +68,7 @@ public class ConsoleMain {
         System.out.println();
         System.out.println("Please enter your email: ");
         String input = scanner.nextLine().trim(); //Get user input
-        User currentUser = (User) users.findFromEmail(input); //Find user associated with email
+        User currentUser = users.findFromEmail(input); //Find user associated with email
         
         //if they enter an email that is not found, keep asking
         while (currentUser == null) { 
@@ -69,7 +76,7 @@ public class ConsoleMain {
             System.out.println();
             System.out.println("Please enter your email: ");
             input = scanner.nextLine().trim(); //Get user input
-            currentUser = (User) users.findFromEmail(input); //Find user associated with email            
+            currentUser = users.findFromEmail(input); //Find user associated with email            
         }
         
         //if user is a Volunteer, switch to Volunteer screen
