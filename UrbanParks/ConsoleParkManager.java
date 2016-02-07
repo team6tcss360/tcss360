@@ -16,7 +16,14 @@ public class ConsoleParkManager {
 	 */
 	private static final Scanner scanner = new Scanner(System.in);
 
-
+	 /**
+     * The file input/output object.
+     */
+    private FileIO fileIO;
+    /**
+     * Parks List
+     */
+    private ParkList parks;
 	/**
 	 * The user that is currently logged in.
 	 */
@@ -37,12 +44,22 @@ public class ConsoleParkManager {
 	 * 
 	 * @param currentUser the user that has logged in
 	 */
-	public ConsoleParkManager(User currentUser) {
+	public ConsoleParkManager(User currentUser, FileIO inputFileIO) {
 		scanner.useDelimiter("\\n");
 		user = currentUser;
 		countJobs = 0;
-		myJobs = new JobList();
+		myJobs = fileIO.getJobs();
 		volunteerList = new ArrayList<Volunteer>();
+		parks = fileIO.getParks();
+		
+		/**
+		 * scanner.useDelimiter("\\n");
+        user = currentUser;
+        fileIO = inputFileIO;
+        users = fileIO.getUsers();
+        jobs = fileIO.getJobs();
+        parks = fileIO.getParks();
+		 */
 	}
 
 	/**
@@ -129,7 +146,9 @@ public class ConsoleParkManager {
 
 
 	}
-
+	/**
+	 * Removes a job from the job list.
+	 */
 	public void deleteJob() {
 		System.out.println("Enter the job ID you want to delete");
 		int jobID = 0;
@@ -146,6 +165,9 @@ public class ConsoleParkManager {
 			myJobs.remove(job);
 		}
 	}
+	/**
+	 * Edits a job.
+	 */
 	public void editJob() {
 		System.out.println("Enter the job ID you want to edit");
 		int jobID = 0;

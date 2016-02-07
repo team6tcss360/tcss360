@@ -81,7 +81,7 @@ public class ConsoleMain {
         } 
         //if user is a ParkManager, switch to ParkManager screen
         else if (currentUser instanceof ParkManager) {
-            ConsoleParkManager console = new ConsoleParkManager(currentUser);
+            ConsoleParkManager console = new ConsoleParkManager(currentUser, fileIO);
             console.run();
         }
         //if user is a StaffMember, switch to StaffMember screen
