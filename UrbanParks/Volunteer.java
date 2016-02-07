@@ -61,7 +61,7 @@ public class Volunteer extends User {
      */
     public ArrayList<Job> getCurrentJobs() {
 		return volunteerJobs;
-    	
+		
     }
     
     /**
