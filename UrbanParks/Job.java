@@ -155,7 +155,34 @@ public class Job implements Serializable {
     public void setIsPast(boolean inputIsPast) {
     	isPast = inputIsPast;
     }
-    
+    /**
+     * Set the start date
+     * @param inputDate
+     */
+    public void setStartDate(String inputDate) {
+    	startDate = convertToCalender(inputDate);
+    }
+    /**
+     * Set the end date
+     * @param inputEndDate
+     */
+    public void setEndDate(String inputEndDate) {
+    	endDate = convertToCalender(inputEndDate);
+    }
+    /**
+     * Set the park name
+     * @param inputParkName
+     */
+    public void setParkName(String inputParkName) {
+    	parkName = inputParkName;
+    }
+    /**
+     * Set the details of the park
+     * @param inputDetails
+     */
+    public void setDetails(String inputDetails) {
+    	details = inputDetails;
+    }
     /*
      * -----------------------------------------------------------------------------------------------------------
      */
