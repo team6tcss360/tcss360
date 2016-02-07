@@ -10,16 +10,16 @@ import java.util.ArrayList;
  */
 public class Volunteer extends User implements Serializable {
 
-	/**
+    /**
      * The serial version UID.
      */
     private static final long serialVersionUID = 6857145170865256803L;
     
     /**
-	 * 
-	 */
-	private ArrayList<Job> volunteerJobs;
-	
+     * 
+     */
+    private ArrayList<Job> volunteerJobs;
+    
     /**
      * Creates a volunteer through the User constructor.
      */
@@ -32,9 +32,13 @@ public class Volunteer extends User implements Serializable {
     /**
      * Returns a list of jobs that the User is signed up for.
      */
-    public String getJobs() {
-    	
-        return null;
+    //not done yet
+    private String getJobs(JobList inputList) {
+        ArrayList<Job> jobs = new ArrayList<Job>();
+        for(int i=0; i< inputList.size(); i++){
+            Job currentJob = inputList.getJobAt(i);
+        }
+        return jobs.toString();
     }
     
     /**
@@ -43,7 +47,7 @@ public class Volunteer extends User implements Serializable {
      * @param inputJob
      */
     public void addJob(Job inputJob) {
-    	volunteerJobs.add(inputJob);
+        volunteerJobs.add(inputJob);
     }
     
     /**
@@ -52,12 +56,12 @@ public class Volunteer extends User implements Serializable {
      * @param inputJob
      */
     public void removeJob(Job inputJob) {
-    	if(inputJob==null|| !volunteerJobs.contains(inputJob)) {
-    		//can't remove
-    	}else {
-    		int toRemove = volunteerJobs.indexOf(inputJob);
-    		volunteerJobs.remove(toRemove);
-    	}
+        if(inputJob==null|| !volunteerJobs.contains(inputJob)) {
+            //can't remove
+        }else {
+            int toRemove = volunteerJobs.indexOf(inputJob);
+            volunteerJobs.remove(toRemove);
+        }
     }
     
     /**
@@ -66,8 +70,8 @@ public class Volunteer extends User implements Serializable {
      * @return ArrayList<Job>
      */
     public ArrayList<Job> getCurrentJobs() {
-		return volunteerJobs;
-		
+        return volunteerJobs;
+        
     }
     
     /**
@@ -75,10 +79,6 @@ public class Volunteer extends User implements Serializable {
      * @return
      */
     public int jobCount() {
-    	return volunteerJobs.size();
+        return volunteerJobs.size();
     }
-    
-    
-    
-    
 }
