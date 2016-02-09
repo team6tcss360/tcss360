@@ -113,9 +113,7 @@ public class ConsoleVolunteer {
 		if(temp == null) {
 			System.out.println("Job doesn't exist");
 		} else if (temp != null){
-			System.out.println("I am in here!");
-			
-			
+			jobs.getJob(inputJobID).addVolunteers(user);
 		}
 		
 	}

@@ -95,6 +95,7 @@ public class Job implements Serializable {
     public Job(int inputJobID, String inputStartDate, String inputEndDate, String inputParkName, 
             String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax, 
             List<Volunteer> inputVolunteerList) {
+    	//Remove volunteer list
         jobID = inputJobID;
         
         startDate = convertToCalender(inputStartDate);
@@ -116,7 +117,7 @@ public class Job implements Serializable {
         
         
         //TODO input is currently an array of Strings with first name, then last name, then next first name, etc.
-        List<Volunteer> volunteerList  = inputVolunteerList;
+        volunteerList  = inputVolunteerList;
     }
    
 
@@ -267,6 +268,9 @@ public class Job implements Serializable {
     }
 	public void setVolunteerList(List<Volunteer> volunteerList) {
 		this.volunteerList = volunteerList;
+	}
+	public void addVolunteers(User user) {
+		this.volunteerList.add((Volunteer) user);
 	}
 	@Override
 	public String toString() {
