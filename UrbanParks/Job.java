@@ -74,9 +74,11 @@ public class Job implements Serializable {
     /**
      * A list of the job's volunteers.
      */
-    private List<Volunteer> volunteerList;
+    private List<List<String>> volunteerList;
     
     private boolean isPast;
+    
+    //private int spotTaken;
     
     
     //Constructor
@@ -94,7 +96,7 @@ public class Job implements Serializable {
      */
     public Job(int inputJobID, String inputStartDate, String inputEndDate, String inputParkName, 
             String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax, 
-            List<Volunteer> inputVolunteerList) {
+            List<List<String>> inputVolunteerList) {
         jobID = inputJobID;
         
         startDate = convertToCalender(inputStartDate);
@@ -104,19 +106,20 @@ public class Job implements Serializable {
         details = inputDetails;
         
         lightMax = inputLightMax;
-        lightCurrent = 0;
+        //lightCurrent = 0;
         
         medMax = inputMedMax;
-        medCurrent = 0;
+        //medCurrent = 0;
         
         heavyMax = inputHeavyMax;
-        heavyCurrent = 0;
+        //heavyCurrent = 0;
         
         isPast = false;
         
+        //spotTaken = 0;
         
         //TODO input is currently an array of Strings with first name, then last name, then next first name, etc.
-        List<Volunteer> volunteerList  = inputVolunteerList;
+        volunteerList  = inputVolunteerList;
     }
    
 
@@ -124,30 +127,30 @@ public class Job implements Serializable {
      *-----------------------------------------------------------------------------------------------------------
      */
     //Setters
-    /**
-     * Set the current volunteer numbers for light job.
-     * @param inputLightCurrent
-     */
-    public void setLightCurrent(int inputLightCurrent) {
-    	lightCurrent = inputLightCurrent;
-    }
-    
-    /**
-     * Set the current volunteer numbers for medium job.
-     * @param inputMedCurrent
-     */
-    public void setMedCurrent(int inputMedCurrent) {
-    	medCurrent = inputMedCurrent;
-    }
-    
-    /**
-     * Set the current volunteer numbers for heavy job.
-     * @param inputHeavyCurrent
-     */
-    public void setHeavyCurrent(int inputHeavyCurrent) {
-    	heavyCurrent = inputHeavyCurrent;
-    }
-    
+//    /**
+//     * Set the current volunteer numbers for light job.
+//     * @param inputLightCurrent
+//     */
+//    public void setLightCurrent(int inputLightCurrent) {
+//    	lightCurrent = inputLightCurrent;
+//    }
+//    
+//    /**
+//     * Set the current volunteer numbers for medium job.
+//     * @param inputMedCurrent
+//     */
+//    public void setMedCurrent(int inputMedCurrent) {
+//    	medCurrent = inputMedCurrent;
+//    }
+//    
+//    /**
+//     * Set the current volunteer numbers for heavy job.
+//     * @param inputHeavyCurrent
+//     */
+//    public void setHeavyCurrent(int inputHeavyCurrent) {
+//    	heavyCurrent = inputHeavyCurrent;
+//    }
+//    
     /**
      * Set whether or not the start date is in the past.
      * @param inputIsPast
@@ -233,21 +236,21 @@ public class Job implements Serializable {
      * @return the number of volunteers that sign up for light job.
      */
     public int getLightCurrent() {
-    	return lightCurrent;
+    	return getSpotNumber("Light");
     }
     
     /**
      * @return the number of volunteers that sign up for medium job.
      */
     public int getMedCurrent() {
-    	return medCurrent;
+    	return getSpotNumber("Medium");
     }
     
     /**
      * @return the number of volunteers that sign up for heavy job.
      */
     public int getHeavyCurrent() {
-    	return heavyCurrent;
+    	return getSpotNumber("Heavy");
     }
     
     /**
@@ -265,14 +268,23 @@ public class Job implements Serializable {
     public int getHeavyMax() {
     	return heavyMax;
     }
-	public void setVolunteerList(List<Volunteer> volunteerList) {
-		this.volunteerList = volunteerList;
+    
+    /**
+     * add the volunteers to the volunteer list
+     * @param inputVolunteer
+     */
+	public void addVolunteer(List<String> inputVolunteer) {
+		volunteerList.add(inputVolunteer);
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "Job jobID=" + jobID + ", startDate=" + startDate + ", endDate=" + endDate + ", parkName=" + parkName
-				+ ", details=" + details + ", lightMax=" + lightMax + ", lightCurrent=" + lightCurrent + ", medMax="
-				+ medMax + ", medCurrent=" + medCurrent + ", heavyMax=" + heavyMax + ", heavyCurrent=" + heavyCurrent
+				+ ", details=" + details + ", "
+						+ "lightMax=" + lightMax + ", lightCurrent=" + lightCurrent
+						+ ", medMax="+ medMax + ", medCurrent=" + medCurrent + 
+						", heavyMax=" + heavyMax + ", heavyCurrent=" + heavyCurrent
 				+ ", volunteerList=" + volunteerList + "\n ";
 	}
     
@@ -280,7 +292,7 @@ public class Job implements Serializable {
      * 
      * @return a list of volunteers for the job
      */
-    public List<Volunteer> getVolunteerList() {
+    public List<List<String>> getVolunteerList() {
     	return volunteerList;
     }
     
@@ -293,10 +305,58 @@ public class Job implements Serializable {
     	return isPast;
     }
     
-   
-   /*
-    * ------------------------------------------------------------------------------------------------------ 
-    */
+    /*
+     *------------------------------------------------------------------------------------------------------
+     */
+    //helper classes
+    /**
+     * Fill the number of spots that been taken in certain type
+     * @param inputType
+     * @return
+     */
+    public int getSpotNumber(String inputType) {
+    	int spotTaken = 0;
+    	
+    	for (List<String> myVolunteer : volunteerList) {
+    		if (myVolunteer.get(1).equals(inputType)) {
+    			spotTaken++;
+    		}
+    	}
+    	return spotTaken;
+    }
+    
+    /**
+     * Get the available light jobs numbers.
+     * @return
+     */
+    public int getCurrentLightNum() {
+    	lightCurrent = lightMax - getSpotNumber("Light'");
+    	
+    	return lightCurrent;
+    }
+    
+    /**
+     * Get the available med jobs numbers.
+     * @return
+     */
+    public int getCurrentMedNum() {
+    	medCurrent = medMax - getSpotNumber("Medium");
+    	
+    	return medCurrent;
+    }
+    
+    /**
+     * Get the available heavy jobs numbers.
+     * @return
+     */
+    public int getCurrentHeavyNum() {
+    	heavyCurrent = heavyMax - getSpotNumber("Heavy");
+    	
+    	return heavyCurrent;
+    }
+    
+    
+ 
     /**
      * Convert a string date to a GregorianCalender object.
      * @param theDate
