@@ -10,13 +10,21 @@ import java.util.Scanner;
  * @version February 3, 2016
  */
 public class ConsoleParkManager {
-
+	
+	
 	/**
 	 * A scanner to use for console input.
 	 */
 	private static final Scanner scanner = new Scanner(System.in);
 
-
+	/**
+	 * The file input/output object.
+	 */
+	private FileIO fileIO;
+	/**
+	 * Parks List
+	 */
+	private ParkList parks;
 	/**
 	 * The user that is currently logged in.
 	 */
@@ -47,7 +55,10 @@ public class ConsoleParkManager {
 	 * JobList instance
 	 */
 	private JobList myJobs;
-
+	/**
+	 * UserList instance
+	 */
+	private UserList users;
 	/**
 	 * Used for JobID
 	 */
@@ -63,12 +74,27 @@ public class ConsoleParkManager {
 		scanner.useDelimiter("\\n");
 		user = currentUser;
 		countJobs = 0;
+<<<<<<< HEAD
+		myJobs = fileIO.getJobs();
+		users = fileIO.getUsers();
+=======
 		fileIO = inputFileIO;
 		users = fileIO.getUsers();
         	jobs = fileIO.getJobs();
         	parks = fileIO.getParks();
 		myJobs = new JobList();
+>>>>>>> master
 		volunteerList = new ArrayList<Volunteer>();
+		parks = fileIO.getParks();
+
+		/**
+		 * scanner.useDelimiter("\\n");
+        user = currentUser;
+        fileIO = inputFileIO;
+        users = fileIO.getUsers();
+        jobs = fileIO.getJobs();
+        parks = fileIO.getParks();
+		 */
 	}
 
 	/**
@@ -81,7 +107,7 @@ public class ConsoleParkManager {
 		System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
 
 		do {
-			
+
 			System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
 			System.out.println();
 			System.out.println("Please Enter a Command:");
@@ -111,8 +137,10 @@ public class ConsoleParkManager {
 		}while(input.compareTo("6") != 0);
 
 	}
+	/**
+	 * Submits a job
+	 */
 	public void submitJob() {
-
 		System.out.print("Enter the start date: ");
 		String startDate = scanner.next();
 
@@ -144,7 +172,7 @@ public class ConsoleParkManager {
 
 		System.out.print("Enter the number of volunteers you want");
 		int numOfVolunteers = Integer.parseInt(scanner.next());
-		
+
 		for(int i = 0; i < numOfVolunteers; i++) {
 
 			volunteerList.add(createVolunteer());
@@ -152,10 +180,11 @@ public class ConsoleParkManager {
 		countJobs++;
 		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, volunteerList);
 		myJobs.add(job);
-
-
+		//fileIO.save(users, inputJobs, inputParks);
 	}
-
+	/**
+	 * Removes a job from the job list.
+	 */
 	public void deleteJob() {
 		System.out.println("Enter the job ID you want to delete");
 		int jobID = 0;
@@ -172,6 +201,9 @@ public class ConsoleParkManager {
 			myJobs.remove(job);
 		}
 	}
+	/**
+	 * Edits a job.
+	 */
 	public void editJob() {
 		System.out.println("Enter the job ID you want to edit");
 		int jobID = 0;
@@ -230,7 +262,7 @@ public class ConsoleParkManager {
 		}
 
 	}
-	
+
 	public void viewUpcomingJobs() {
 		System.out.println(myJobs.toString());
 
@@ -246,9 +278,9 @@ public class ConsoleParkManager {
 		System.out.println("Enter the phone number");
 		String phone = scanner.next();
 		Volunteer myVolunteer = new Volunteer(firstName, lastName, email, phone);
-		
+
 		return myVolunteer;
-				
+
 	}
 
 }

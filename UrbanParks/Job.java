@@ -95,8 +95,8 @@ public class Job implements Serializable {
      * @param inputVolunteerList
      */
     public Job(int inputJobID, String inputStartDate, String inputEndDate, String inputParkName, 
-            String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax, 
-            List<List<String>> inputVolunteerList) {
+            String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax) {
+
         jobID = inputJobID;
         
         startDate = convertToCalender(inputStartDate);
@@ -276,8 +276,12 @@ public class Job implements Serializable {
 	public void addVolunteer(List<String> inputVolunteer) {
 		volunteerList.add(inputVolunteer);
 	}
-	
-	
+
+	public void addVolunteers(User user) {
+		this.volunteerList.add((Volunteer) user);
+	}
+
+
 	@Override
 	public String toString() {
 		return "Job jobID=" + jobID + ", startDate=" + startDate + ", endDate=" + endDate + ", parkName=" + parkName
