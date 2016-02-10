@@ -108,12 +108,14 @@ public class ConsoleVolunteer {
 			System.out.println(temp.toString());
 		}
 	}
+	
+	//TODO need to ask for category (light, etc.)
 	public void signUpForJob(int inputJobID) {
 		Job temp = jobs.getJob(inputJobID);
 		if(temp == null) {
 			System.out.println("Job doesn't exist");
 		} else if (temp != null){
-			jobs.getJob(inputJobID).addVolunteers(user);
+//			jobs.getJob(inputJobID).addVolunteer((Volunteer) user);
 		}
 		
 	}

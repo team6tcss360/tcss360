@@ -21,21 +21,12 @@ public class ConsoleParkManager {
 	 * The file input/output object.
 	 */
 	private FileIO fileIO;
-	/**
-	 * Parks List
-	 */
-	private ParkList parks;
+
 	/**
 	 * The user that is currently logged in.
 	 */
 	private User user;
 
-
-    /**
-     * The file input/output object.
-     */
-    private FileIO fileIO;
-    
     /**
      * Contains the users that Urban Parks application will use.
      */
@@ -55,10 +46,7 @@ public class ConsoleParkManager {
 	 * JobList instance
 	 */
 	private JobList myJobs;
-	/**
-	 * UserList instance
-	 */
-	private UserList users;
+
 	/**
 	 * Used for JobID
 	 */
@@ -74,17 +62,9 @@ public class ConsoleParkManager {
 		scanner.useDelimiter("\\n");
 		user = currentUser;
 		countJobs = 0;
-<<<<<<< HEAD
+
 		myJobs = fileIO.getJobs();
 		users = fileIO.getUsers();
-=======
-		fileIO = inputFileIO;
-		users = fileIO.getUsers();
-        	jobs = fileIO.getJobs();
-        	parks = fileIO.getParks();
-		myJobs = new JobList();
->>>>>>> master
-		volunteerList = new ArrayList<Volunteer>();
 		parks = fileIO.getParks();
 
 		/**
@@ -178,7 +158,7 @@ public class ConsoleParkManager {
 			volunteerList.add(createVolunteer());
 		}	
 		countJobs++;
-		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy, volunteerList);
+		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy);
 		myJobs.add(job);
 		//fileIO.save(users, inputJobs, inputParks);
 	}
@@ -241,13 +221,13 @@ public class ConsoleParkManager {
 				myJobs.getJob(jobID).setDetails(scanner.next());
 				break;
 			case "5":
-				myJobs.getJob(jobID).setLightCurrent(scanner.nextInt());
+				myJobs.getJob(jobID).setLightMax(scanner.nextInt());
 				break;
 			case "6":
-				myJobs.getJob(jobID).setMedCurrent(scanner.nextInt());
+				myJobs.getJob(jobID).setMedMax(scanner.nextInt());
 				break;
 			case "7":
-				myJobs.getJob(jobID).setHeavyCurrent(scanner.nextInt());
+				myJobs.getJob(jobID).setHeavyMax(scanner.nextInt());
 				break;
 			case "8":
 				//I will need to fix this later.

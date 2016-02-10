@@ -75,7 +75,7 @@ public class FileIOTest {
         users.add(new ParkManager("George","Wilson","geogew@gmail.com","9876543210"));
         users.add(new ParkManager("Peter","Parker","p@p.com","9876547590"));
         parks.add(new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "George", "Wilson"));
-        jobs.add(new Job(1, "20160301", "20160301", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0, null));   
+        jobs.add(new Job(1, "20160301", "20160301", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));   
 //        emptyFileIO = new FileIO(FILE_EMPTY);
         workingFileIO = new FileIO(FILE_WORKING_COPY);
     }
