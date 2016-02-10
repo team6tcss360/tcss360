@@ -364,5 +364,11 @@ public class Job implements Serializable {
 		int myYear = Integer.parseInt(theDate.substring(4, 8));
 
 		return new GregorianCalendar(myYear, myDate, myMonth);	  	
+	}
+
+
+	public String getSummary() {
+		
+		return "Job jobID=" + jobID + ", parkName=" + parkName + ", startDate=" + startDate + ", endDate=" + endDate;
 	}        
 }

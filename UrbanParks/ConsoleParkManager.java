@@ -98,7 +98,7 @@ public class ConsoleParkManager {
 			System.out.println("5) Back");
 			System.out.println("6) Exit");  
 			System.out.print(">> ");
-			input = scanner.next();
+			input = scanner.nextLine();
 			System.out.println(input);
 			switch(input) {
 			case "1":
