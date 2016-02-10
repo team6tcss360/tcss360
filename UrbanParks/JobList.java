@@ -69,9 +69,9 @@ public class JobList {
      * ToString method for the Array list.
      */
     public String toString() {
-    	String str = " ";
+    	String str = "";
     	for(int i = 0; i < jobs.size(); i++) {
-    		str += jobs.get(i).toString() + "\n";
+    		str += jobs.get(i).getSummary() + "\n";
     	}
     	return str;
     }

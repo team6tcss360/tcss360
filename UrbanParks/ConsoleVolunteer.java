@@ -69,14 +69,13 @@ public class ConsoleVolunteer {
 			System.out.println("2) View Jobs by Job ID");
 			System.out.println("3) Volunteer for a job");
 			System.out.println("4) View jobs you signed up for");
-			System.out.println("4) Exit");  
+			System.out.println("5) Exit");  
 			System.out.print(">> ");
-			input = scanner.next(); //Get user input
-
+			input = scanner.nextLine(); //Get user input
 			switch(input) {
 			case "1":
 				viewAllJobs();
-				System.out.println(users.getVolunteerLastNames());
+//				System.out.println(users.getVolunteerLastNames());
 				break;
 			case "2":
 				System.out.println("Enter in the job ID that you want to view");

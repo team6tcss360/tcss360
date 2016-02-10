@@ -74,7 +74,7 @@ public class ConsoleStaffMember {
 			System.out.println("4) Back"); 
 			System.out.println("5) Exit");  
 			System.out.print(">> ");
-			myInput = scanner.next(); //Get user input
+			myInput = scanner.nextLine(); //Get user input
 
 			switch(myInput) {
 			case "1":
