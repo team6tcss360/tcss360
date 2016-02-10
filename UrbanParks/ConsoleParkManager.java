@@ -32,11 +32,6 @@ public class ConsoleParkManager {
      */
     private UserList users;
 
-    /**
-     * Contains the jobs that Urban Parks application will use.
-     */
-    private JobList jobs;
-    
 	/**
      * Contains the parks that Urban Parks application will use.
      */
@@ -45,36 +40,27 @@ public class ConsoleParkManager {
 	/**
 	 * JobList instance
 	 */
-	private JobList myJobs;
+	private JobList jobs;
 
 	/**
 	 * Used for JobID
 	 */
 	private int countJobs;
 
-	private List<Volunteer> volunteerList;
 	/**
 	 * Constructs the Park Manager console for the current user.
 	 * 
 	 * @param currentUser the user that has logged in
 	 */
 	public ConsoleParkManager(User currentUser, FileIO inputFileIO) {
-		scanner.useDelimiter("\\n");
 		user = currentUser;
-		countJobs = 0;
-
-		myJobs = fileIO.getJobs();
+		countJobs = 1;
+		fileIO = inputFileIO;
+		jobs = fileIO.getJobs();
 		users = fileIO.getUsers();
 		parks = fileIO.getParks();
 
-		/**
-		 * scanner.useDelimiter("\\n");
-        user = currentUser;
-        fileIO = inputFileIO;
-        users = fileIO.getUsers();
-        jobs = fileIO.getJobs();
-        parks = fileIO.getParks();
-		 */
+		
 	}
 
 	/**
@@ -121,46 +107,35 @@ public class ConsoleParkManager {
 	 * Submits a job
 	 */
 	public void submitJob() {
-		System.out.print("Enter the start date: ");
-		String startDate = scanner.next();
+		System.out.print("Enter the start date: (ddmmyyyy)");
+		String startDate = scanner.nextLine();
 
-		System.out.print("Enter the end date");
-		String endDate = scanner.next();
+		System.out.print("Enter the end date: (ddmmyyyy)");
+		String endDate = scanner.nextLine();
 
 		System.out.print("Enter the park name");
-		String parkName = scanner.next();
+		String parkName = scanner.nextLine();
 
 		System.out.print("Enter in the details of the job");
-		String details = scanner.next();
+		String details = scanner.nextLine();
 
-		System.out.print(startDate + "\n" + endDate + "\n" + parkName + "\n" + details);
+		System.out.print("Enter in the number of people for the light job");
+		String string_light = scanner.nextLine();
+		int light = Integer.parseInt(string_light);
+	
 
-		System.out.print("Is it going to be a light weight job? Enter '1' for yes or '0' for no");
-		int light = 0;
-		try {
-			light = Integer.parseInt(scanner.next());
+		System.out.print("Enter in the number of volunteers of the medium job");
+		String string_med = scanner.nextLine();
+		int medium = Integer.parseInt(string_med);
 
-		} catch(NumberFormatException errorMessage) {
-			System.out.println("Numbers only, " + light + " is not a number.");
-		}
+		System.out.print("Enter in the number of volunteers for the heavy job");
+		String string_hev = scanner.nextLine();
+		int heavy = Integer.parseInt(string_hev);
 
-		System.out.print("Is it going to be a medium weight job? Enter '1' for yes or '0' for no");
-		int medium = Integer.parseInt(scanner.next());
-
-		System.out.print("Is it going to be a heavy weight job? Enter '1' for yes or '0' for no");
-		int heavy = Integer.parseInt(scanner.next());
-
-		System.out.print("Enter the number of volunteers you want");
-		int numOfVolunteers = Integer.parseInt(scanner.next());
-
-		for(int i = 0; i < numOfVolunteers; i++) {
-
-			volunteerList.add(createVolunteer());
-		}	
 		countJobs++;
 		Job job = new Job(countJobs, startDate, endDate, parkName, details, light, medium, heavy);
-		myJobs.add(job);
-		//fileIO.save(users, inputJobs, inputParks);
+		jobs.add(job);
+		fileIO.save(users, jobs, parks);
 	}
 	/**
 	 * Removes a job from the job list.
@@ -173,13 +148,15 @@ public class ConsoleParkManager {
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid input, needs to be a number!");
 		}
-		Job job = myJobs.getJob(jobID);
+		Job job = jobs.getJob(jobID);
 		if(job == null) {
 			System.out.println("Job doesn't exist");
 		} else {
 			System.out.println("Job exists and we are removing it!");
-			myJobs.remove(job);
+			jobs.remove(job);
 		}
+		countJobs--;
+		fileIO.save(users, jobs, parks);
 	}
 	/**
 	 * Edits a job.
@@ -192,11 +169,11 @@ public class ConsoleParkManager {
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid input, needs to be a number!");
 		}
-		Job job = myJobs.getJob(jobID);
+		Job job = jobs.getJob(jobID);
 		if(job == null) {
 			System.out.println("Job doesn't exist");
 		} else {
-			System.out.println("This is the job you chose to edit " + myJobs.getJob(jobID).toString());
+			System.out.println("This is the job you chose to edit " + jobs.getJob(jobID).toString());
 			System.out.println("Choose which field to edit");
 			System.out.println("1)Start Date");
 			System.out.println("2)End Date");
@@ -209,25 +186,25 @@ public class ConsoleParkManager {
 			String input = scanner.next();
 			switch(input) {
 			case "1":
-				myJobs.getJob(jobID).setStartDate(scanner.next());
+				jobs.getJob(jobID).setStartDate(scanner.nextLine());
 				break;
 			case "2":
-				myJobs.getJob(jobID).setEndDate(scanner.next());
+				jobs.getJob(jobID).setEndDate(scanner.next());
 				break;
 			case "3":
-				myJobs.getJob(jobID).setParkName(scanner.next());
+				jobs.getJob(jobID).setParkName(scanner.next());
 				break;
 			case "4":
-				myJobs.getJob(jobID).setDetails(scanner.next());
+				jobs.getJob(jobID).setDetails(scanner.next());
 				break;
 			case "5":
-				myJobs.getJob(jobID).setLightMax(scanner.nextInt());
+				jobs.getJob(jobID).setLightMax(scanner.nextInt());
 				break;
 			case "6":
-				myJobs.getJob(jobID).setMedMax(scanner.nextInt());
+				jobs.getJob(jobID).setMedMax(scanner.nextInt());
 				break;
 			case "7":
-				myJobs.getJob(jobID).setHeavyMax(scanner.nextInt());
+				jobs.getJob(jobID).setHeavyMax(scanner.nextInt());
 				break;
 			case "8":
 				//I will need to fix this later.
@@ -240,11 +217,11 @@ public class ConsoleParkManager {
 				}	
 			}
 		}
-
+		fileIO.save(users, jobs, parks);
 	}
 
 	public void viewUpcomingJobs() {
-		System.out.println(myJobs.toString());
+		System.out.println(jobs.toString());
 
 	}
 

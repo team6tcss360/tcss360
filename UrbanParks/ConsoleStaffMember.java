@@ -71,15 +71,15 @@ public class ConsoleStaffMember {
 			System.out.println("2) View a summary of all upcoming jobs.");
 			System.out.println("3) Display All Volunteers");
 			System.out.println("4) Display summary of a job by it's Job ID");
-			System.out.println("4) Back"); 
-			System.out.println("5) Exit");  
+			System.out.println("5) Back"); 
+			System.out.println("6) Exit");  
 			System.out.print(">> ");
 			myInput = scanner.nextLine(); //Get user input
 
 			switch(myInput) {
 			case "1":
 				System.out.println("Enter in the last name you are looking for.");
-				String lastName = scanner.next();
+				String lastName = scanner.nextLine();
 				searchVolunteer(lastName);
 				break;
 			case "2":
@@ -93,8 +93,11 @@ public class ConsoleStaffMember {
 				int jobID = scanner.nextInt();
 				getJob(jobID);
 				break;
+			case "5":
+				ConsoleMain console = new ConsoleMain();
+				console.run();
 			}
-		} while(myInput.compareTo("5") != 0);
+		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
 	}
 
 	
