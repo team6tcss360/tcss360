@@ -69,36 +69,62 @@ public class ConsoleVolunteer {
 			System.out.println("2) View Jobs by Job ID");
 			System.out.println("3) Volunteer for a job");
 			System.out.println("4) View jobs you signed up for");
-			System.out.println("5) Exit");  
+			System.out.println("5) Back");
+			System.out.println("6) Exit");  
 			System.out.print(">> ");
 			input = scanner.nextLine(); //Get user input
+			int jobID = 0;
 			switch(input) {
 			case "1":
 				viewAllJobs();
-//				System.out.println(users.getVolunteerLastNames());
+				//				System.out.println(users.getVolunteerLastNames());
 				break;
 			case "2":
 				System.out.println("Enter in the job ID that you want to view");
-				int jobID = scanner.nextInt();
+				String string_jobID = scanner.nextLine();
+				try {
+					jobID = Integer.parseInt(string_jobID);
+				} catch(NumberFormatException e) {
+					System.out.println("Invalid input");
+					break;
+				}
 				viewJobID(jobID);
 				break;
 			case "3":
 				System.out.println("Enter in the job ID that you want to volunteer for.");
-				jobID = scanner.nextInt();
+				string_jobID = scanner.nextLine();
+				try {
+					jobID = Integer.parseInt(string_jobID);
+				} catch(NumberFormatException e) {
+					System.out.println("Invalid input");
+					break;
+				}
 				signUpForJob(jobID);
 				break;
 			case "4":
 				viewMyJobs();
 				break;
+			case "5":
+				ConsoleMain console = new ConsoleMain();
+				console.run();
+			case "6":
+				break;
 			}
 
 
-		} while(input.compareTo("5") != 0);
+		} while(input.compareTo("5") != 0 && input.compareTo("6") != 0);
 
 	}
+	/**
+	 * Allows the volunteer to view all the current jobs
+	 */
 	public void viewAllJobs() {
 		System.out.println(jobs.toString());
 	}
+	/**
+	 * Allows the Volunteer to view a job based off of it's unique ID
+	 * @param inputJobID
+	 */
 	public void viewJobID(int inputJobID) {
 		Job temp = jobs.getJob(inputJobID);
 		if(temp == null) {
@@ -107,18 +133,35 @@ public class ConsoleVolunteer {
 			System.out.println(temp.toString());
 		}
 	}
-	
+
 	//TODO need to ask for category (light, etc.)
 	public void signUpForJob(int inputJobID) {
 		Job temp = jobs.getJob(inputJobID);
+		String level = "";
 		if(temp == null) {
 			System.out.println("Job doesn't exist");
 		} else if (temp != null){
-//			jobs.getJob(inputJobID).addVolunteer((Volunteer) user);
+			System.out.println("What level of difficulty would you like?");
+			System.out.println("Light, Medium, or Heavy?");
+			level = scanner.nextLine().toLowerCase();
+			switch(level) {
+			//This is still returning a null pointer exception....
+			case "light":
+				System.out.println(jobs.getJob(inputJobID).toString());
+				//jobs.getJob(inputJobID).addLightVolunteer((Volunteer) user); 
+				break;
+			case "medium":
+				jobs.getJob(inputJobID).addMedVolunteer((Volunteer) user);
+			case "heavy":
+				jobs.getJob(inputJobID).addHeavyVolunteer((Volunteer) user);
+			}
+
 		}
-		
+		fileIO.save(users, jobs, parks);
+
 	}
 	public void viewMyJobs() {
 		//System.out.println(jobs.getJobAt(0).getVolunteerList().get(0));
 	}
+
 }

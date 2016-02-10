@@ -75,7 +75,7 @@ public class ConsoleStaffMember {
 			System.out.println("6) Exit");  
 			System.out.print(">> ");
 			myInput = scanner.nextLine(); //Get user input
-
+			int jobID = 0;
 			switch(myInput) {
 			case "1":
 				System.out.println("Enter in the last name you are looking for.");
@@ -90,12 +90,19 @@ public class ConsoleStaffMember {
 				break;
 			case "4":
 				System.out.println("Enter in job ID:");
-				int jobID = scanner.nextInt();
+				String string_jobID = scanner.nextLine();
+				try {
+				jobID = Integer.parseInt(string_jobID);
+				} catch(NumberFormatException e) {
+					System.out.println("Invalid Input");
+					break;
+				}
 				getJob(jobID);
 				break;
 			case "5":
 				ConsoleMain console = new ConsoleMain();
 				console.run();
+				break;
 			}
 		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
 	}
@@ -138,7 +145,6 @@ public class ConsoleStaffMember {
 		}
 		if(isFound) {
 			System.out.println(users.getArrayList().get(index));
-
 		} else {
 			System.out.println("Volunteer doesn't exist");
 		}

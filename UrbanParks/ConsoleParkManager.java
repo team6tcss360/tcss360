@@ -10,8 +10,8 @@ import java.util.Scanner;
  * @version February 3, 2016
  */
 public class ConsoleParkManager {
-	
-	
+
+
 	/**
 	 * A scanner to use for console input.
 	 */
@@ -27,15 +27,15 @@ public class ConsoleParkManager {
 	 */
 	private User user;
 
-    /**
-     * Contains the users that Urban Parks application will use.
-     */
-    private UserList users;
+	/**
+	 * Contains the users that Urban Parks application will use.
+	 */
+	private UserList users;
 
 	/**
-     * Contains the parks that Urban Parks application will use.
-     */
-    private ParkList parks;
+	 * Contains the parks that Urban Parks application will use.
+	 */
+	private ParkList parks;
 
 	/**
 	 * JobList instance
@@ -59,8 +59,6 @@ public class ConsoleParkManager {
 		jobs = fileIO.getJobs();
 		users = fileIO.getUsers();
 		parks = fileIO.getParks();
-
-		
 	}
 
 	/**
@@ -99,8 +97,14 @@ public class ConsoleParkManager {
 			case "4":
 				viewUpcomingJobs();
 				break;
+			case "5":
+				ConsoleMain console = new ConsoleMain();
+				console.run();
+				break;
+			case "6":
+				break;
 			}
-		}while(input.compareTo("6") != 0);
+		}while(input.compareTo("6") != 0 && input.compareTo("5") != 0);
 
 	}
 	/**
@@ -122,7 +126,7 @@ public class ConsoleParkManager {
 		System.out.print("Enter in the number of people for the light job");
 		String string_light = scanner.nextLine();
 		int light = Integer.parseInt(string_light);
-	
+
 
 		System.out.print("Enter in the number of volunteers of the medium job");
 		String string_med = scanner.nextLine();
@@ -164,6 +168,7 @@ public class ConsoleParkManager {
 	public void editJob() {
 		System.out.println("Enter the job ID you want to edit");
 		int jobID = 0;
+		String input = "";
 		try {
 			jobID = Integer.parseInt(scanner.next());
 		} catch (NumberFormatException e) {
@@ -173,71 +178,62 @@ public class ConsoleParkManager {
 		if(job == null) {
 			System.out.println("Job doesn't exist");
 		} else {
-			System.out.println("This is the job you chose to edit " + jobs.getJob(jobID).toString());
-			System.out.println("Choose which field to edit");
-			System.out.println("1)Start Date");
-			System.out.println("2)End Date");
-			System.out.println("3)Park Name");
-			System.out.println("4)Description");
-			System.out.println("5)Light Max");
-			System.out.println("6)Medium Max");
-			System.out.println("7)Heavy Max");
-			System.out.println("8)Volunteer List");
-			String input = scanner.next();
-			switch(input) {
-			case "1":
-				jobs.getJob(jobID).setStartDate(scanner.nextLine());
-				break;
-			case "2":
-				jobs.getJob(jobID).setEndDate(scanner.next());
-				break;
-			case "3":
-				jobs.getJob(jobID).setParkName(scanner.next());
-				break;
-			case "4":
-				jobs.getJob(jobID).setDetails(scanner.next());
-				break;
-			case "5":
-				jobs.getJob(jobID).setLightMax(scanner.nextInt());
-				break;
-			case "6":
-				jobs.getJob(jobID).setMedMax(scanner.nextInt());
-				break;
-			case "7":
-				jobs.getJob(jobID).setHeavyMax(scanner.nextInt());
-				break;
-			case "8":
-				//I will need to fix this later.
-				System.out.println("Enter in the number of volunteers");
-				int numVolunteers = Integer.parseInt(scanner.next());
-				String[] volunterList = new String[numVolunteers];
-				for(int i = 0; i < numVolunteers; i++) {
-					System.out.println("Enter in the name");
-					volunterList[i] = scanner.next();
-				}	
-			}
+			do {
+				System.out.println("This is the job you chose to edit " + jobs.getJob(jobID).toString());
+				System.out.println("Choose which field to edit");
+				System.out.println("1)Start Date");
+				System.out.println("2)End Date");
+				System.out.println("3)Park Name");
+				System.out.println("4)Description");
+				System.out.println("5)Light Max");
+				System.out.println("6)Medium Max");
+				System.out.println("7)Heavy Max");
+				System.out.println("8) Exit");
+				input = scanner.next();
+				switch(input) {
+				case "1":
+					System.out.print("Enter the start date: (ddmmyyyy)");
+					jobs.getJob(jobID).setStartDate(scanner.nextLine());
+					break;
+				case "2":
+					System.out.print("Enter the end date: (ddmmyyyy)");
+					jobs.getJob(jobID).setEndDate(scanner.next());
+					break;
+				case "3":
+					System.out.print("Enter the park name");
+					jobs.getJob(jobID).setParkName(scanner.next());
+					break;
+				case "4":
+					System.out.print("Enter in the details of the job");
+					jobs.getJob(jobID).setDetails(scanner.next());
+					break;
+				case "5":
+					System.out.print("Enter in the number of volunteers of the light job");
+					jobs.getJob(jobID).setLightMax(scanner.nextInt());
+					break;
+				case "6":
+					System.out.print("Enter in the number of volunteers of the medium job");
+					jobs.getJob(jobID).setMedMax(scanner.nextInt());
+					break;
+				case "7":
+					System.out.print("Enter in the number of volunteers of the heavy job");
+					jobs.getJob(jobID).setHeavyMax(scanner.nextInt());
+					break;
+				case "8":
+					break;
+				}
+			}while(input.compareTo("8") !=0);
 		}
 		fileIO.save(users, jobs, parks);
 	}
-
+	/**
+	 * Prints out all of the upcoming jobs.
+	 */
 	public void viewUpcomingJobs() {
+		
 		System.out.println(jobs.toString());
 
 	}
 
-	public Volunteer createVolunteer() {
-		System.out.println("Enter the first name");
-		String firstName = scanner.next();
-		System.out.println("Enter the last name");
-		String lastName = scanner.next();
-		System.out.println("Enter the email");
-		String email = scanner.next();
-		System.out.println("Enter the phone number");
-		String phone = scanner.next();
-		Volunteer myVolunteer = new Volunteer(firstName, lastName, email, phone);
-
-		return myVolunteer;
-
-	}
 
 }
