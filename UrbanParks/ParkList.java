@@ -40,18 +40,6 @@ public class ParkList {
     }
     
     /**
-     * Remove a park from the system.
-     * @param park Park to be removed
-     */
-    public void removePark(Park park) {
-    	int index = findIndex(park);
-    	if(index != -1) {
-    		parks.remove(index);
-    	} else {
-    		System.out.println("The park you were trying to remove doesn't exist in our system.");
-    	}
-    }
-    /**
      * Find the index of which a park exists in the system
      * @param park Park to be found
      * @return Returns the index of where the park exists inside of the arraylist.
@@ -66,23 +54,17 @@ public class ParkList {
     }
     
     /**
-     * Returns the size of the ParkList
-     * 
-     * @return Returns size of ParksList.
+     * @return Park object with given park name. Null if not found.
      */
-    public int size(){
-    	return parks.size();
-    }
-    
-    
-    /**
-     * Returns the Park at a given index in ParkList
-     * 
-     * @param inputIndex int for index.
-     * @return Park at the given index.
-     */
-    public Park getParkAt(int inputIndex){
-    	return parks.get(inputIndex);
+    public Park getPark(String inputParkName){
+        for(int i = 0; i < parks.size(); i++) {
+            Park myPark = parks.get(i);
+            String myParkName = myPark.getParkName();
+            if(myParkName.compareTo(inputParkName) == 0) {
+                return myPark;
+            }
+        }
+        return null;
     }
     
     /**

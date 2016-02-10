@@ -30,26 +30,10 @@ public class UserList {
     
     /**
      * Adds a user to the collection.
-     * 
-     * @param user the user to add
-     * @return 
      */
-    public boolean add(User user) {
+    public void add(User user) {
         users.add(user);
-        //TODO fix below
-        return true;
     }
-    
-//TODO remove?    
-//    /**
-//     * Removes a user from the collection.
-//     * 
-//     * @param user the user to remove
-//     */
-//    public void remove(User user) {
-//        int index = findIndexFromEmail(user.getEmail()); //find user index
-//        users.remove(index); //remove user at that index
-//    }
 
     /**
      * Finds the user associated with an input email.
@@ -114,6 +98,9 @@ public class UserList {
         return lastNames.toString();
     }
     
+    /**
+     * @return An ArrayList of Users contained in this class.
+     */
     public ArrayList<User> getArrayList() {
         return users;
     }

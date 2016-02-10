@@ -49,8 +49,8 @@ public class ConsoleMain {
         users = fileIO.getUsers();      //initialize users
         jobs = fileIO.getJobs();        //initialize jobs
         parks = fileIO.getParks();      //initialize parks
-        addManualData();
-        fileIO.save(users, jobs, parks);
+//        addManualData();
+//        fileIO.save(users, jobs, parks);
     }
     
     /**
@@ -106,6 +106,7 @@ public class ConsoleMain {
      * users, jobs, or parks.
      * @throws ParseException if invalid date format
      */
+    @SuppressWarnings("unused") //just in case we want to manually inject data
     private void addManualData() throws ParseException {
         users = new UserList();
         jobs = new JobList();  

@@ -110,6 +110,23 @@ public class Park implements Serializable {
         return parkManagerLastName;
     }
     
+    /**
+     * Checks if the User is the park manager for this park.
+     * 
+     * @param inputUser the User to check
+     * @return true if first name and last name match the park manager's
+     */
+    public boolean isParkManager(User inputUser) {
+        String userFirstName = inputUser.getFirstName();
+        String userLastName = inputUser.getLastName();
+        if (inputUser instanceof ParkManager 
+                    && userFirstName.compareTo(parkManagerFirstName) == 0 
+                    && userLastName.compareTo(parkManagerLastName) == 0) {
+                return true;            
+        } 
+        return false;
+    }
+    
     @Override
     public String toString() {
         return "Park: " + parkName + ", Location: " + location + ", Park Manager: "

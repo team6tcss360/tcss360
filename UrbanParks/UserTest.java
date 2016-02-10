@@ -15,7 +15,6 @@ public class UserTest {
     private static final String LAST_NAME = null;
     private static final String EMAIL = null;
     private static final String PHONE = null;
-    private static final int ID = 0;
     
     /** A user for testing. */
     private User user;

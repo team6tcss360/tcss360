@@ -112,7 +112,7 @@ public abstract class User implements Serializable {
     
     @Override
     public String toString(){
-		String toReturn = "Name: "+ firstName+ " "+ lastName + "\nE-Mail: " + email + "\nPhone: " + phone;
+		String toReturn = "Name: "+ firstName+ " "+ lastName + " | Email: " + email + " | Phone: " + phone;
 		return toReturn;   	
     }
     

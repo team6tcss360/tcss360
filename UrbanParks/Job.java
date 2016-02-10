@@ -109,14 +109,9 @@ public class Job implements Serializable {
 		heavyMax = inputHeavyMax;
 		heavyCurrent = 0;
 		
-		volunteerList  = new ArrayList<Volunteer>();
+		volunteerList = new ArrayList<Volunteer>();
 	}
 
-
-	/*
-	 *-----------------------------------------------------------------------------------------------------------
-	 */
-	//Setters
 	/**
 	 * Set the current volunteer numbers for light job.
 	 *
@@ -157,6 +152,7 @@ public class Job implements Serializable {
 	public void setEndDate(String inputEndDate) throws ParseException {
 		endDate = convertToCalender(inputEndDate);
 	}
+	
 	/**
 	 * Set the park name
 	 * @param inputParkName
@@ -164,6 +160,7 @@ public class Job implements Serializable {
 	public void setParkName(String inputParkName) {
 		parkName = inputParkName;
 	}
+	
 	/**
 	 * Set the details of the park
 	 * @param inputDetails
@@ -171,10 +168,7 @@ public class Job implements Serializable {
 	public void setDetails(String inputDetails) {
 		details = inputDetails;
 	}
-	/*
-	 * -----------------------------------------------------------------------------------------------------------
-	 */
-	//Getters
+	
 	/**
 	 * @return the job ID.
 	 */
@@ -216,7 +210,6 @@ public class Job implements Serializable {
 	public int getLightMax() {
 		return lightMax;
 	}
-
 
 	/**
 	 * 
@@ -272,19 +265,12 @@ public class Job implements Serializable {
         return "Job: " + jobID + " | Park: " + parkName + " | Start: " + formatDate(startDate) + " | End: " + formatDate(endDate);
     }  
     
-	/**
-	 * Gives a String with full details of the job.
-	 */
-	@Override
-	public String toString() {
-		return "Job: " + jobID + " | Park: " + parkName + " | Start: " 
-		        + formatDate(startDate) + " | End: " + formatDate(endDate)
-				+"\n"+ "Details: " + details
-				+"\n"+ "Positions Taken | Light: " + lightCurrent + "/" + lightMax 
-				+ " | Medium: " + medCurrent + "/" + medMax 
-				+ " | Heavy: " + heavyCurrent + "/" + heavyMax 
-				+"\n"+ "Volunteers: " + volunteerListToString();
-	}
+    /**
+     * @return the Date Format
+     */
+    public SimpleDateFormat getDateFormat() { 
+        return DATE_FORMAT;
+    }
 
 	/**
 	 * @return an ArrayList of volunteers that are signed up for the job
@@ -294,25 +280,22 @@ public class Job implements Serializable {
 	}
 	
 	/**
-     * @return a list of volunteers that are signed up for the job
+     * @return a String list of volunteers that are signed up for the job
      */
     public String volunteerListToString() {
-        String result = "";
+        String result = "Volunteers: ";
+        if (volunteerList.size() == 0) {
+            result += "None";
+        }
         for (int i = 0; i < volunteerList.size(); i++) {
             Volunteer v = volunteerList.get(i);
-            result = result + ", " + v.getFirstName() + v.getLastName();
+            if (i > 0) {
+                result += ", ";
+            }
+            result += v.getFirstName() +" "+ v.getLastName();
         }
         return result;
     }
-
-	/**
-	 * @return if the start date is in the past.
-	 */
-	public boolean isPast() {
-	    GregorianCalendar now = new GregorianCalendar();
-	    int compare = startDate.compareTo(now);
-	    return compare < 0;
-	}
 
 	/**
      * @return if the maximum number of light duty volunteers is reached
@@ -341,7 +324,7 @@ public class Job implements Serializable {
 	 * @return GregorianCalender formatted date.
 	 * @throws ParseException if invalid date format
 	 */
-	protected GregorianCalendar convertToCalender(String inputDate) throws ParseException {
+	public GregorianCalendar convertToCalender(String inputDate) throws ParseException {
 	    Date parsed = DATE_FORMAT.parse(inputDate);
 	    GregorianCalendar newCalendar = new GregorianCalendar();
 	    newCalendar.setTime(parsed);
@@ -349,7 +332,8 @@ public class Job implements Serializable {
 	}
 	
 	/**
-	 * Converts from GregorianCalendar to an American style date format
+	 * Converts from GregorianCalendar to an American style date format.
+	 * 
 	 * @param inputCalendar
 	 * @return formatted date as String in MM-dd-yy h:mma format
 	 */
@@ -358,6 +342,50 @@ public class Job implements Serializable {
 	    return formattedDate;
 	}
 	
+	/**
+	 * Checks if the User is the park manager for this job.
+	 * 
+	 * @param inputParks the ParkList that contains all the parks
+	 * @param inputUser the User to check
+	 * @return true if first name and last name match the park manager's
+	 */
+	public boolean isParkManager(ParkList inputParks, User inputUser) {
+	    Park currentPark = inputParks.getPark(parkName);
+	    return currentPark.isParkManager(inputUser);
+	}
+	
+	/**
+	 * Checks if a volunteer is currently signed up for this job.
+	 * 
+	 * @param inputVolunteer the one to check to see if they are signed up
+	 * @return true if they are signed up, otherwise false
+	 */
+    public boolean isVolunteer(Volunteer inputVolunteer) {
+        return volunteerList.contains(inputVolunteer);
+    }
+    
+    /**
+     * Checks if this job is in the past.
+     */
+    public boolean isInPast() {
+        GregorianCalendar now = new GregorianCalendar();
+        return startDate.before(now);
+    }
+    
+    /**
+     * Gives a String with full details of the job.
+     */
+    @Override
+    public String toString() {
+        return "Job: " + jobID + " | Park: " + parkName + " | Start: " 
+                + formatDate(startDate) + " | End: " + formatDate(endDate)
+                +"\n"+ "Details: " + details
+                +"\n"+ "Positions Taken | Light: " + lightCurrent + "/" + lightMax 
+                + " | Medium: " + medCurrent + "/" + medMax 
+                + " | Heavy: " + heavyCurrent + "/" + heavyMax 
+                +"\n"+ volunteerListToString();
+    }
+    
 	/**
 	 * Compares the toString()'s of both jobs.
 	 */
