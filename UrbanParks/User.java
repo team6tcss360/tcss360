@@ -113,7 +113,28 @@ public abstract class User implements Serializable {
     @Override
     public String toString(){
 		String toReturn = "Name: "+ firstName+ " "+ lastName + "\nE-Mail: " + email + "\nPhone: " + phone;
-		return toReturn;
-    	
+		return toReturn;   	
+    }
+    
+    /**
+     * Compares the toString()'s of both Users.
+     */
+    @Override
+    public boolean equals(Object inputUser) {
+        if (inputUser == null) {
+            return false;
+        }
+        if (this.getClass() != inputUser.getClass()) {
+            return false;
+        }
+        return this.toString().compareTo(inputUser.toString()) == 0;
+    }
+    
+    /**
+     * @return toString's hashCode
+     */
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
     }
 }

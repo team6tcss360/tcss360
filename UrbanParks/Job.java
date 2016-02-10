@@ -1,6 +1,8 @@
-import java.util.List;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -12,12 +14,15 @@ import java.util.GregorianCalendar;
  */
 public class Job implements Serializable {
 
-	
-	
 	/**
 	 * The serial version UID.
 	 */
 	private static final long serialVersionUID = -2382757831956773518L;
+	
+	/**
+	 * The format to use on dates.
+	 */
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd-yy h:mma");
 
 	/**
 	 * A job's ID number.
@@ -79,26 +84,13 @@ public class Job implements Serializable {
 	 */
 	private ArrayList<Volunteer> volunteerList;
 
-	private boolean isPast;
-
-	//private int spotTaken;
-
-
 	//Constructor
 	/**
-	 * Constructor  
-	 * @param inputJobID
-	 * @param inputStartDate
-	 * @param inputEndDate
-	 * @param inputParkName
-	 * @param inputDetails
-	 * @param inputLightMax
-	 * @param inputMedMax
-	 * @param inputHeavyMax
-	 * @param inputVolunteerList
+	 * Constructs a Job.
+	 * @throws ParseException if invalid date format
 	 */
 	public Job(int inputJobID, String inputStartDate, String inputEndDate, String inputParkName, 
-			String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax) {
+			String inputDetails, int inputLightMax, int inputMedMax, int inputHeavyMax) throws ParseException {
 
 		jobID = inputJobID;
 
@@ -116,12 +108,7 @@ public class Job implements Serializable {
 
 		heavyMax = inputHeavyMax;
 		heavyCurrent = 0;
-
-		isPast = false;
-
-		//spotTaken = 0;
-
-		//TODO input is currently an array of Strings with first name, then last name, then next first name, etc.
+		
 		volunteerList  = new ArrayList<Volunteer>();
 	}
 
@@ -155,24 +142,19 @@ public class Job implements Serializable {
 	}
 
 	/**
-	 * Set whether or not the start date is in the past.
-	 * @param inputIsPast
-	 */
-	public void setIsPast(boolean inputIsPast) {
-		isPast = inputIsPast;
-	}
-	/**
 	 * Set the start date
 	 * @param inputDate
+	 * @throws ParseException if invalid date format
 	 */
-	public void setStartDate(String inputDate) {
+	public void setStartDate(String inputDate) throws ParseException {
 		startDate = convertToCalender(inputDate);
 	}
 	/**
 	 * Set the end date
 	 * @param inputEndDate
+	 * @throws ParseException if invalid date format
 	 */
-	public void setEndDate(String inputEndDate) {
+	public void setEndDate(String inputEndDate) throws ParseException {
 		endDate = convertToCalender(inputEndDate);
 	}
 	/**
@@ -253,8 +235,7 @@ public class Job implements Serializable {
 	}
 
 	/**
-	 * add the volunteers to the volunteer list
-	 * @param inputVolunteer
+	 * Adds a volunteer to the job and increments the light duty category.
 	 */
 	public void addLightVolunteer(Volunteer inputLightVolunteer) {
 		if(!hasLightMax()){
@@ -263,6 +244,9 @@ public class Job implements Serializable {
 		}
 	}
 
+	/**
+     * Adds a volunteer to the job and increments the medium duty category.
+     */
 	public void addMedVolunteer(Volunteer inputMedVolunteer) {
 		if(!hasMedMax()){
 			medCurrent++;
@@ -270,115 +254,129 @@ public class Job implements Serializable {
 		}
 	}
 
+	/**
+     * Adds a volunteer to the job and increments the heavy duty category.
+     */
 	public void addHeavyVolunteer(Volunteer inputHeavyVolunteer) {
 		if(!hasHeavyMax()) {
 			heavyCurrent++;
 			volunteerList.add(inputHeavyVolunteer);
 		}
 	}
-
-
-
+    
+    /**
+     * Summarizes a job in a String.
+     * @return the job's ID, park, and start date/time
+     */
+    public String getSummary() {
+        return "Job: " + jobID + " | Park: " + parkName + " | Start: " + formatDate(startDate) + " | End: " + formatDate(endDate);
+    }  
+    
+	/**
+	 * Gives a String with full details of the job.
+	 */
 	@Override
 	public String toString() {
-		return "Job jobID=" + jobID + ", startDate=" + startDate + ", endDate=" + endDate + ", parkName=" + parkName
-				+ ", details=" + details + ", "
-				+ ", lightCurrent=" + lightCurrent + "/" + "lightMax=" + lightMax 
-				+ ", medCurrent=" + medCurrent + "/" + ", medMax="+ medMax 
-				+ ", heavyCurrent=" + heavyCurrent + "/" + ", heavyMax=" + heavyMax 
-				+ ", volunteerList=" + volunteerList + "\n ";
+		return "Job: " + jobID + " | Park: " + parkName + " | Start: " 
+		        + formatDate(startDate) + " | End: " + formatDate(endDate)
+				+"\n"+ "Details: " + details
+				+"\n"+ "Positions Taken | Light: " + lightCurrent + "/" + lightMax 
+				+ " | Medium: " + medCurrent + "/" + medMax 
+				+ " | Heavy: " + heavyCurrent + "/" + heavyMax 
+				+"\n"+ "Volunteers: " + volunteerListToString();
 	}
 
 	/**
-	 * 
-	 * @return a list of volunteers for the job
+	 * @return an ArrayList of volunteers that are signed up for the job
 	 */
 	public ArrayList<Volunteer> getVolunteerList() {
 		return volunteerList;
 	}
+	
+	/**
+     * @return a list of volunteers that are signed up for the job
+     */
+    public String volunteerListToString() {
+        String result = "";
+        for (int i = 0; i < volunteerList.size(); i++) {
+            Volunteer v = volunteerList.get(i);
+            result = result + ", " + v.getFirstName() + v.getLastName();
+        }
+        return result;
+    }
 
 	/**
-	 * 
 	 * @return if the start date is in the past.
 	 */
-	//Check the start date to see if it's a past date
 	public boolean isPast() {
-		return isPast;
+	    GregorianCalendar now = new GregorianCalendar();
+	    int compare = startDate.compareTo(now);
+	    return compare < 0;
 	}
 
-	/*
-	 *------------------------------------------------------------------------------------------------------
-	 */
-	//helper classes
-	//    /**
-	//     * Fill the number of spots that been taken in certain type
-	//     * @param inputType
-	//     * @return
-	//     */
-	//    public int getSpotNumber(String inputType) {
-	//    	int spotTaken = 0;
-	//    	
-	//    	for (Volunteer myVolunteer : volunteerList) {
-	//    		if (myVolunteer.get.equals(inputType)) {
-	//    			spotTaken++;
-	//    		}
-	//    	}
-	//    	return spotTaken;
-	//    }
-
 	/**
-	 * Get the available light jobs numbers.
-	 * @return
+     * @return if the maximum number of light duty volunteers is reached
 	 */
 	public boolean hasLightMax() {
-
-		return lightMax == lightCurrent;
+	    return lightMax == lightCurrent;
 	}
 
 	/**
-	 * Get the available med jobs numbers.
-	 * @return
+	 * @return if the maximum number of medium duty volunteers is reached
 	 */
 	public boolean hasMedMax() {
-
-		return medMax == medCurrent;
+	    return medMax == medCurrent;
 	}
 
 	/**
-	 * Get the available heavy jobs numbers.
-	 * @return
+	 * @return if the maximum number of heavy duty volunteers is reached
 	 */
 	public boolean hasHeavyMax() {
-
-		return heavyMax == heavyCurrent;
+	    return heavyMax == heavyCurrent;
 	}
-	
-
-
 
 	/**
 	 * Convert a string date to a GregorianCalender object.
-	 * @param theDate, mmddyyyy
-	 * @return GregorianCalender format date.
+	 * @param theDate, MM-dd-yy h:mma (March 1st, 2016 at 9am is 03-01-16 9:00AM)
+	 * @return GregorianCalender formatted date.
+	 * @throws ParseException if invalid date format
 	 */
-	private GregorianCalendar convertToCalender(String theDate) {
-		int myDate = Integer.parseInt(theDate.substring(0, 2));
-		int myMonth = Integer.parseInt(theDate.substring(2,4));
-		int myYear = Integer.parseInt(theDate.substring(4, 8));
-
-		return new GregorianCalendar( myMonth, myDate, myYear);	  	
+	protected GregorianCalendar convertToCalender(String inputDate) throws ParseException {
+	    Date parsed = DATE_FORMAT.parse(inputDate);
+	    GregorianCalendar newCalendar = new GregorianCalendar();
+	    newCalendar.setTime(parsed);
+		return newCalendar;	  	
 	}
-
-
-	public String getSummary() {
-		
-		return "Job jobID=" + jobID + ", parkName=" + parkName + ", startDate=" + startDate + ", endDate=" + endDate;
-	}  
 	
-	public boolean equals(Object inputJob) {
-		
-		return this.toString().compareTo(inputJob.toString()) == 0;
-		
+	/**
+	 * Converts from GregorianCalendar to an American style date format
+	 * @param inputCalendar
+	 * @return formatted date as String in MM-dd-yy h:mma format
+	 */
+	protected String formatDate(GregorianCalendar inputCalendar){
+	    String formattedDate = DATE_FORMAT.format(inputCalendar.getTime());
+	    return formattedDate;
 	}
-
+	
+	/**
+	 * Compares the toString()'s of both jobs.
+	 */
+	@Override
+	public boolean equals(Object inputJob) {
+	    if (inputJob == null) {
+	        return false;
+	    }
+	    if (this.getClass() != inputJob.getClass()) {
+	        return false;
+	    }
+		return this.toString().compareTo(inputJob.toString()) == 0;
+	}
+	
+	/**
+	 * @return toString's hashCode
+	 */
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
+    }
 }

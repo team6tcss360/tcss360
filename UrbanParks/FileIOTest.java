@@ -75,7 +75,11 @@ public class FileIOTest {
         users.add(new ParkManager("George","Wilson","geogew@gmail.com","9876543210"));
         users.add(new ParkManager("Peter","Parker","p@p.com","9876547590"));
         parks.add(new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "George", "Wilson"));
-        jobs.add(new Job(1, "20160301", "20160301", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));   
+        parks.add(new Park("Dash Point", "1500 Beach Dr. N.E. Tacoma, WA 98422", "Peter", "Parker"));
+        parks.add(new Park("Mount Rainier", "National Park Inn, Packwood, WA 98361", "Peter", "Parker"));
+        jobs.add(new Job(1, "03-01-16 2:00PM", "03-01-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));
+        jobs.add(new Job(2, "04-02-16 9:00AM", "04-03-16 5:00PM", "Mount Rainier", "The volunteers will repair a bridge.", 0, 0, 5));
+        jobs.add(new Job(3, "02-22-16 1:00PM", "02-22-16 4:00PM", "Dash Point", "The volunteers will help clean the beach.", 5, 0, 0));   
 //        emptyFileIO = new FileIO(FILE_EMPTY);
         workingFileIO = new FileIO(FILE_WORKING_COPY);
     }

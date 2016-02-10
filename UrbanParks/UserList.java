@@ -117,4 +117,50 @@ public class UserList {
     public ArrayList<User> getArrayList() {
         return users;
     }
+    
+    /**
+     * @return Each user's toString method on their own lines.
+     */
+    @Override
+    public String toString() {
+        String str = "";
+        for(int i = 0; i < users.size(); i++) {
+            str += users.get(i).toString() + "\n";
+        }
+        return str;
+    }
+    
+    /**
+     * @return Compares each user's toString methods in array's order.
+     */
+    @Override
+    public boolean equals(Object inputUsers) {
+        if (inputUsers == null) { //check null
+            return false;
+        }
+        if (this.getClass() != inputUsers.getClass()) { //check class
+            return false;
+        }
+        UserList otherUserList = (UserList) inputUsers;
+        ArrayList<User> otherUsers = otherUserList.getArrayList();
+        if (users.size() != otherUsers.size()) { //check size
+            return false;
+        }
+        for(int i = 0; i < users.size(); i++) { //check each park by toString
+            String myUser = users.get(i).toString();
+            String otherUser = otherUsers.get(i).toString();
+            if (myUser.compareTo(otherUser) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @return toString's hashCode
+     */
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
+    }
 }
