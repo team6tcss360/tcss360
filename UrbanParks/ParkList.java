@@ -15,13 +15,13 @@ public class ParkList {
     ArrayList<Park> parks;
 	
 	/**
-	 * Construct the ParkList Array
+	 * Construct the ParkList
 	 */
 	public ParkList() {
 		parks = new ArrayList<Park>();
 	}
 	
-	   /**
+	/**
      * Construct the ParkList Array
      */
     public ParkList(ArrayList<Park> inputArray) {
@@ -86,18 +86,55 @@ public class ParkList {
     }
     
     /**
-     * ToString method for the Array list.
+     * @return the ArrayList of Parks stored in this class
      */
+    public ArrayList<Park> getArrayList() {
+        return parks;
+    }
+    
+    /**
+     * @return Each park's toString method on their own lines.
+     */
+    @Override
     public String toString() {
-    	String str = " ";
+    	String str = "";
     	for(int i = 0; i < parks.size(); i++) {
-    		str += parks.toString() + "\n";
+    		str += parks.get(i).toString() + "\n";
     	}
     	return str;
     }
+    
+    /**
+     * @return Compares each park's toString methods in array's order.
+     */
+    @Override
+    public boolean equals(Object inputParks) {
+        if (inputParks == null) { //check null
+            return false;
+        }
+        if (this.getClass() != inputParks.getClass()) { //check class
+            return false;
+        }
+        ParkList otherParkList = (ParkList) inputParks;
+        ArrayList<Park> otherParks = otherParkList.getArrayList();
+        if (parks.size() != otherParks.size()) { //check size
+            return false;
+        }
+        for(int i = 0; i < parks.size(); i++) { //check each park by toString
+            String myPark = parks.get(i).toString();
+            String otherPark = otherParks.get(i).toString();
+            if (myPark.compareTo(otherPark) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    public ArrayList<Park> getArrayList() {
-        // TODO Auto-generated method stub
-        return parks;
+    /**
+     * @return toString's hashCode
+     */
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
     }
 }

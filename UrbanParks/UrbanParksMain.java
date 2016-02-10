@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 /**
  * Starts the program for the Urban Parks application.
  *
@@ -10,8 +12,9 @@ public class UrbanParksMain {
     /**
      * Main method for the Urban Parks user interface.
      * @param args Command line args
+     * @throws ParseException if invalid date format
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         ConsoleMain consoleMain = new ConsoleMain(); //create ConsoleMain
         consoleMain.run();           //run ConsoleMain
     }

@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -63,13 +62,13 @@ public class ConsoleParkManager {
 
 	/**
 	 * Runs the Park Manager console screen.
+	 * @throws ParseException if invalid date format
 	 */
-	public void run() {
+	public void run() throws ParseException {
 		String input = " ";
 		System.out.println("Login Success!");
 		System.out.println("Welcome: ");
-		System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
-
+		
 		do {
 
 			System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
@@ -109,12 +108,13 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Submits a job
+	 * @throws ParseException if invalid date format
 	 */
-	public void submitJob() {
-		System.out.print("Enter the start date: (ddmmyyyy)");
+	public void submitJob() throws ParseException {
+		System.out.print("Enter the start date: (mm-dd-yy)");
 		String startDate = scanner.nextLine();
 
-		System.out.print("Enter the end date: (ddmmyyyy)");
+		System.out.print("Enter the end date: (mm-dd-yy)");
 		String endDate = scanner.nextLine();
 
 		System.out.print("Enter the park name");
@@ -164,8 +164,9 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Edits a job.
+	 * @throws ParseException if invalid date format
 	 */
-	public void editJob() {
+	public void editJob() throws ParseException {
 		System.out.println("Enter the job ID you want to edit");
 		int jobID = 0;
 		String input = "";
@@ -192,11 +193,11 @@ public class ConsoleParkManager {
 				input = scanner.next();
 				switch(input) {
 				case "1":
-					System.out.print("Enter the start date: (ddmmyyyy)");
+					System.out.print("Enter the start date: (mm-dd-yy)");
 					jobs.getJob(jobID).setStartDate(scanner.nextLine());
 					break;
 				case "2":
-					System.out.print("Enter the end date: (ddmmyyyy)");
+					System.out.print("Enter the end date: (mm-dd-yy)");
 					jobs.getJob(jobID).setEndDate(scanner.next());
 					break;
 				case "3":

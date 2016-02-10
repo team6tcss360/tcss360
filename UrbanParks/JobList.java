@@ -90,14 +90,6 @@ public class JobList {
 		return jobs;
 	}
 
-	public boolean equals(Object inputJobList) {
-		boolean flag = false;
-		for(int i = 0; i <= jobs.size(); i++) {
-			flag = this.toString().compareTo(inputJobList.toString()) == 0;
-		}
-		return flag;
-	}
-
 	//Business rule #1
 	/**
 	 * Business rule #1: A job may not be added if the total number of pending job is currently 30.
@@ -180,4 +172,42 @@ public class JobList {
 //		}
 //		
 //	}
+	
+    /**
+     * @return Compares each job's toString methods in array's order.
+     */
+    @Override
+    public boolean equals(Object inputJobs) {
+        if (inputJobs == null) { //check null
+            return false;
+        }
+        if (this.getClass() != inputJobs.getClass()) { //check class
+            return false;
+        }
+        JobList otherJobList = (JobList) inputJobs;
+        ArrayList<Job> otherJobs = otherJobList.getArrayList();
+        if (jobs.size() != otherJobs.size()) { //check size
+            return false;
+        }
+        for(int i = 0; i < jobs.size(); i++) { //check each job by toString
+            String myJob = jobs.get(i).toString();
+            String otherJob = otherJobs.get(i).toString();
+            if (myJob.compareTo(otherJob) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+	/**
+     * @return all the jobs' toString's hashCode
+     */
+    @Override
+    public int hashCode() {
+        String allJobs = "";
+        for(int i = 0; i < jobs.size(); i++) { //check each job by toString
+            allJobs += jobs.get(i).toString();
+        }
+        return allJobs.hashCode();
+    }
 }

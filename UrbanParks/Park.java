@@ -109,4 +109,32 @@ public class Park implements Serializable {
     public String getParkManagerLastName() {
         return parkManagerLastName;
     }
+    
+    @Override
+    public String toString() {
+        return "Park: " + parkName + ", Location: " + location + ", Park Manager: "
+                + parkManagerFirstName + " " + parkManagerFirstName;
+    }
+    
+    /**
+     * Compares the toString()'s of both parks.
+     */
+    @Override
+    public boolean equals(Object inputPark) {
+        if (inputPark == null) {
+            return false;
+        }
+        if (this.getClass() != inputPark.getClass()) {
+            return false;
+        }
+        return this.toString().compareTo(inputPark.toString()) == 0;
+    }
+    
+    /**
+     * @return toString's hashCode
+     */
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
+    }
 }

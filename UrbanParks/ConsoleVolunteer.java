@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -56,8 +57,9 @@ public class ConsoleVolunteer {
 
 	/**
 	 * Runs the volunteer console screen.
+	 * @throws ParseException if invalid date format
 	 */
-	public void run() {
+	public void run() throws ParseException {
 		String input;
 		System.out.println("Login Success!");
 		System.out.println("Welcome: ");
@@ -119,7 +121,7 @@ public class ConsoleVolunteer {
 	 * Allows the volunteer to view all the current jobs
 	 */
 	public void viewAllJobs() {
-		System.out.println(jobs.toString());
+	    System.out.println(jobs.toString());
 	}
 	/**
 	 * Allows the Volunteer to view a job based off of it's unique ID

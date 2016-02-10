@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -58,8 +59,9 @@ public class ConsoleStaffMember {
 
 	/**
 	 * Runs the Staff Member console screen.
+	 * @throws ParseException if invalid date format
 	 */
-	public void run() {
+	public void run() throws ParseException {
 		String myInput;
 		System.out.println("Login Success!");
 		System.out.println("Welcome: ");
