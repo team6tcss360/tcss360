@@ -12,6 +12,8 @@ import java.util.GregorianCalendar;
  */
 public class Job implements Serializable {
 
+	
+	
 	/**
 	 * The serial version UID.
 	 */
@@ -350,12 +352,13 @@ public class Job implements Serializable {
 
 		return heavyMax == heavyCurrent;
 	}
+	
 
 
 
 	/**
 	 * Convert a string date to a GregorianCalender object.
-	 * @param theDate
+	 * @param theDate, mmddyyyy
 	 * @return GregorianCalender format date.
 	 */
 	private GregorianCalendar convertToCalender(String theDate) {
@@ -363,12 +366,19 @@ public class Job implements Serializable {
 		int myMonth = Integer.parseInt(theDate.substring(2,4));
 		int myYear = Integer.parseInt(theDate.substring(4, 8));
 
-		return new GregorianCalendar(myYear, myDate, myMonth);	  	
+		return new GregorianCalendar( myMonth, myDate, myYear);	  	
 	}
 
 
 	public String getSummary() {
 		
 		return "Job jobID=" + jobID + ", parkName=" + parkName + ", startDate=" + startDate + ", endDate=" + endDate;
-	}        
+	}  
+	
+	public boolean equals(Object inputJob) {
+		
+		return this.toString().compareTo(inputJob.toString()) == 0;
+		
+	}
+
 }
