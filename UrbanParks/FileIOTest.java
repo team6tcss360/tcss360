@@ -1,7 +1,4 @@
 import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,34 +13,34 @@ import org.junit.Test;
 public class FileIOTest {
 
     /** 
-     * Contains a copy of the actual Urban Parks data file.
-     */
-    private static final String FILE_ORIGINAL_COPY = "UrbanParks/UrbanParksDataCopy.txt";
-    
-    /** 
-     * Contains a copy of the actual Urban Parks data file.
+     * The location of a file to test writing/reading data.
      */
     private static final String FILE_WORKING_COPY = "UrbanParks/UrbanParksDataTest.txt";
     
-    /** 
-     * Contains an empty Urban Parks data file.
-     */
-    private static final String FILE_EMPTY = "UrbanParks/UrbanParksDataTestEmpty.txt";
-    
-    /**
-     * A file name with a typo (so that it is not found).
-     */
-    private static final String FILE_TYPO = "UrbanParks/UrbanParksDDKJHKDJ.txt";
+//    /** 
+//     * Contains a copy of the actual Urban Parks data file.
+//     */
+//    private static final String FILE_ORIGINAL_COPY = "UrbanParks/UrbanParksDataCopy.txt";
+//    
+//    /** 
+//     * Contains an empty Urban Parks data file.
+//     */
+//    private static final String FILE_EMPTY = "UrbanParks/UrbanParksDataTestEmpty.txt";
+//    
+//    /**
+//     * A file name with a typo (so that it is not found).
+//     */
+//    private static final String FILE_TYPO = "UrbanParks/UrbanParksDDKJHKDJ.txt";
     
     /**
      * A FileIO object with expected contents.
      */
     private FileIO workingFileIO;
     
-    /**
-     * A FileIO object with no contents.
-     */
-    private FileIO emptyFileIO;
+//    /**
+//     * A FileIO object with no contents.
+//     */
+//    private FileIO emptyFileIO;
     
     /**
      * Contains the users that Urban Parks application will use.

@@ -40,7 +40,8 @@ public class ConsoleStaffMember {
 	/**
 	 * Contains the parks that Urban Parks application will use.
 	 */
-	private ParkList parks;
+	@SuppressWarnings("unused") //may need it later
+    private ParkList parks;
 
 	/**
 	 * Constructs the Staff Member console for the current user.
@@ -65,46 +66,58 @@ public class ConsoleStaffMember {
 		String myInput;
 		System.out.println("Login Success!");
 		System.out.println("Welcome: ");
-		System.out.println("Urban Parks Staff: " + user.getFirstName() + " " + user.getLastName());
-		System.out.println();
 		do {
-			System.out.println("Please Enter a Command:");
-			System.out.println("1) Search volunteers by last name");
-			System.out.println("2) View a summary of all upcoming jobs.");
-			System.out.println("3) Display All Volunteers");
-			System.out.println("4) Display summary of a job by it's Job ID");
+		    System.out.println();
+		    System.out.println("Urban Parks Staff: " + user.getFirstName() + " " + user.getLastName());
+	        System.out.println();
+	        System.out.println("Please Enter a Command:");
+	        System.out.println("1) Display all volunteers");
+			System.out.println("2) Search volunteers by last name");
+			System.out.println("3) View a summary of all upcoming jobs");
+			
+			System.out.println("4) Display summary of a job by job ID");
 			System.out.println("5) Back"); 
 			System.out.println("6) Exit");  
 			System.out.print(">> ");
 			myInput = scanner.nextLine(); //Get user input
 			int jobID = 0;
 			switch(myInput) {
-			case "1":
-				System.out.println("Enter in the last name you are looking for.");
-				String lastName = scanner.nextLine();
-				searchVolunteer(lastName);
-				break;
-			case "2":
-				displayJobs();
-				break;
-			case "3":
-				displayVolunteers();
-				break;
-			case "4":
-				System.out.println("Enter in job ID:");
-				String string_jobID = scanner.nextLine();
-				try {
-				jobID = Integer.parseInt(string_jobID);
-				} catch(NumberFormatException e) {
-					System.out.println("Invalid Input");
-					break;
-				}
-				getJob(jobID);
-				break;
-			case "5":
-				ConsoleMain console = new ConsoleMain();
-				console.run();
-				break;
+    			case "1":
+                    displayVolunteers();
+                    break;
+                    
+    			case "2":
+    				System.out.println("Enter in the last name you are looking for.");
+    				System.out.print(">> ");
+    	            String lastName = scanner.nextLine();
+    				searchVolunteer(lastName);
+    				break;
+    				
+    			case "3":
+    				displayJobs();
+    				break;
+
+    			case "4":
+    				System.out.println("Enter job ID:");
+    				System.out.print(">> ");
+    				String string_jobID = scanner.nextLine();
+    				try {
+    				jobID = Integer.parseInt(string_jobID);
+    				} catch(NumberFormatException e) {
+    					System.out.println("Invalid Input");
+    					break;
+    				}
+    				getJob(jobID);
+    				break;
+    				
+    			case "5":
+    				ConsoleMain console = new ConsoleMain();
+    				console.run();
+    				break;
+    				
+    			case "6":
+    			    System.out.println("Exiting...");
+    			    break;
 			}
 		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
 	}
@@ -120,6 +133,7 @@ public class ConsoleStaffMember {
 	}
 	
 	public void displayVolunteers() {
+	    System.out.println("Volunteers: ");
 		for(int i = 0; i < users.size(); i++) {
 			if(users.getArrayList().get(i) instanceof Volunteer) {
 				System.out.println(users.getArrayList().get(i).toString());
@@ -128,10 +142,9 @@ public class ConsoleStaffMember {
 	}
 
 	public void displayJobs() {
-		for(int i = 0; i < jobs.size(); i++) {
-			System.out.println(jobs.toString());
-		}
+		System.out.print(jobs.getSummaries());
 	}
+	
 	public void searchVolunteer(String inputName) {
 		int index = 0;
 		boolean isFound = false;
@@ -148,8 +161,7 @@ public class ConsoleStaffMember {
 		if(isFound) {
 			System.out.println(users.getArrayList().get(index));
 		} else {
-			System.out.println("Volunteer doesn't exist");
+			System.out.println("Volunteer doesn't exist. \n");
 		}
 	}
-
 }

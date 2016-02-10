@@ -63,12 +63,13 @@ public class ConsoleVolunteer {
 		String input;
 		System.out.println("Login Success!");
 		System.out.println("Welcome: ");
-		System.out.println("Volunteer: " + user.getFirstName() + " " + user.getLastName());
 		do {
-			System.out.println();
+		    System.out.println();
+		    System.out.println("Volunteer: " + user.getFirstName() + " " + user.getLastName());
+	        System.out.println();
 			System.out.println("Please Enter a Command:");
-			System.out.println("1) View Upcoming Jobs");
-			System.out.println("2) View Jobs by Job ID");
+			System.out.println("1) View upcoming jobs");
+			System.out.println("2) View jobs by job ID");
 			System.out.println("3) Volunteer for a job");
 			System.out.println("4) View jobs you signed up for");
 			System.out.println("5) Back");
@@ -77,52 +78,59 @@ public class ConsoleVolunteer {
 			input = scanner.nextLine(); //Get user input
 			int jobID = 0;
 			switch(input) {
-			case "1":
-				viewAllJobs();
-				//				System.out.println(users.getVolunteerLastNames());
-				break;
-			case "2":
-				System.out.println("Enter in the job ID that you want to view");
-				String string_jobID = scanner.nextLine();
-				try {
-					jobID = Integer.parseInt(string_jobID);
-				} catch(NumberFormatException e) {
-					System.out.println("Invalid input");
-					break;
-				}
-				viewJobID(jobID);
-				break;
-			case "3":
-				System.out.println("Enter in the job ID that you want to volunteer for.");
-				string_jobID = scanner.nextLine();
-				try {
-					jobID = Integer.parseInt(string_jobID);
-				} catch(NumberFormatException e) {
-					System.out.println("Invalid input");
-					break;
-				}
-				signUpForJob(jobID);
-				break;
-			case "4":
-				viewMyJobs();
-				break;
-			case "5":
-				ConsoleMain console = new ConsoleMain();
-				console.run();
-			case "6":
-				break;
+    			case "1":
+    				viewAllJobs();
+    				//				System.out.println(users.getVolunteerLastNames());
+    				break;
+    				
+    			case "2":
+    				System.out.println("Enter the job ID that you want to view:");
+    				System.out.print(">> ");
+    				String string_jobID = scanner.nextLine();
+    				try {
+    					jobID = Integer.parseInt(string_jobID);
+    				} catch(NumberFormatException e) {
+    					System.out.println("Invalid input");
+    					break;
+    				}
+    				viewJobID(jobID);
+    				break;
+    				
+    			case "3":
+    				System.out.println("Enter the job ID that you want to volunteer for:");
+    				System.out.print(">> ");
+    				string_jobID = scanner.nextLine();
+    				try {
+    					jobID = Integer.parseInt(string_jobID);
+    				} catch(NumberFormatException e) {
+    					System.out.println("Invalid input");
+    					break;
+    				}
+    				signUpForJob(jobID);
+    				break;
+    				
+    			case "4":
+    				viewMyJobs();
+    				break;
+    				
+    			case "5":
+    				ConsoleMain console = new ConsoleMain();
+    				console.run();
+    				
+    			case "6":
+    			    System.out.println("Exiting...");
+    				break;
 			}
-
-
 		} while(input.compareTo("5") != 0 && input.compareTo("6") != 0);
-
 	}
+	
 	/**
 	 * Allows the volunteer to view all the current jobs
 	 */
 	public void viewAllJobs() {
-	    System.out.println(jobs.toString());
+	    System.out.print(jobs.getSummaries());
 	}
+	
 	/**
 	 * Allows the Volunteer to view a job based off of it's unique ID
 	 * @param inputJobID
@@ -135,35 +143,71 @@ public class ConsoleVolunteer {
 			System.out.println(temp.toString());
 		}
 	}
-
-	//TODO need to ask for category (light, etc.)
+	
+	/**
+	 * Allows a Volunteer to sign up for a job based off of it's unique ID
+	 * @param inputJobID
+	 */
 	public void signUpForJob(int inputJobID) {
 		Job temp = jobs.getJob(inputJobID);
 		String level = "";
 		if(temp == null) {
-			System.out.println("Job doesn't exist");
-		} else if (temp != null){
+			System.out.println("Job doesn't exist.");
+		} else if (temp.isVolunteer((Volunteer) user)) {
+		    System.out.println("You are already signed up for this job!");
+		} else if (temp.isInPast()) {
+            System.out.println("This job already happened!");
+        } else if (temp != null){
 			System.out.println("What level of difficulty would you like?");
-			System.out.println("Light, Medium, or Heavy?");
-			level = scanner.nextLine().toLowerCase();
+			System.out.println("1) Light");
+			System.out.println("2) Medium");
+			System.out.println("3) Heavy");
+			System.out.print(">> ");
+			level = scanner.nextLine();
 			switch(level) {
-			//This is still returning a null pointer exception....
-			case "light":
-				System.out.println(jobs.getJob(inputJobID).toString());
-				//jobs.getJob(inputJobID).addLightVolunteer((Volunteer) user); 
-				break;
-			case "medium":
-				jobs.getJob(inputJobID).addMedVolunteer((Volunteer) user);
-			case "heavy":
-				jobs.getJob(inputJobID).addHeavyVolunteer((Volunteer) user);
+    			case "1":
+    			    if (jobs.getJob(inputJobID).hasLightMax()) {
+    			        System.out.println("That category is full!");
+    			    } else {
+    			        jobs.getJob(inputJobID).addLightVolunteer((Volunteer) user); 
+    			        System.out.println("You signed up for job " + inputJobID 
+    			                + " in the light category!");
+    			    }
+    				break;
+    				
+    			case "2":
+    			    if (jobs.getJob(inputJobID).hasMedMax()) {
+                        System.out.println("That category is full!");
+                    } else {
+                        jobs.getJob(inputJobID).addMedVolunteer((Volunteer) user);
+                        System.out.println("You signed up for job " + inputJobID 
+                                + " in the medium category!");
+                    }
+    				break;
+    				
+    			case "3":
+    			    if (jobs.getJob(inputJobID).hasHeavyMax()) {
+                        System.out.println("That category is full!");
+                    } else {
+                        jobs.getJob(inputJobID).addHeavyVolunteer((Volunteer) user);
+                        System.out.println("You signed up for job " + inputJobID 
+                                + " in the heavy category!");
+                    }
+    				break;
+    				
+    			default: 
+    			    System.out.println("That is not a valid category.");
+    			    break;
 			}
-
 		}
 		fileIO.save(users, jobs, parks);
-
 	}
+	
+	/**
+	 * Displays the jobs that the user is signed up for.
+	 */
 	public void viewMyJobs() {
-		//System.out.println(jobs.getJobAt(0).getVolunteerList().get(0));
+		System.out.print(jobs.getSummariesMyVolunteerJobs((Volunteer) user));
 	}
 
 }
