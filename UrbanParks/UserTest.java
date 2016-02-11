@@ -108,11 +108,19 @@ public class UserTest {
     }
 
     /**
-     * Test method for {@link User#getUserID()}.
+     * Test method for {@link User#equals()}
      */
     @Test
-    public void testGetUserID() {
-        fail("Not yet implemented");
+    public void testEquals() {
+    	fail("Not yet implemented");
     }
+//    unneeded since no user ID
+//    /**
+//     * Test method for {@link User#getUserID()}.
+//     */
+//    @Test
+//    public void testGetUserID() {
+//        fail("Not yet implemented");
+//    }
 
 }
