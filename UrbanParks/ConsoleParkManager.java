@@ -91,8 +91,9 @@ public class ConsoleParkManager {
 			System.out.println("2) Delete a job");
 			System.out.println("3) Edit a job");
 			System.out.println("4) View upcoming jobs in my parks");
-			System.out.println("5) Back");
-			System.out.println("6) Exit");  
+			System.out.println("5) View Volunteers in a park that I manage");
+			System.out.println("6) Back");  
+			System.out.println("7) Exit");
 			System.out.print(">> ");
 			input = scanner.nextLine();
 			switch(input) {
@@ -109,17 +110,42 @@ public class ConsoleParkManager {
     				viewUpcomingJobsMyPark();
     				break;
     			case "5":
-    				ConsoleMain console = new ConsoleMain();
-    				console.run();
+    			    viewVolunteersInPark();
     				break;
     			case "6":
+    			    ConsoleMain console = new ConsoleMain();
+    				console.run();
+    				break;
+    			case "7":
     			    System.out.println("Exiting...");
     				break;
 			}
-		} while(input.compareTo("6") != 0 && input.compareTo("5") != 0);
+		} while(input.compareTo("7") != 0 && input.compareTo("6") != 0);
 
 	}
-	
+	/**
+	 * Displays the volunteers in the parks that are managed by the current park manager.
+	 */
+	public void viewVolunteersInPark() {
+		System.out.println("Enter the job ID you want to view");
+		System.out.print(">> ");
+		int jobID = 0;
+		String input = "";
+		try {
+			jobID = Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("Invalid input, needs to be a number!");
+		}
+		Job job = jobs.getJob(jobID);
+		if(job == null) {
+			System.out.println("Job doesn't exist");
+		} else if (!job.isParkManager(parks, user)) {
+            System.out.println("You are not the park manager.");
+        } else {
+        	System.out.println(job.volunteerListToString());
+        }
+		
+	}
 	/**
 	 * Submits a job
 	 * @throws ParseException if invalid date format
