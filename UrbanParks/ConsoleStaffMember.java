@@ -122,7 +122,10 @@ public class ConsoleStaffMember {
 		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
 	}
 
-	
+	/**
+	 * Displays the job by job ID
+	 * @param inputJobID
+	 */
 	public void getJob(int inputJobID) {
 		Job temp = jobs.getJob(inputJobID);
 		if(temp == null) {
@@ -131,7 +134,9 @@ public class ConsoleStaffMember {
 			System.out.println(temp.toString());
 		}
 	}
-	
+	/**
+	 * Displays all volunteers
+	 */
 	public void displayVolunteers() {
 	    System.out.println("Volunteers: ");
 		for(int i = 0; i < users.size(); i++) {
@@ -144,7 +149,10 @@ public class ConsoleStaffMember {
 	public void displayJobs() {
 		System.out.print(jobs.getSummaries());
 	}
-	
+	/**
+	 * Searches volunteer by last name
+	 * @param inputName
+	 */
 	public void searchVolunteer(String inputName) {
 		int index = 0;
 		boolean isFound = false;
