@@ -187,15 +187,9 @@ public class JobList {
 	    GregorianCalendar left = convertToCalender(inputStartDate);
 	    GregorianCalendar right = convertToCalender(inputEndDate);
 	    left.add(Calendar.DAY_OF_MONTH, -3);
-	    left.set(Calendar.HOUR_OF_DAY, 0);
-	    left.set(Calendar.MINUTE, 0);
-	    left.set(Calendar.SECOND, 0);
-	    left.set(Calendar.MILLISECOND, 0);
+	    zeroOutTime(left);
 	    right.add(Calendar.DAY_OF_MONTH, 4);
-	    right.set(Calendar.HOUR_OF_DAY, 0);
-	    right.set(Calendar.MINUTE, 0);
-	    right.set(Calendar.SECOND, 0);
-	    right.set(Calendar.MILLISECOND, 0);
+	    zeroOutTime(right);
 	    for (int i = 0; i < jobs.size(); i++) {
 	        Job currentJob = jobs.get(i);
 	        if (currentJob.getEndDate().after(left)
