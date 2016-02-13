@@ -209,35 +209,35 @@ public class JobList {
         return false;
 	}
 	
-	/**
-	 * Business rule #4: A job may not be scheduled that lasts more than two days
-	 */
-	public boolean hasValidDuration(Job inputJob) {
-		GregorianCalendar invalid = (GregorianCalendar) inputJob.getStartDate().clone();
-		invalid.add(GregorianCalendar.DATE, MAX_DURATION);
-		
-		return inputJob.getEndDate().before(invalid);
-	}
+//	/**
+//	 * Business rule #4: A job may not be scheduled that lasts more than two days
+//	 */
+//	public boolean hasValidDuration(Job inputJob) {
+//		GregorianCalendar invalid = (GregorianCalendar) inputJob.getStartDate().clone();
+//		invalid.add(GregorianCalendar.DATE, MAX_DURATION);
+//		
+//		return inputJob.getEndDate().before(invalid);
+//	}
+//	
+//	/**
+//	 * Business rule #5 part B: A job may not be added that is in the more than 3 months for the future. 
+//	 */
+//	public boolean future3MonthTest(Job inputJob) {
+//		GregorianCalendar then = new GregorianCalendar();
+//		then.add(GregorianCalendar.MONTH, MAX_POST_TIME);
+//		
+//		return inputJob.getStartDate().before(then);
+//	}
 	
-	/**
-	 * Business rule #5 part B: A job may not be added that is in the more than 3 months for the future. 
-	 */
-	public boolean future3MonthTest(Job inputJob) {
-		GregorianCalendar then = new GregorianCalendar();
-		then.add(GregorianCalendar.MONTH, MAX_POST_TIME);
-		
-		return inputJob.getStartDate().before(then);
-	}
-	
-	/**
-	 * Business rule #6: A volunteer may not sign up for a job that has passed.
-	 */
-	public boolean hasPastDate(Job inputJob) {
-		if (inputJob.isInPast()) {
-			return false;
-		}
-		return true;
-	}
+//	/**
+//	 * Business rule #6: A volunteer may not sign up for a job that has passed.
+//	 */
+//	public boolean hasPastDate(Job inputJob) {
+//		if (inputJob.isInPast()) {
+//			return false;
+//		}
+//		return true;
+//	}
 	
 //	/**
 //	 * Business rule #7: A volunteer may not sign for two jobs on the same day.
