@@ -239,33 +239,34 @@ public class JobList {
 //		return true;
 //	}
 	
-//	/**
-//	 * Business rule #7: A volunteer may not sign for two jobs on the same day.
-//	 */
-//	public boolean hasJobOnSameDay(String inputEmail, Job inputJob, JobList inputJobList) {
-//		GregorianCalendar startDate = inputJob.getStartDate();
-//		GregorianCalendar endDate = inputJob.getEndDate();
-//		
-//		for(Job tempJob : inputJobList.getArrayList()) {
-//			for(Volunteer tempVolunter : tempJob.getVolunteerList()) {
-//				if(tempVolunter.get(0).equals(inputEmail)){
-//					if(startDate.equals(tempJob.getStartDate())) {
-//						return true;
-//					}
-//					if(startDate.equals(tempJob.getEndDate())) {
-//						return true;
-//					}
-//					if(endDate.equals(tempJob.getStartDate())) {
-//						return true;
-//					}
-//					if(endDate.equals(tempJob.getEndDate()) {
-//						
-//					}
-//				}
-//			}
-//		}
-//		
-//	}
+	/**
+	 * Business rule #7: A volunteer may not sign for two jobs on the same day.
+	 */
+	public boolean hasJobOnSameDay(Volunteer inputVolunteer, Job inputJob) {
+		GregorianCalendar startDate = (GregorianCalendar) inputJob.getStartDate().clone();
+		GregorianCalendar endDate = (GregorianCalendar) inputJob.getEndDate().clone();
+		//zero out time, because we only care if they are on the same day
+		zeroOutTime(startDate);
+		zeroOutTime(endDate);
+		
+		for (int i = 0; i < jobs.size(); i++) { //test every job
+		    Job testJob = jobs.get(i);
+		    if(testJob.isVolunteer(inputVolunteer)) { //check if they are signed up
+    		    //if they are signed up, get the dates for that job
+		        GregorianCalendar testStartDate = (GregorianCalendar) testJob.getStartDate().clone();
+    	        GregorianCalendar testEndDate = (GregorianCalendar) testJob.getEndDate().clone();
+    	        zeroOutTime(testStartDate);
+    	        zeroOutTime(testEndDate);
+    	        
+    	        //test if any start date or end date matches a job they are signed up for
+    	        if (startDate.equals(testStartDate) || startDate.equals(testEndDate) 
+    	                || endDate.equals(testStartDate) || endDate.equals(testEndDate)) {
+    	            return true;
+    	        }
+		    }
+		}
+		return false;
+	}
 	 
 	/**
 	 * Checks if the jobID is already taken.
@@ -292,6 +293,16 @@ public class JobList {
         GregorianCalendar newCalendar = new GregorianCalendar();
         newCalendar.setTime(parsed);
         return newCalendar;     
+    }
+    
+    /**
+     * Sets the input calendar's hour, minute, second, and ms to 0.
+     */
+    protected void zeroOutTime(GregorianCalendar inputCalendar) {
+        inputCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        inputCalendar.set(Calendar.MINUTE, 0);
+        inputCalendar.set(Calendar.SECOND, 0);
+        inputCalendar.set(Calendar.MILLISECOND, 0);
     }
 	
 	/**

@@ -157,6 +157,8 @@ public class ConsoleVolunteer {
 		    System.out.println("You are already signed up for this job!");
 		} else if (temp.isInPast()) {
             System.out.println("This job already happened!");
+		} else if (jobs.hasJobOnSameDay((Volunteer) user, temp)) {
+		    System.out.println("You are already signed up for a job on that day!");
         } else if (temp != null){
 			System.out.println("What level of difficulty would you like?");
 			System.out.println("1) Light");
