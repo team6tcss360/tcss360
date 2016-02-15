@@ -24,6 +24,7 @@ public class JobTest {
 	 */
 	private Job myJob;
 	private Job myJob2;
+	private Job myJob3;
 
 	/**
 	 * Volunteer object for testing.
@@ -50,7 +51,8 @@ public class JobTest {
 	public void setUp() throws ParseException {
 
 		myJob = new Job(1, "03-01-16 2:00PM", "03-01-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
-		myJob2 = new Job(2, "04-02-16 9:00AM", "04-03-16 5:00PM", "Mount Rainier", "The volunteers will repair a bridge.", 0, 0, 5);
+		myJob2 = new Job(1, "03-01-16 2:00PM", "03-01-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
+		myJob3 = new Job(3, "03-01-17 2:00PM", "03-01-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
 
 		park1 = new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "Peter", "Parker");
 
@@ -171,7 +173,8 @@ public class JobTest {
 	 */
 	@Test
 	public void testEquals() {
-		assertFalse(myJob.equals(myJob2));
+		assertTrue(myJob.equals(myJob2));
+		assertFalse(myJob.equals(myJob3));
 
 	}
 

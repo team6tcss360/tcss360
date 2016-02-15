@@ -26,6 +26,7 @@ public class JobListTest {
 	 * Contains the jobs that Urban Parks application will use.
 	 */
 	private JobList myJobList;
+	private JobList myJobList2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -33,6 +34,7 @@ public class JobListTest {
 	@Before
 	public void setUp() throws Exception {
 		myJobList = new JobList();
+		myJobList2 = new JobList();
 
 	}
 
@@ -181,8 +183,10 @@ public class JobListTest {
 	@Test
 	public void testEquals() throws ParseException {
 		Job j1 = new Job(1, "03-01-16 2:00PM", "03-01-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
+		myJobList.add(j1);
 		Job j2 = new Job(1, "03-01-16 2:00PM", "03-01-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
-		assertTrue(j1.equals(j2));
+		myJobList2.add(j2);
+		assertTrue(myJobList.equals(myJobList2));
 
 	}
 
