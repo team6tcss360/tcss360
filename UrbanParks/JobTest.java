@@ -19,18 +19,33 @@ import org.junit.Test;
 
 public class JobTest {
 
+	/**
+	 * Job object for testing.
+	 */
 	private Job myJob;
 	private Job myJob2;
 
-
+	/**
+	 * Volunteer object for testing.
+	 */
 	private Volunteer v0;
 	private Volunteer v1;
 	private Volunteer v2;
-	
-	private Park park1;
-	private ParkManager pm1;
-	//check park manager
 
+	/**
+	 * Park object for testing
+	 */
+	private Park park1;
+	
+	/**
+	 * ParkManger object for testing.
+	 */
+	private ParkManager pm1;
+
+
+	/**
+	 * @throws ParseException
+	 */
 	@Before
 	public void setUp() throws ParseException {
 
@@ -38,20 +53,23 @@ public class JobTest {
 		myJob2 = new Job(2, "04-02-16 9:00AM", "04-03-16 5:00PM", "Mount Rainier", "The volunteers will repair a bridge.", 0, 0, 5);
 
 		park1 = new Park("Point Defiance", "5400 N Pearl St, Tacoma, WA 98407", "Peter", "Parker");
-		
+
 		pm1 = new ParkManager("Peter","Parker","p@p.com","9876547590");
-		
-		
+
+
 	}
 
-	@Test
-	public void testConstructor() {
-		assertEquals(3, myJob.getLightMax());
-		assertEquals(3, myJob.getMedMax());
-		assertEquals(3, myJob.getHeavyMax());
-	}
+//	@Test
+//	public void testConstructor() {
+//		assertEquals(3, myJob.getLightMax());
+//		assertEquals(3, myJob.getMedMax());
+//		assertEquals(3, myJob.getHeavyMax());
+//	}
 
 	//Here we also tested addLightVolunteer method.
+	/**
+	 * Test hasLightMax() method, to check if the max number of  light jobs has been reached.
+	 */
 	@Test
 	public void testHasLightMax() {
 		v0 = new Volunteer("Weiwei", "Shi", "wshi@uw.edu", "911");
@@ -69,6 +87,9 @@ public class JobTest {
 	}
 
 	//Here we also tested addMedVolunteer method
+	/**
+	 * Test hasMedMax() method, to check if the max number of  medium jobs has been reached.
+	 */
 	@Test
 	public void testHasMedMax() {
 		v0 = new Volunteer("Josh", "Teneburg", "jos@kk.com", "2899833");
@@ -83,8 +104,11 @@ public class JobTest {
 		//current medium type reaches the max, return true
 		assertTrue(myJob.hasMedMax());		
 	}
-	
+
 	//Here we also tested addHeavyVolunteer method
+	/**
+	 * Test hasHeavyMax() method, to check if the max number of  heavy jobs has been reached.
+	 */
 	@Test
 	public void testHasHeavyMax() {
 		v0 = new Volunteer("kk", "Woweo", "wi@uw.edu", "28937");
@@ -92,57 +116,70 @@ public class JobTest {
 		v2 = new Volunteer("Jack", "Wong", "Jwong@uw.edu", "399849783");
 		myJob.addHeavyVolunteer(v0);
 		//right now heavy type doesn't reach the max, return false
-		
+
 		myJob.addHeavyVolunteer(v1);
 		myJob.addHeavyVolunteer(v2);
 		assertTrue(myJob.hasHeavyMax());
-		
+
 	}
-	
+
+	/**
+	 * Test if the job is in past.
+	 */
 	@Test
 	public void testIsInPast(){
 		assertFalse(myJob.isInPast());	
 	}
-	
+
+	/**
+	 * Test getSummary() method, it should get the detail of the job been selected.
+	 */
 	@Test
 	public void testGetSummary() {
 		assertEquals("Job: " + "1" + " | Park: " + "South Park" + 
 				" | Start: " + "03-01-16 2:00PM" + " | End: " 
 				+ "03-01-16 4:00PM", myJob.getSummary());
 	}
-	
-	
-	
+
+
+	/**
+	 * Test if the User is the park manager for this job.
+	 */
 	@Test
 	public void testIsParkManager() {
 		assertEquals("Peter Parker, Point Defiance", park1.getParkManagerFirstName() + " " 
-													+ park1.getParkManagerLastName() + ", "
-													+ park1.getParkName());
-		
+				+ park1.getParkManagerLastName() + ", "
+				+ park1.getParkName());
+
 	}
-	
-	
+
+	/**
+	 * Test if a volunteer is currently signed up for this job.
+	 */
 	@Test
 	public void testIsVolunteer() {
 		v0 = new Volunteer("Weiwei", "Shi", "wshi@uw.edu", "911");
 		v1 = new Volunteer("Weiwei2", "Shi2", "wshi2@uw.edu", "912");
 		myJob.addLightVolunteer(v0);
-		
+
 		assertTrue(myJob.isVolunteer(v0));
 		assertFalse(myJob.isVolunteer(v1));
 	}
-	
+
+	/**
+	 * Test equals() method, to test two objects if they are equal. 
+	 */
 	@Test
 	public void testEquals() {
 		assertFalse(myJob.equals(myJob2));
-		
+
 	}
-	
-	
 
 
 
-	
+
+
+
 
 }
 
