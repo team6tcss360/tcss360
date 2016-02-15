@@ -151,7 +151,7 @@ public class JobListTest {
 		myJobList.add(new Job(3, "03-01-18 2:00PM", "03-01-18 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));
 		myJobList.add(new Job(4, "03-01-19 2:00PM", "03-01-19 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));
 		myJobList.add(new Job(5, "03-01-20 2:00PM", "03-01-20 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));
-		//add another job between this five days should return true
+		//add another job between this five days should return false
 		myJobList.add(new Job(6, "03-01-17 3:00PM", "03-01-17 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));
 		assertFalse(myJobList.hasMaxJobsInWeek("03-01-17 3:00PM", "03-01-17 4:00PM"));
 	}
