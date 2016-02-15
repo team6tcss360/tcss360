@@ -4,7 +4,7 @@
   <class id="1" language="java" name="ConsoleMain" project="tcss360" file="/tcss360/UrbanParks/ConsoleMain.java" 
     binary="false" corner="TOP_LEFT">    
     <position height="-1" width="-1" x="904" y="310"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -12,17 +12,17 @@
   </class>  
   <class id="2" language="java" name="ConsoleParkManager" project="tcss360" 
     file="/tcss360/UrbanParks/ConsoleParkManager.java" binary="false" corner="TOP_LEFT">    
-    <position height="179" width="264" x="106" y="52"/>    
-    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
+    <position height="142" width="210" x="106" y="52"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
-      <attributes public="false" package="true" protected="false" private="false" static="false"/>      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
   <class id="3" language="java" name="ConsoleStaffMember" project="tcss360" 
     file="/tcss360/UrbanParks/ConsoleStaffMember.java" binary="false" corner="TOP_LEFT">    
     <position height="-1" width="-1" x="585" y="128"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -31,7 +31,7 @@
   <class id="4" language="java" name="ConsoleVolunteer" project="tcss360" 
     file="/tcss360/UrbanParks/ConsoleVolunteer.java" binary="false" corner="TOP_LEFT">    
     <position height="-1" width="-1" x="829" y="130"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -76,7 +76,7 @@
   <class id="9" language="java" name="ParkList" project="tcss360" file="/tcss360/UrbanParks/ParkList.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="836" y="532"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -85,7 +85,7 @@
   <class id="10" language="java" name="ParkManager" project="tcss360" file="/tcss360/UrbanParks/ParkManager.java" 
     binary="false" corner="TOP_RIGHT">    
     <position height="-1" width="-1" x="130" y="976"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -94,7 +94,7 @@
   <class id="11" language="java" name="StaffMember" project="tcss360" file="/tcss360/UrbanParks/StaffMember.java" 
     binary="false" corner="TOP_RIGHT">    
     <position height="-1" width="-1" x="120" y="912"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -112,7 +112,7 @@
   <class id="13" language="java" name="UserList" project="tcss360" file="/tcss360/UrbanParks/UserList.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="600" y="780"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
@@ -121,26 +121,27 @@
   <class id="14" language="java" name="Volunteer" project="tcss360" file="/tcss360/UrbanParks/Volunteer.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="122" y="844"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="false" static="false"/>      
       <operations public="true" package="true" protected="true" private="false" static="false"/>    
     </display>  
   </class>  
   <association id="15">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="16" name="user">        
+    <bendpoint x="662" y="446"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="16" name="users">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="17" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="18">    
-    <end type="SOURCE" refId="4" navigable="false">      
+    <end type="SOURCE" refId="3" navigable="false">      
       <attribute id="19" name="fileIO">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -152,79 +153,81 @@
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="21">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="22" name="jobs">        
+    <bendpoint x="482" y="407"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="22" name="users">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="23" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="25" name="users">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="25" name="volunteerList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="26" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
   <association id="27">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="28" name="parks">        
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="28" name="users">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="29" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="30">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="31" name="user">        
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="31" name="parks">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="33">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="34" name="users">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="34" name="jobs">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="35" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="36">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="37" name="fileIO">        
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="37" name="jobs">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
+      <multiplicity id="38" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="39">    
-    <end type="SOURCE" refId="4" navigable="false">      
+    <bendpoint x="281" y="270"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
       <attribute id="40" name="jobs">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -236,19 +239,20 @@
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="42">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="43" name="fileIO">        
+    <bendpoint x="256" y="464"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="43" name="user">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="44" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="45">    
-    <end type="SOURCE" refId="1" navigable="false">      
+    <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="46" name="parks">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -259,148 +263,150 @@
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
-  <association id="48">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="49" name="jobs">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="52" name="jobs">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="53" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <association id="54">    
+  <generalization id="48">    
+    <bendpoint x="234" y="878"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="49">    
+    <bendpoint x="524" y="467"/>    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="55" name="parks">        
+      <attribute id="50" name="user">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <association id="57">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="58" name="user">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="59" minimum="0" maximum="1">        
+      <multiplicity id="51" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
-  <association id="60">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="61" name="fileIO">        
+  <association id="52">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="53" name="user">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="62" minimum="0" maximum="1">        
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="56" name="fileIO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
-  <association id="63">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="64" name="parks">        
+  <association id="58">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="59" name="users">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="65" minimum="0" maximum="1">        
+      <multiplicity id="60" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="62" name="fileIO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="65" name="parks">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
-  <association id="66">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="67" name="jobs">        
+  <generalization id="67">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="68">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="69" name="fileIO">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="68" minimum="0" maximum="1">        
+      <multiplicity id="70" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="72" name="parks">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="73" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="75" name="users">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="78" name="jobs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="79" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
-  <association id="69">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="70" name="users">        
+  <association id="80">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="81" name="parks">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="71" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <generalization id="72">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="73">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="74" name="parks">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="75" minimum="0" maximum="1">        
+      <multiplicity id="82" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
-  <association id="76">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="77" name="users">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="78" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <generalization id="79">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="80">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="81" name="volunteerList">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="82" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
   <association id="83">    
-    <end type="SOURCE" refId="5" navigable="false">      
+    <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="84" name="users">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -412,7 +418,7 @@
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="86">    
-    <end type="SOURCE" refId="3" navigable="false">      
+    <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="87" name="jobs">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -424,11 +430,12 @@
     <display labels="false" multiplicity="false"/>  
   </association>  
   <generalization id="89">    
-    <end type="SOURCE" refId="11"/>    
+    <bendpoint x="308" y="930"/>    
+    <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="12"/>  
   </generalization>  
   <association id="90">    
-    <end type="SOURCE" refId="5" navigable="false">      
+    <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="91" name="parks">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -440,15 +447,16 @@
     <display labels="false" multiplicity="false"/>  
   </association>  
   <association id="93">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="94" name="users">        
+    <bendpoint x="478" y="312"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="94" name="jobs">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="95" minimum="0" maximum="2147483647">        
+      <multiplicity id="95" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
