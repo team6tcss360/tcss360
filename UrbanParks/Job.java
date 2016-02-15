@@ -18,7 +18,7 @@ public class Job implements Serializable {
 	 * The serial version UID.
 	 */
 	private static final long serialVersionUID = -2382757831956773518L;
-	
+
 	/**
 	 * The format to use on dates.
 	 */
@@ -108,12 +108,12 @@ public class Job implements Serializable {
 
 		heavyMax = inputHeavyMax;
 		heavyCurrent = 0;
-		
+
 		volunteerList = new ArrayList<Volunteer>();
 	}
 
 	/**
-	 * Set the current volunteer numbers for light job.
+	 * Set the max volunteer numbers for light job.
 	 *
 	 */
 	public void setLightMax(int inputLightMax) {
@@ -121,7 +121,7 @@ public class Job implements Serializable {
 	}
 
 	/**
-	 * Set the current volunteer numbers for medium job.
+	 * Set the max volunteer numbers for medium job.
 	 * 
 	 */
 	public void setMedMax(int inputMedMax) {
@@ -129,7 +129,7 @@ public class Job implements Serializable {
 	}
 
 	/**
-	 * Set the current volunteer numbers for heavy job.
+	 * Set the max volunteer numbers for heavy job.
 	 * 
 	 */
 	public void setHeavyMax(int inputHeavyMax) {
@@ -152,7 +152,7 @@ public class Job implements Serializable {
 	public void setEndDate(String inputEndDate) throws ParseException {
 		endDate = convertToCalender(inputEndDate);
 	}
-	
+
 	/**
 	 * Set the park name
 	 * @param inputParkName
@@ -160,7 +160,7 @@ public class Job implements Serializable {
 	public void setParkName(String inputParkName) {
 		parkName = inputParkName;
 	}
-	
+
 	/**
 	 * Set the details of the park
 	 * @param inputDetails
@@ -168,7 +168,7 @@ public class Job implements Serializable {
 	public void setDetails(String inputDetails) {
 		details = inputDetails;
 	}
-	
+
 	/**
 	 * @return the job ID.
 	 */
@@ -238,8 +238,8 @@ public class Job implements Serializable {
 	}
 
 	/**
-     * Adds a volunteer to the job and increments the medium duty category.
-     */
+	 * Adds a volunteer to the job and increments the medium duty category.
+	 */
 	public void addMedVolunteer(Volunteer inputMedVolunteer) {
 		if(!hasMedMax()){
 			medCurrent++;
@@ -248,29 +248,29 @@ public class Job implements Serializable {
 	}
 
 	/**
-     * Adds a volunteer to the job and increments the heavy duty category.
-     */
+	 * Adds a volunteer to the job and increments the heavy duty category.
+	 */
 	public void addHeavyVolunteer(Volunteer inputHeavyVolunteer) {
 		if(!hasHeavyMax()) {
 			heavyCurrent++;
 			volunteerList.add(inputHeavyVolunteer);
 		}
 	}
-    
-    /**
-     * Summarizes a job in a String.
-     * @return the job's ID, park, and start date/time
-     */
-    public String getSummary() {
-        return "Job: " + jobID + " | Park: " + parkName + " | Start: " + formatDate(startDate) + " | End: " + formatDate(endDate);
-    }  
-    
-    /**
-     * @return the Date Format
-     */
-    public SimpleDateFormat getDateFormat() { 
-        return DATE_FORMAT;
-    }
+
+	/**
+	 * Summarizes a job in a String.
+	 * @return the job's ID, park, and start date/time
+	 */
+	public String getSummary() {
+		return "Job: " + jobID + " | Park: " + parkName + " | Start: " + formatDate(startDate) + " | End: " + formatDate(endDate);
+	}  
+
+	/**
+	 * @return the Date Format
+	 */
+	public SimpleDateFormat getDateFormat() { 
+		return DATE_FORMAT;
+	}
 
 	/**
 	 * @return an ArrayList of volunteers that are signed up for the job
@@ -278,44 +278,44 @@ public class Job implements Serializable {
 	public ArrayList<Volunteer> getVolunteerList() {
 		return volunteerList;
 	}
-	
-	/**
-     * @return a String list of volunteers that are signed up for the job
-     */
-    public String volunteerListToString() {
-        String result = "Volunteers: ";
-        if (volunteerList.size() == 0) {
-            result += "None";
-        }
-        for (int i = 0; i < volunteerList.size(); i++) {
-            Volunteer v = volunteerList.get(i);
-            if (i > 0) {
-                result += ", ";
-            }
-            result += v.getFirstName() +" "+ v.getLastName();
-        }
-        return result;
-    }
 
 	/**
-     * @return if the maximum number of light duty volunteers is reached
+	 * @return a String list of volunteers that are signed up for the job
+	 */
+	public String volunteerListToString() {
+		String result = "Volunteers: ";
+		if (volunteerList.size() == 0) {
+			result += "None";
+		}
+		for (int i = 0; i < volunteerList.size(); i++) {
+			Volunteer v = volunteerList.get(i);
+			if (i > 0) {
+				result += ", ";
+			}
+			result += v.getFirstName() +" "+ v.getLastName();
+		}
+		return result;
+	}
+
+	/**
+	 * @return if the maximum number of light duty volunteers is reached
 	 */
 	public boolean hasLightMax() {
-	    return lightMax == lightCurrent;
+		return lightMax == lightCurrent;
 	}
 
 	/**
 	 * @return if the maximum number of medium duty volunteers is reached
 	 */
 	public boolean hasMedMax() {
-	    return medMax == medCurrent;
+		return medMax == medCurrent;
 	}
 
 	/**
 	 * @return if the maximum number of heavy duty volunteers is reached
 	 */
 	public boolean hasHeavyMax() {
-	    return heavyMax == heavyCurrent;
+		return heavyMax == heavyCurrent;
 	}
 
 	/**
@@ -325,12 +325,12 @@ public class Job implements Serializable {
 	 * @throws ParseException if invalid date format
 	 */
 	public GregorianCalendar convertToCalender(String inputDate) throws ParseException {
-	    Date parsed = DATE_FORMAT.parse(inputDate);
-	    GregorianCalendar newCalendar = new GregorianCalendar();
-	    newCalendar.setTime(parsed);
+		Date parsed = DATE_FORMAT.parse(inputDate);
+		GregorianCalendar newCalendar = new GregorianCalendar();
+		newCalendar.setTime(parsed);
 		return newCalendar;	  	
 	}
-	
+
 	/**
 	 * Converts from GregorianCalendar to an American style date format.
 	 * 
@@ -338,10 +338,10 @@ public class Job implements Serializable {
 	 * @return formatted date as String in MM-dd-yy h:mma format
 	 */
 	protected String formatDate(GregorianCalendar inputCalendar){
-	    String formattedDate = DATE_FORMAT.format(inputCalendar.getTime());
-	    return formattedDate;
+		String formattedDate = DATE_FORMAT.format(inputCalendar.getTime());
+		return formattedDate;
 	}
-	
+
 	/**
 	 * Checks if the User is the park manager for this job.
 	 * 
@@ -350,61 +350,63 @@ public class Job implements Serializable {
 	 * @return true if first name and last name match the park manager's
 	 */
 	public boolean isParkManager(ParkList inputParks, User inputUser) {
-	    Park currentPark = inputParks.getPark(parkName);
-	    return currentPark.isParkManager(inputUser);
+		Park currentPark = inputParks.getPark(parkName);
+		return currentPark.isParkManager(inputUser);
 	}
-	
+
 	/**
 	 * Checks if a volunteer is currently signed up for this job.
 	 * 
 	 * @param inputVolunteer the one to check to see if they are signed up
 	 * @return true if they are signed up, otherwise false
 	 */
-    public boolean isVolunteer(Volunteer inputVolunteer) {
-        return volunteerList.contains(inputVolunteer);
-    }
-    
-    /**
-     * Checks if this job is in the past.
-     */
-    public boolean isInPast() {
-        GregorianCalendar now = new GregorianCalendar();
-        return startDate.before(now);
-    }
-    
-    /**
-     * Gives a String with full details of the job.
-     */
-    @Override
-    public String toString() {
-        return "Job: " + jobID + " | Park: " + parkName + " | Start: " 
-                + formatDate(startDate) + " | End: " + formatDate(endDate)
-                +"\n"+ "Details: " + details
-                +"\n"+ "Positions Taken | Light: " + lightCurrent + "/" + lightMax 
-                + " | Medium: " + medCurrent + "/" + medMax 
-                + " | Heavy: " + heavyCurrent + "/" + heavyMax 
-                +"\n"+ volunteerListToString();
-    }
-    
+	public boolean isVolunteer(Volunteer inputVolunteer) {
+		return volunteerList.contains(inputVolunteer);
+	}
+
+	/**
+	 * Checks if this job is in the past.
+	 * 
+	 * @return true the the job is past.
+	 */
+	public boolean isInPast() {
+		GregorianCalendar now = new GregorianCalendar();
+		return startDate.before(now);
+	}
+
+	/**
+	 * Gives a String with full details of the job.
+	 */
+	@Override
+	public String toString() {
+		return "Job: " + jobID + " | Park: " + parkName + " | Start: " 
+				+ formatDate(startDate) + " | End: " + formatDate(endDate)
+				+"\n"+ "Details: " + details
+				+"\n"+ "Positions Taken | Light: " + lightCurrent + "/" + lightMax 
+				+ " | Medium: " + medCurrent + "/" + medMax 
+				+ " | Heavy: " + heavyCurrent + "/" + heavyMax 
+				+"\n"+ volunteerListToString();
+	}
+
 	/**
 	 * Compares the toString()'s of both jobs.
 	 */
 	@Override
 	public boolean equals(Object inputJob) {
-	    if (inputJob == null) {
-	        return false;
-	    }
-	    if (this.getClass() != inputJob.getClass()) {
-	        return false;
-	    }
+		if (inputJob == null) {
+			return false;
+		}
+		if (this.getClass() != inputJob.getClass()) {
+			return false;
+		}
 		return this.toString().compareTo(inputJob.toString()) == 0;
 	}
-	
+
 	/**
 	 * @return toString's hashCode
 	 */
-    @Override
-    public int hashCode() {
-        return this.toString().hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 }
