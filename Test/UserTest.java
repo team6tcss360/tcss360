@@ -1,6 +1,13 @@
-import static org.junit.Assert.*;
+package Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import Model.ParkManager;
+import Model.User;
+import Model.Volunteer;
 
 /**
  * Testing the abstract class that contains shared methods for all user types.

@@ -1,3 +1,4 @@
+package File;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -6,6 +7,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import Model.Job;
+import Model.JobList;
+import Model.Park;
+import Model.ParkList;
+import Model.User;
+import Model.UserList;
+
+
 
 /**
  * Reads and saves data to files for the Urban Parks application.
