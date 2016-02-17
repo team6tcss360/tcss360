@@ -1,8 +1,16 @@
-import static org.junit.Assert.*;
+package Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import Model.Park;
+import Model.ParkList;
+import Model.ParkManager;
+import Model.User;
 
 /**
  * A JUnit test class for ParkList Object.

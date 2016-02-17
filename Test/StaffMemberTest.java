@@ -1,4 +1,5 @@
-import static org.junit.Assert.*;
+package Test;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 

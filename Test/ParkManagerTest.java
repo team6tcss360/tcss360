@@ -1,7 +1,10 @@
-import static org.junit.Assert.*;
+package Test;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Model.ParkManager;
 
 public class ParkManagerTest {
 	ParkManager newPM;

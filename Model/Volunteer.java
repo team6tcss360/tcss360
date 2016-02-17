@@ -1,5 +1,6 @@
+package Model;
 import java.io.Serializable;
-
+ 
 /**
  * The class that contains volunteer specific methods.
  * 
