@@ -156,7 +156,7 @@ public class ConsoleParkManager {
 		
 	}
 	/**
-	 * Submits a job
+	 * Submits a job.
 	 * @throws ParseException if invalid date format
 	 */
 	public void submitJob() throws ParseException {
@@ -342,6 +342,8 @@ public class ConsoleParkManager {
 			System.out.println("Job doesn't exist");
 		} else if (!job.isParkManager(parks, user)) {
             System.out.println("You are not the park manager.");
+        } else if (job.hasVolunteers()) {
+            System.out.println("The job has volunteers, you cannot edit it.");
         } else {
 			do {
 			    System.out.println();

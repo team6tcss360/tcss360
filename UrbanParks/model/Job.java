@@ -114,60 +114,74 @@ public class Job implements Serializable {
 	}
 
 	/**
-	 * Set the max volunteer numbers for light job.
-	 *
+	 * Set the max volunteer numbers for light job.  Only editable if there are
+	 * no volunteers.
 	 */
 	public void setLightMax(int inputLightMax) {
-		lightMax = inputLightMax;
+	    if(!hasVolunteers()) {
+	        lightMax = inputLightMax;
+	    }
 	}
 
 	/**
-	 * Set the max volunteer numbers for medium job.
-	 * 
+	 * Set the max volunteer numbers for medium job.  Only editable if there are
+     * no volunteers.
 	 */
 	public void setMedMax(int inputMedMax) {
-		medMax = inputMedMax;
+	    if(!hasVolunteers()) {
+            medMax = inputMedMax;
+	    }
 	}
 
 	/**
-	 * Set the max volunteer numbers for heavy job.
-	 * 
+	 * Set the max volunteer numbers for heavy job.  Only editable if there are
+     * no volunteers.
 	 */
 	public void setHeavyMax(int inputHeavyMax) {
-		heavyCurrent = inputHeavyMax;
+	    if(!hasVolunteers()) {
+            heavyCurrent = inputHeavyMax;
+	    }
 	}
 
 	/**
-	 * Set the start date
-	 * @param inputDate
+	 * Set the start date.  Only editable if there are
+     * no volunteers.
 	 * @throws ParseException if invalid date format
 	 */
 	public void setStartDate(String inputDate) throws ParseException {
-		startDate = convertToCalender(inputDate);
+	    if(!hasVolunteers()) {
+            startDate = convertToCalender(inputDate);
+	    }
 	}
 	/**
-	 * Set the end date
-	 * @param inputEndDate
+	 * Set the end date.    Only editable if there are
+     * no volunteers.
 	 * @throws ParseException if invalid date format
 	 */
 	public void setEndDate(String inputEndDate) throws ParseException {
-		endDate = convertToCalender(inputEndDate);
+	    if(!hasVolunteers()) {
+            endDate = convertToCalender(inputEndDate);
+	    }
 	}
 
 	/**
-	 * Set the park name
-	 * @param inputParkName
+	 * Set the park name.  Only editable if there are
+     * no volunteers.
 	 */
 	public void setParkName(String inputParkName) {
-		parkName = inputParkName;
+	    if(!hasVolunteers()) {
+            parkName = inputParkName;
+	    }
 	}
 
 	/**
-	 * Set the details of the park
-	 * @param inputDetails
+	 * Set the details of the park.  Only editable if there are
+     * no volunteers.
 	 */
 	public void setDetails(String inputDetails) {
-		details = inputDetails;
+	    if(!hasVolunteers()) {
+            details = inputDetails;
+	    }
 	}
 
 	/**
@@ -373,6 +387,16 @@ public class Job implements Serializable {
 	public boolean isInPast() {
 		GregorianCalendar now = new GregorianCalendar();
 		return startDate.before(now);
+	}
+	
+	/**
+	 * @return true if this job has any volunteers
+	 */
+	public boolean hasVolunteers() {
+	    if(volunteerList.size() > 0) {
+	        return true;
+	    }
+        return false;
 	}
 
 	/**
