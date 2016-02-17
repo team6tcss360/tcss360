@@ -1,6 +1,11 @@
+package test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import model.ParkManager;
+import model.User;
+import model.Volunteer;
 
 /**
  * Testing the abstract class that contains shared methods for all user types.

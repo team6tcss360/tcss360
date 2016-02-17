@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 
 /**
@@ -57,7 +59,7 @@ public class UserList {
      * @return User index if found
      * @return -1 if not found
      */
-    protected int findIndexFromEmail(String inputEmail) {
+    public int findIndexFromEmail(String inputEmail) {
         //iterate through array list to find a match
         for (int i = 0; i < users.size(); i++) {
             if(users.get(i).getEmail().equals(inputEmail)) {

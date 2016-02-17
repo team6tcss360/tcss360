@@ -1,5 +1,17 @@
+package view;
 import java.text.ParseException;
 import java.util.Scanner;
+
+import data.FileIO;
+import model.Job;
+import model.JobList;
+import model.Park;
+import model.ParkList;
+import model.ParkManager;
+import model.StaffMember;
+import model.User;
+import model.UserList;
+import model.Volunteer;
 
 /**
  * Runs the Console main screen for the Urban Parks application.
@@ -13,7 +25,7 @@ public class ConsoleMain {
     /**
      * The file name for the Urban Park Application's data.
      */
-    private static final String FILE_NAME = "UrbanParks/UrbanParksData.txt";
+    private static final String FILE_NAME = "UrbanParks/data/UrbanParksData.txt";
     
     /**
      * A scanner to use for console input.

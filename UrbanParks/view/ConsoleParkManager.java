@@ -1,3 +1,4 @@
+package view;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -5,6 +6,15 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import data.FileIO;
+import model.Job;
+import model.JobList;
+import model.Park;
+import model.ParkList;
+import model.ParkManager;
+import model.User;
+import model.UserList;
 
 /**
  * Runs the Park Manager's console screen for the Urban Parks application.
@@ -130,7 +140,6 @@ public class ConsoleParkManager {
 		System.out.println("Enter the job ID you want to view");
 		System.out.print(">> ");
 		int jobID = 0;
-		String input = "";
 		try {
 			jobID = Integer.parseInt(scanner.nextLine());
 		} catch (NumberFormatException e) {

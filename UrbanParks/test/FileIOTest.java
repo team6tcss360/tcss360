@@ -1,6 +1,17 @@
+package test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import data.FileIO;
+import model.Job;
+import model.JobList;
+import model.Park;
+import model.ParkList;
+import model.ParkManager;
+import model.StaffMember;
+import model.UserList;
+import model.Volunteer;
 
 /**
  * Tests the class that reads and saves data to files for the Urban Parks 
@@ -15,22 +26,22 @@ public class FileIOTest {
     /** 
      * The location of a file to test writing/reading data.
      */
-    private static final String FILE_WORKING_COPY = "UrbanParks/UrbanParksDataTest.txt";
+    private static final String FILE_WORKING_COPY = "UrbanParks/data/UrbanParksDataTest.txt";
     
 //    /** 
 //     * Contains a copy of the actual Urban Parks data file.
 //     */
-//    private static final String FILE_ORIGINAL_COPY = "UrbanParks/UrbanParksDataCopy.txt";
+//    private static final String FILE_ORIGINAL_COPY = "UrbanParks/data/UrbanParksDataCopy.txt";
 //    
 //    /** 
 //     * Contains an empty Urban Parks data file.
 //     */
-//    private static final String FILE_EMPTY = "UrbanParks/UrbanParksDataTestEmpty.txt";
+//    private static final String FILE_EMPTY = "UrbanParks/data/UrbanParksDataTestEmpty.txt";
 //    
 //    /**
 //     * A file name with a typo (so that it is not found).
 //     */
-//    private static final String FILE_TYPO = "UrbanParks/UrbanParksDDKJHKDJ.txt";
+//    private static final String FILE_TYPO = "UrbanParks/data/UrbanParksDDKJHKDJ.txt";
     
     /**
      * A FileIO object with expected contents.

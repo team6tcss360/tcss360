@@ -1,8 +1,16 @@
+package test;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import model.ParkList;
+import model.ParkManager;
+import model.StaffMember;
+import model.User;
+import model.UserList;
+import model.Volunteer;
 
 /**
  * A JUnit test class for UserList Object.

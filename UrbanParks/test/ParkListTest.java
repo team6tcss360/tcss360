@@ -1,19 +1,26 @@
+package test;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import model.Park;
+import model.ParkList;
+import model.ParkManager;
+import model.User;
 
 /**
- * A JUnit test class for Park Object.
+ * A JUnit test class for ParkList Object.
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
  * @version February 12, 2016
  */
-public class ParkTest {
 
+public class ParkListTest {
+
+	
 	/** A Park object for testing. */
 	private Park park1;
 	private String park1Name;
@@ -44,12 +51,19 @@ public class ParkTest {
 	private String pm2LN;
 	private String pm2EM;
 	private String pm2P;
-
+	
+	private ParkList pList1;
+	
+	private ParkList pList2;
+	
+	private ParkList pList3;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	/**
@@ -83,33 +97,67 @@ public class ParkTest {
 		park3 = new Park(park1Name, park1Location, park1FirstName, park1LastName);
 		pm1 = new ParkManager(pm1FN, pm1LN, pm1EM, pm1P);
 		pm2 = new ParkManager(pm2FN, pm2LN, pm2EM, pm2P);
+		
+		pList1 = new ParkList();
+		pList2 = new ParkList();
+		pList3 = new ParkList();
 	}
 
-
-
-
-
 	/**
-	 * Test method for {@link Park#isParkManager(User)}.
+	 * Test method for {@link ParkList#add(Park)}.
 	 */
 	@Test
-	public void testIsParkManager() {
-		assertFalse(park1.isParkManager(pm1));
-		System.out.println(park2.getParkManagerFirstName()+" "+ park2.getParkManagerLastName());
-		assertTrue(park2.isParkManager(pm2));
+	public void testAdd() {
+		assertTrue(pList1.getArrayList().size()==0);
+		pList1.add(park1);
+		pList1.add(park2);
+		assertFalse(pList1.getArrayList().size()==0);
+		assertTrue(pList1.getArrayList().size()==2);
 	}
 
 	/**
-	 * Test method for {@link Park#equals(java.lang.Object)}.
+	 * Test method for {@link ParkList#findIndex(Park)}.
+	 */
+	@Test
+	public void testFindIndex() {
+		pList1.add(park1);
+		pList1.add(park2);
+		int x = pList1.findIndex(park1);
+		assertEquals(x, 0);
+		int y = pList1.findIndex(park2);
+		assertEquals(y, 1);
+	}
+
+	/**
+	 * Test method for {@link ParkList#getPark(java.lang.String)}.
+	 */
+	@Test
+	public void testGetPark() {
+		
+		pList1.add(park1);
+		pList1.add(park2);
+		Park newPark = pList1.getPark(park1Name);
+		assertTrue(park1.equals(newPark));
+		assertFalse(park2.equals(newPark));
+	}
+
+	/**
+	 * Test method for {@link ParkList#equals(java.lang.Object)}.
 	 */
 	@Test
 	public void testEqualsObject() {
-		assertTrue(park1.equals(park3));
-		assertFalse(park1.equals(park2));
+		pList1.add(park1);
+		pList1.add(park2);
+		pList2.add(park1);
+		pList3.add(park1);
+		pList3.add(park2);
+		
+		assertTrue(pList1.equals(pList3));
+		assertFalse(pList1.equals(pList2));
 	}
 
 	//	/**
-	//	 * Test method for {@link Park#hashCode()}.
+	//	 * Test method for {@link ParkList#hashCode()}.
 	//	 */
 	//	@Test
 	//	public void testHashCode() {
@@ -117,82 +165,35 @@ public class ParkTest {
 	//	}
 
 	//	/**
-	//	 * Test method for {@link Park#toString()}.
+	//	 * Test method for {@link ParkList#ParkList()}.
+	//	 */
+	//	@Test
+	//	public void testParkList() {
+	//		fail("Not yet implemented"); // TODO
+	//	}
+
+	//	/**
+	//	 * Test method for {@link ParkList#ParkList(java.util.ArrayList)}.
+	//	 */
+	//	@Test
+	//	public void testParkListArrayListOfPark() {
+	//		fail("Not yet implemented"); // TODO
+	//	}
+
+	//	/**
+	//	 * Test method for {@link ParkList#getArrayList()}.
+	//	 */
+	//	@Test
+	//	public void testGetArrayList() {
+	//		fail("Not yet implemented"); // TODO
+	//	}
+
+	//	/**
+	//	 * Test method for {@link ParkList#toString()}.
 	//	 */
 	//	@Test
 	//	public void testToString() {
 	//		fail("Not yet implemented"); // TODO
 	//	}
 
-	//	/**
-	//	 * Test method for {@link Park#Park(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testPark() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#setParkName(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetParkName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#setLastName(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetLastName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#setParkManagerFirstName(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetParkManagerFirstName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#setParkManagerLastName(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetParkManagerLastName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#getParkName()}.
-	//	 */
-	//	@Test
-	//	public void testGetParkName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#getLocation()}.
-	//	 */
-	//	@Test
-	//	public void testGetLocation() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#getParkManagerFirstName()}.
-	//	 */
-	//	@Test
-	//	public void testGetParkManagerFirstName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link Park#getParkManagerLastName()}.
-	//	 */
-	//	@Test
-	//	public void testGetParkManagerLastName() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
 }
