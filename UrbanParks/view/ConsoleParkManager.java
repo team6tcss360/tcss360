@@ -307,7 +307,7 @@ public class ConsoleParkManager {
 		    System.out.println("You are not the park manager.");
 		}
 		fileIO.save(users, jobs, parks);
-		System.out.println();
+		pause();
 	}
 	
 	/**
@@ -453,5 +453,6 @@ public class ConsoleParkManager {
 	 */
 	public void viewUpcomingJobsMyPark() {
 		System.out.print(jobs.getSummariesMyParks(parks, (ParkManager) user));
+		pause();
 	}
 }
