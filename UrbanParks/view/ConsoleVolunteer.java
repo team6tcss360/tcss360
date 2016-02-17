@@ -71,9 +71,10 @@ public class ConsoleVolunteer {
 	public void run() throws ParseException {
 		String input;
 		System.out.println("Login Success!");
-		System.out.println("Welcome: ");
 		do {
 		    System.out.println();
+		    System.out.println("*********************Urban Parks***********************");
+            System.out.println("----------------------Main Menu------------------------");
 		    System.out.println("Volunteer: " + user.getFirstName() + " " + user.getLastName());
 	        System.out.println();
 			System.out.println("Please Enter a Command:");
@@ -138,6 +139,7 @@ public class ConsoleVolunteer {
 	 */
 	public void viewAllJobs() {
 	    System.out.print(jobs.getSummaries());
+	    pause();
 	}
 	
 	/**
@@ -151,6 +153,7 @@ public class ConsoleVolunteer {
 		} else {
 			System.out.println(temp.toString());
 		}
+		pause();
 	}
 	
 	/**
@@ -212,6 +215,7 @@ public class ConsoleVolunteer {
 			}
 		}
 		fileIO.save(users, jobs, parks);
+		pause();
 	}
 	
 	/**
@@ -219,6 +223,14 @@ public class ConsoleVolunteer {
 	 */
 	public void viewMyJobs() {
 		System.out.print(jobs.getSummariesMyVolunteerJobs((Volunteer) user));
+		pause();
 	}
-
+	
+    /**
+     * Pause the console until user is ready.
+     */
+    private void pause() {
+        System.out.println("<<Press any key to continue>>");
+        scanner.nextLine();        
+    }
 }

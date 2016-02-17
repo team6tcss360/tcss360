@@ -15,14 +15,14 @@ import java.util.GregorianCalendar;
  */
 public class JobList {
 
-	//Constant
+	//Constants
 	public static final int MAX_JOBS = 30;
 	
 	public static final int MAX_JOBS_IN_WEEK = 5;
-	
-	public static final int MAX_DURATION = 2;
-	
-	public static final int MAX_POST_TIME = 3;
+
+	public static final int MAX_JOB_LENGTH = 2;
+
+	public static final int MAX_SCHEDULING_IN_FUTURE = 90;
 	
 	/**
      * The format to use on dates.
@@ -50,13 +50,55 @@ public class JobList {
 
 	/**
      * @param job to add to the ArrayList
+	 * @throws ParseException if invalid date format
      */
-	public void add(Job job) {
+	public void add(Job job) throws ParseException {
 		if(job == null) {
-			System.out.println("Invalid Job yo!");
+			System.out.println("Invalid Job!");
 		}
-		jobs.add(job);
+		String startDate = formatDate(job.getStartDate());
+		String endDate = formatDate(job.getStartDate());
+		
+		//check all business rules before adding job
+		if (passesBusinessRules(startDate, endDate)) {
+		    jobs.add(job);
+		}
 	}
+	
+	/**
+	 * @return true if all business rules pass
+     * @throws ParseException if invalid date format
+     */
+	public boolean passesBusinessRules(String startDate, String endDate) throws ParseException {
+	    if (!hasMaxJobs() 
+	            && !hasMaxJobsInWeek(startDate, endDate) 
+	            && hasValidDuration(startDate, endDate) 
+                && !hasEndBeforeStart(startDate, endDate) 
+                && !isTooFarInFuture(startDate) 
+                && !hasPastDate(startDate) ) {
+            return true;
+        }
+	    return false;
+	}
+	
+    /**
+     * @return true if all business rules pass for the edit
+     * @throws ParseException if invalid date format
+     */
+    @SuppressWarnings("unchecked")
+    public boolean passesBusinessRulesEdit(Job inputJob, String startDate, String endDate) throws ParseException {
+        JobList tempJobs = new JobList((ArrayList<Job>) jobs.clone()); //shallow copy
+        tempJobs.remove(inputJob); //don't want to double count edited job
+        if (!tempJobs.hasMaxJobs() 
+                && !tempJobs.hasMaxJobsInWeek(startDate, endDate) 
+                && tempJobs.hasValidDuration(startDate, endDate) 
+                && !tempJobs.hasEndBeforeStart(startDate, endDate) 
+                && !tempJobs.isTooFarInFuture(startDate) 
+                && !tempJobs.hasPastDate(startDate) ) {
+            return true;
+        }
+        return false;
+    }
 
 	/**
 	 * @param job to remove from the ArrayList
@@ -111,12 +153,15 @@ public class JobList {
 	}
 	
 	/**
-     * Gets summaries for all the jobs.
+     * Gets summaries for all the jobs that are not in the past.
      */
     public String getSummaries() {
         String str = "";
         for(int i = 0; i < jobs.size(); i++) {
-            str += jobs.get(i).getSummary() + "\n";
+            Job currentJob = jobs.get(i);
+            if (!currentJob.isInPast()) {
+                str += currentJob.getSummary() + "\n";
+            }
         }
         return str;
     }
@@ -132,8 +177,8 @@ public class JobList {
         String str = "";
         for(int i = 0; i < jobs.size(); i++) {
             Job currentJob = jobs.get(i);
-            //check if they are park manager for that job
-            if (currentJob.isParkManager(inputParks, inputUser)) {
+            //check if they are park manager for that job and it is not in the past
+            if (currentJob.isParkManager(inputParks, inputUser) && !currentJob.isInPast()) {
                 str += jobs.get(i).getSummary() + "\n"; //add job if they are
             }
         }
@@ -150,8 +195,8 @@ public class JobList {
         String str = "";
         for(int i = 0; i < jobs.size(); i++) {
             Job currentJob = jobs.get(i);
-            //check if they are volunteered for that job
-            if (currentJob.isVolunteer(inputUser)) {
+            //check if they are volunteered for that job and it is not in the past
+            if (currentJob.isVolunteer(inputUser) && !currentJob.isInPast()) {
                 str += jobs.get(i).getSummary() + "\n"; //add job if they are
             }
         } 
@@ -170,10 +215,10 @@ public class JobList {
 
 	//Business rule #1
 	/**
-	 * Business rule #1: A job may not be added if the total number of pending job is currently 30.
+	 * Business rule #1: A job may not be added if the total number of pending job is currently 30 or more.
 	 */
 	public boolean hasMaxJobs() {		
-		return  jobs.size() == MAX_JOBS;
+		return  jobs.size() >= MAX_JOBS;
 	}
 
     //Business rule #2
@@ -204,36 +249,65 @@ public class JobList {
         return false;
 	}
 	
-//	/**
-//	 * Business rule #4: A job may not be scheduled that lasts more than two days
-//	 */
-//	public boolean hasValidDuration(Job inputJob) {
-//		GregorianCalendar invalid = (GregorianCalendar) inputJob.getStartDate().clone();
-//		invalid.add(GregorianCalendar.DATE, MAX_DURATION);
-//		
-//		return inputJob.getEndDate().before(invalid);
-//	}
-//	
-//	/**
-//	 * Business rule #5 part B: A job may not be added that is in the more than 3 months for the future. 
-//	 */
-//	public boolean future3MonthTest(Job inputJob) {
-//		GregorianCalendar then = new GregorianCalendar();
-//		then.add(GregorianCalendar.MONTH, MAX_POST_TIME);
-//		
-//		return inputJob.getStartDate().before(then);
-//	}
+	//Business rule #4
+	/**
+	 * Business rule #4: A job may not be scheduled that lasts more than two days.
+	 * @throws ParseException if invalid date format
+	 */
+	public boolean hasValidDuration(String startDate, String endDate) throws ParseException {
+	    GregorianCalendar startTemp = convertToCalender(startDate);
+        GregorianCalendar endTemp = convertToCalender(endDate);
+        zeroOutTime(startTemp);
+		startTemp.add(Calendar.DAY_OF_MONTH, MAX_JOB_LENGTH);
+        if (endTemp.after(startTemp)) {
+            return false;
+        }
+        return true;
+	}
 	
-//	/**
-//	 * Business rule #6: A volunteer may not sign up for a job that has passed.
-//	 */
-//	public boolean hasPastDate(Job inputJob) {
-//		if (inputJob.isInPast()) {
-//			return false;
-//		}
-//		return true;
-//	}
+	/**
+     * Business rule #4B: A job may not end before it starts.
+	 * @throws ParseException if invalid date format
+     */
+    public boolean hasEndBeforeStart(String startDate, String endDate) throws ParseException {
+        GregorianCalendar startTemp = convertToCalender(startDate);
+        GregorianCalendar endTemp = convertToCalender(endDate);
+        if (endTemp.before(startTemp)) {
+            return true;
+        }
+        return false;
+    }
 	
+    //Business rule #5
+	/**
+	 * Business rule #5 A job may not be added that is in the more than 90 days in the future. 
+	 * @throws ParseException if invalid date format
+	 */
+	public boolean isTooFarInFuture(String startDate) throws ParseException {
+	    GregorianCalendar startTemp = convertToCalender(startDate);
+        GregorianCalendar now = new GregorianCalendar();
+		now.add(Calendar.DAY_OF_MONTH, MAX_SCHEDULING_IN_FUTURE);
+        if (startTemp.after(now)) {
+            return true;
+        }
+		return false;
+	}
+	
+	//Business rule #6
+	/**
+	 * Business rule #6: A volunteer may not sign up for a job that has passed.
+	 * @throws ParseException if invalid date format
+	 */
+	public boolean hasPastDate(String startDate) throws ParseException {
+	    GregorianCalendar startTemp = convertToCalender(startDate);
+        GregorianCalendar now = new GregorianCalendar();
+        if (startTemp.before(now)) {
+			return true;
+		}
+		return false;
+	}
+	
+	//Business rule #7
 	/**
 	 * Business rule #7: A volunteer may not sign for two jobs on the same day.
 	 */
@@ -288,6 +362,17 @@ public class JobList {
         GregorianCalendar newCalendar = new GregorianCalendar();
         newCalendar.setTime(parsed);
         return newCalendar;     
+    }
+    
+    /**
+     * Converts from GregorianCalendar to an American style date format.
+     * 
+     * @param inputCalendar
+     * @return formatted date as String in MM-dd-yy h:mma format
+     */
+    public String formatDate(GregorianCalendar inputCalendar){
+        String formattedDate = DATE_FORMAT.format(inputCalendar.getTime());
+        return formattedDate;
     }
     
     /**
