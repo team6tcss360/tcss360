@@ -1,9 +1,5 @@
 package view;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,8 +20,7 @@ import model.UserList;
  * @version February 3, 2016
  */
 public class ConsoleParkManager {
-
-
+    
 	/**
 	 * A scanner to use for console input.
 	 */
@@ -34,16 +29,7 @@ public class ConsoleParkManager {
 	/**
 	 * The proper time format when using the Job constructor.
 	 */
-	private final String TIME_FORMAT_STRING = "Date-Time Format: mm-dd-yy hh:mma (Example 02-25-16 12:30PM)";
-	
-    /**
-     * The format to use on dates.
-     */
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd-yy h:mma");
-
-    private static final int MAX_JOB_LENGTH = 2;
-
-    private static final int MAX_SCHEDULING_IN_FUTURE = 90;
+	private final String TIME_FORMAT_STRING = "Date-Time Format: mm-dd-yy hh:mma (Example 03-25-16 12:30PM)";
 
 	/**
 	 * The file input/output object.
@@ -90,10 +76,11 @@ public class ConsoleParkManager {
 	public void run() throws ParseException {
 		String input = " ";
 		System.out.println("Login Success!");
-		System.out.println("Welcome: ");
 		
 		do {
 		    System.out.println();
+		    System.out.println("*********************Urban Parks***********************");
+		    System.out.println("----------------------Main Menu------------------------");
 			System.out.println("Park Manager: " + user.getFirstName() + " " + user.getLastName());
 			System.out.println();
 			System.out.println("Please Enter a Command:");
@@ -163,24 +150,23 @@ public class ConsoleParkManager {
 	    if(jobs.hasMaxJobs()) {
 	        System.out.println("There are already too many total jobs!"); 
 	    } else {
+	        System.out.println();
+	        System.out.println("*********************Urban Parks***********************");
+            System.out.println("--------------------New Job Menu-----------------------");
+            System.out.println();
     	    String startDate = "";
-    	    GregorianCalendar startTemp;
-    	    
     	    while (true) {
     		    System.out.println(TIME_FORMAT_STRING);
     	        System.out.print("Enter the start date & time: ");
     			try {
                     startDate = scanner.nextLine();
-                    startTemp = convertToCalender(startDate);
-                    GregorianCalendar now = new GregorianCalendar();
-                    if (startTemp.before(now)) {
+                    if (jobs.hasPastDate(startDate)) {
                         System.out.println("You can't create a job in the past!");
                         continue;
                     } 
-                    now.add(Calendar.DAY_OF_MONTH, MAX_SCHEDULING_IN_FUTURE);
-                    if (startTemp.after(now)) {
+                    if (jobs.isTooFarInFuture(startDate)) {
                         System.out.println("You can't create a job " 
-                                + MAX_SCHEDULING_IN_FUTURE + "+ days in the future!");
+                                + JobList.MAX_SCHEDULING_IN_FUTURE + "+ days in the future!");
                         continue;
                     } else {
                         break;
@@ -192,24 +178,17 @@ public class ConsoleParkManager {
             }
     		
     		String endDate = ""; 
-    		GregorianCalendar end;
     		while (true) {
     	        System.out.println(TIME_FORMAT_STRING);
     	        System.out.print("Enter the end date & time: ");
     	        try {
     	            endDate = scanner.nextLine();
-                    end = convertToCalender(endDate);
-                    if (end.before(startTemp)) {
+                    if (jobs.hasEndBeforeStart(startDate, endDate)) {
                         System.out.println("You can't end before the start!");
                         continue;
                     }
-                    startTemp.set(Calendar.HOUR_OF_DAY, 0);
-                    startTemp.set(Calendar.MINUTE, 0);
-                    startTemp.set(Calendar.SECOND, 0);
-                    startTemp.set(Calendar.MILLISECOND, 0);
-                    startTemp.add(Calendar.DAY_OF_MONTH, MAX_JOB_LENGTH);
-                    if (end.after(startTemp)) {
-                        System.out.println("Your job cannot be more than 2 days!");
+                    if (!jobs.hasValidDuration(startDate, endDate)) {
+                        System.out.println("Your job cannot be more than " + JobList.MAX_JOB_LENGTH + " days!");
                         continue;
                     } else {
                         break;
@@ -290,9 +269,16 @@ public class ConsoleParkManager {
             
             if (!jobs.hasMaxJobsInWeek(startDate, endDate)) {
                 //create job and save
+                int beforeSize = jobs.size();
         		Job job = new Job(jobID, startDate, endDate, parkName, details, light, medium, heavy);
                 jobs.add(job);
                 fileIO.save(users, jobs, parks);  
+                if (jobs.size() > beforeSize) {
+                    System.out.println("Job successfully added as job number " + jobID +".");
+                } else {
+                    System.out.println("Job creation failed.");
+                }
+                pause();
             } else {
                 System.out.println("There are too many jobs in that week!");
             }
@@ -337,18 +323,20 @@ public class ConsoleParkManager {
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid input, needs to be a number!");
 		}
-		Job job = jobs.getJob(jobID);
-		if(job == null) {
+		Job currentJob = jobs.getJob(jobID);
+		if(currentJob == null) {
 			System.out.println("Job doesn't exist");
-		} else if (!job.isParkManager(parks, user)) {
+		} else if (!currentJob.isParkManager(parks, user)) {
             System.out.println("You are not the park manager.");
-        } else if (job.hasVolunteers()) {
+        } else if (currentJob.hasVolunteers()) {
             System.out.println("The job has volunteers, you cannot edit it.");
         } else {
 			do {
 			    System.out.println();
+			    System.out.println("*********************Urban Parks***********************");
+	            System.out.println("----------------------Edit Menu------------------------");
 				System.out.println("This is the job you chose to edit: " 
-				        +"\n"+ jobs.getJob(jobID).toString());
+				        +"\n"+ currentJob.toString());
 				System.out.println();
 				System.out.println("Choose which field to edit");
 				System.out.println("1) Start Date");
@@ -367,7 +355,13 @@ public class ConsoleParkManager {
     					System.out.println("Enter the start date & time: ");
     					System.out.print(">> ");
     					try {
-    					    jobs.getJob(jobID).setStartDate(scanner.nextLine());
+    					    String startDate = scanner.nextLine();
+    					    String endDate = jobs.formatDate(currentJob.getEndDate());
+    					    if (jobs.passesBusinessRulesEdit(currentJob, startDate, endDate)) {
+    					        currentJob.setStartDate(startDate);
+    					    } else {
+    					        System.out.println("Invalid date.");
+    					    }
     			        } catch (ParseException e) {
     			            System.out.println("Invalid date format.  Use:");
     			            System.out.println(TIME_FORMAT_STRING);
@@ -379,7 +373,14 @@ public class ConsoleParkManager {
     					System.out.print("Enter the end date & time: ");
     					System.out.print(">> ");
     					try {
-    					    jobs.getJob(jobID).setStartDate(scanner.nextLine());
+    					    String endDate = scanner.nextLine();
+    					    String startDate = jobs.formatDate(currentJob.getStartDate());
+    					    if (jobs.passesBusinessRulesEdit(currentJob, startDate, endDate)) {
+                                currentJob.setEndDate(endDate);
+    					    } else {
+                                System.out.println("Invalid date.");
+                                pause();
+                            }
                         } catch (ParseException e) {
                             System.out.println("Invalid date format.  Use:");
                             System.out.println(TIME_FORMAT_STRING);
@@ -395,19 +396,19 @@ public class ConsoleParkManager {
     					} else if (!thePark.isParkManager(user)) {
                             System.out.println("You are not the manager of that park.");
                         } else {
-    					    jobs.getJob(jobID).setParkName(parkName);
+                            currentJob.setParkName(parkName);
                         } 
     					break;
     					
     				case "4":
     					System.out.print("Enter in the details of the job: ");
-    					jobs.getJob(jobID).setDetails(scanner.nextLine());
+    					currentJob.setDetails(scanner.nextLine());
     					break;
     					
     				case "5":
     					System.out.print("Enter in the number of volunteers of the light category: ");
     					try { 
-    					    jobs.getJob(jobID).setLightMax(scanner.nextInt());
+    					    currentJob.setLightMax(scanner.nextInt());
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input.");
                         }
@@ -416,7 +417,7 @@ public class ConsoleParkManager {
     				case "6":
     					System.out.print("Enter in the number of volunteers of the medium category: ");
     					try { 
-                            jobs.getJob(jobID).setMedMax(scanner.nextInt());
+    					    currentJob.setMedMax(scanner.nextInt());
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input.");
                         }
@@ -425,7 +426,7 @@ public class ConsoleParkManager {
     				case "7":
     					System.out.print("Enter in the number of volunteers of the heavy category: ");
     					try { 
-                            jobs.getJob(jobID).setHeavyMax(scanner.nextInt());
+    					    currentJob.setHeavyMax(scanner.nextInt());
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input.");
                         }
@@ -440,22 +441,17 @@ public class ConsoleParkManager {
 	}
 	
 	/**
+	 * Pause the console until user is ready.
+	 */
+	private void pause() {
+        System.out.println("<<Press any key to continue>>");
+        scanner.nextLine();        
+    }
+
+    /**
 	 * Prints out all of the upcoming jobs in Parks that this User manages.
 	 */
 	public void viewUpcomingJobsMyPark() {
 		System.out.print(jobs.getSummariesMyParks(parks, (ParkManager) user));
 	}
-	
-	/**
-     * Convert a string date to a GregorianCalender object.
-     * @param theDate, MM-dd-yy h:mma (March 1st, 2016 at 9am is 03-01-16 9:00AM)
-     * @return GregorianCalender formatted date.
-     * @throws ParseException if invalid date format
-     */
-    public GregorianCalendar convertToCalender(String inputDate) throws ParseException {
-        Date parsed = DATE_FORMAT.parse(inputDate);
-        GregorianCalendar newCalendar = new GregorianCalendar();
-        newCalendar.setTime(parsed);
-        return newCalendar;     
-    }
 }

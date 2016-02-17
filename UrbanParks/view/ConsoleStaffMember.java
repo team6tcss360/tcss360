@@ -74,9 +74,10 @@ public class ConsoleStaffMember {
 	public void run() throws ParseException {
 		String myInput;
 		System.out.println("Login Success!");
-		System.out.println("Welcome: ");
 		do {
 		    System.out.println();
+		    System.out.println("*********************Urban Parks***********************");
+            System.out.println("----------------------Main Menu------------------------");
 		    System.out.println("Urban Parks Staff: " + user.getFirstName() + " " + user.getLastName());
 	        System.out.println();
 	        System.out.println("Please Enter a Command:");
@@ -142,6 +143,7 @@ public class ConsoleStaffMember {
 		} else {
 			System.out.println(temp.toString());
 		}
+		pause();
 	}
 	/**
 	 * Displays all volunteers
@@ -153,10 +155,12 @@ public class ConsoleStaffMember {
 				System.out.println(users.getArrayList().get(i).toString());
 			}
 		}
+		pause();
 	}
 
 	public void displayJobs() {
 		System.out.print(jobs.getSummaries());
+		pause();
 	}
 	/**
 	 * Searches volunteer by last name
@@ -180,5 +184,14 @@ public class ConsoleStaffMember {
 		} else {
 			System.out.println("Volunteer doesn't exist. \n");
 		}
+		pause();
 	}
+	
+	/**
+     * Pause the console until user is ready.
+     */
+    private void pause() {
+        System.out.println("<<Press any key to continue>>");
+        scanner.nextLine();        
+    }
 }
