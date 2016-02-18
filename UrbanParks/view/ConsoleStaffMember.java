@@ -90,8 +90,8 @@ public class ConsoleStaffMember {
 			System.out.println("3) View a summary of all upcoming jobs");
 			
 			System.out.println("4) Display summary of a job by job ID");
-			System.out.println("5) Back"); 
-			System.out.println("6) Exit");  
+			System.out.println("5) Logout"); 
+			System.out.println("6) Exit Program");  
 			System.out.print(">> ");
 			myInput = scanner.nextLine(); //Get user input
 			int jobID = 0;
@@ -137,14 +137,12 @@ public class ConsoleStaffMember {
     				break;
     				
     			case "5":
-    				printPenguin();
     				ConsoleMain console = new ConsoleMain();
     				console.run();
     				break;
     				
     			case "6":
     			    System.out.println("Exiting...");
-    			    printPenguin();
     			    break;
 			}
 		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
@@ -215,33 +213,7 @@ public class ConsoleStaffMember {
     /**
      * Ascii Art Penguin
      */
-    private void printPenguin() {
-		System.out.println(".-.");
-		System.out.println("/  ;");
-		System.out.println(".-                                                        /   |");
-		System.out.println("| `.                        _                           .'    |");
-		System.out.println(";   \\                    , ``'.                      /      ;");
-		System.out.println(";    `.                ,'        '.                   /      '");
-		System.out.println("|     \\              /            \\                 /       |");
-		System.out.println(";      `.           |              \\               /        '");
-		System.out.println("|       \\         ;                \\             /        |");
-		System.out.println(";        `.       |  .-._           ;          .'        .'");
-		System.out.println("|         `.    ;  /    `.         ;         /          |");
-		System.out.println(";           `.  | |O,_O   |         |       /           ;");
-		System.out.println("|            `.| '/ `\\   /         ;     .'            '");
-		System.out.println(";             .'/`    `-L,--.       '   /             ;");
-		System.out.println("\\            ,'         ____`.      \\.'              ;");
-		System.out.println("\\          /            |  f \\    /`               ;");
-		System.out.println(";       .'             /   \\                      '");
-		System.out.println("\\     /             .'   _| |                   /");
-		System.out.println("\\   (            .'|| /` ; |                  '");
-		System.out.println("`.  `-..____.-'`  '/|  / ,'                .'");
-		System.out.println("`.       |     /L__.'_/                 /");
-		System.out.println("`.|    |     `\"--'` |              _.'");
-		System.out.println("|    ;            ;          _,-'");
-		System.out.println("|   .              \\            `.");
-		System.out.println(";    |               \\             \\"); 
-    }
+
     
 }
 
