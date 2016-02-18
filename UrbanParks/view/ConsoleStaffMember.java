@@ -76,8 +76,12 @@ public class ConsoleStaffMember {
 		System.out.println("Login Success!");
 		do {
 		    System.out.println();
-		    System.out.println("*********************Urban Parks***********************");
             System.out.println("----------------------Main Menu------------------------");
+	        System.out.println("*******************************************************");
+	        System.out.println("*                                                     *");
+	        System.out.println("*               Urban Parks Staff Menu!               *");
+	        System.out.println("*                                                     *");
+	        System.out.println("*******************************************************");
 		    System.out.println("Urban Parks Staff: " + user.getFirstName() + " " + user.getLastName());
 	        System.out.println();
 	        System.out.println("Please Enter a Command:");
@@ -93,10 +97,16 @@ public class ConsoleStaffMember {
 			int jobID = 0;
 			switch(myInput) {
     			case "1":
+    				System.out.println("*******************************************************");
+    				System.out.println("*                    Display Volunteers               *");
+    				System.out.println("*******************************************************");
                     displayVolunteers();
                     break;
                     
     			case "2":
+    				System.out.println("*******************************************************");
+    				System.out.println("*                    Search for Volunteers            *");
+    				System.out.println("*******************************************************");
     				System.out.println("Enter in the last name you are looking for.");
     				System.out.print(">> ");
     	            String lastName = scanner.nextLine();
@@ -104,10 +114,16 @@ public class ConsoleStaffMember {
     				break;
     				
     			case "3":
+    				System.out.println("*******************************************************");
+    				System.out.println("*                    Display Jobs                     *");
+    				System.out.println("*******************************************************");
     				displayJobs();
     				break;
 
     			case "4":
+    				System.out.println("*******************************************************");
+    				System.out.println("*                    View Job by ID                   *");
+    				System.out.println("*******************************************************");
     				System.out.println("Enter job ID:");
     				System.out.print(">> ");
     				String string_jobID = scanner.nextLine();
@@ -121,12 +137,14 @@ public class ConsoleStaffMember {
     				break;
     				
     			case "5":
+    				printPenguin();
     				ConsoleMain console = new ConsoleMain();
     				console.run();
     				break;
     				
     			case "6":
     			    System.out.println("Exiting...");
+    			    printPenguin();
     			    break;
 			}
 		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
@@ -194,4 +212,36 @@ public class ConsoleStaffMember {
         System.out.println("<<Press any key to continue>>");
         scanner.nextLine();        
     }
+    /**
+     * Ascii Art Penguin
+     */
+    private void printPenguin() {
+		System.out.println(".-.");
+		System.out.println("/  ;");
+		System.out.println(".-                                                        /   |");
+		System.out.println("| `.                        _                           .'    |");
+		System.out.println(";   \\                    , ``'.                      /      ;");
+		System.out.println(";    `.                ,'        '.                   /      '");
+		System.out.println("|     \\              /            \\                 /       |");
+		System.out.println(";      `.           |              \\               /        '");
+		System.out.println("|       \\         ;                \\             /        |");
+		System.out.println(";        `.       |  .-._           ;          .'        .'");
+		System.out.println("|         `.    ;  /    `.         ;         /          |");
+		System.out.println(";           `.  | |O,_O   |         |       /           ;");
+		System.out.println("|            `.| '/ `\\   /         ;     .'            '");
+		System.out.println(";             .'/`    `-L,--.       '   /             ;");
+		System.out.println("\\            ,'         ____`.      \\.'              ;");
+		System.out.println("\\          /            |  f \\    /`               ;");
+		System.out.println(";       .'             /   \\                      '");
+		System.out.println("\\     /             .'   _| |                   /");
+		System.out.println("\\   (            .'|| /` ; |                  '");
+		System.out.println("`.  `-..____.-'`  '/|  / ,'                .'");
+		System.out.println("`.       |     /L__.'_/                 /");
+		System.out.println("`.|    |     `\"--'` |              _.'");
+		System.out.println("|    ;            ;          _,-'");
+		System.out.println("|   .              \\            `.");
+		System.out.println(";    |               \\             \\"); 
+    }
+    
 }
+
