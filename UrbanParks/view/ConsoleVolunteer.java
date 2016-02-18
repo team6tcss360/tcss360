@@ -86,8 +86,8 @@ public class ConsoleVolunteer {
 			System.out.println("2) View jobs by job ID");
 			System.out.println("3) Volunteer for a job");
 			System.out.println("4) View jobs you signed up for");
-			System.out.println("5) Back");
-			System.out.println("6) Exit");  
+			System.out.println("5) Logout");
+			System.out.println("6) Exit Program");  
 			System.out.print(">> ");
 			input = scanner.nextLine(); //Get user input
 			int jobID = 0;
@@ -140,13 +140,11 @@ public class ConsoleVolunteer {
 				break;
 
 			case "5":
-				printPikaChu();
 				ConsoleMain console = new ConsoleMain();
 				console.run();
 
 			case "6":
 				System.out.println("Exiting...");
-				printPikaChu();
 				break;
 			}
 		} while(input.compareTo("5") != 0 && input.compareTo("6") != 0);
@@ -251,40 +249,5 @@ public class ConsoleVolunteer {
 		System.out.println("<<Press any key to continue>>");
 		scanner.nextLine();        
 	}
-	/**
-	 * Ascii Art Pikachu
-	 */
-	public void printPikaChu() {
-		System.out.println("		 :::,");
-		System.out.println("		 '::::'._");
-		System.out.println("		   '.    '.                        __.,,.");
-		System.out.println("		     '.    '.                _..-'''':::");
-		System.out.println("		       \\     \\,.------.,-''      _:'");
-		System.out.println("		   /\\   \\  .               .    .-'");
-		System.out.println("		  /  \\   \\                   ':'");
-		System.out.println("		 /    \\  :                     :");
-		System.out.println("		/      \\:                       :");
-		System.out.println("		\\       :                       :");
-		System.out.println("		 \\      :      ,--,         ,-,  :");
-		System.out.println("		  \\    :      |(_):|       |():| :");
-		System.out.println("		   \\   :     __'--'   __    '-'_  :");
-		System.out.println("		    \\  :    /  \\      \\/      / \\ :");
-		System.out.println("		     \\  :  (    )             \\_/ :");
-		System.out.println("		  .-'' . :  \\__/   '--''--'      :");
-		System.out.println("		  \\  . .-:'.                   .:");
-		System.out.println("		   \\' :| :  '-.__      ___...-' :");
-		System.out.println("		    \\::|:        ''''''          '.");
-		System.out.println("		  .,:::':  :                       '.");
-		System.out.println("		   \\::\\:   :                         '._");
-		System.out.println("		    \\::    :     /             '-._     '.");
-		System.out.println("		     \\:    :    /              .   :-._ :-'");
-		System.out.println("		      :    :   /               :   :  ''");
-		System.out.println("		      :   .'   )'.             :   :");
-		System.out.println("		 sjw   :  :  .'   '.          :   :");
-		System.out.println("		        : '..'      :      _.' _.:");
-		System.out.println("	         '._        :..---'\\'''  _)");
-		System.out.println("		            '':---''_)      '-'-'");
-		System.out.println("		               '-'-'  PIKACHU!");
 
-	}
 }

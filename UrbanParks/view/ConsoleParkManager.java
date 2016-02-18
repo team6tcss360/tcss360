@@ -93,8 +93,8 @@ public class ConsoleParkManager {
 			System.out.println("3) Edit a job");
 			System.out.println("4) View upcoming jobs in my parks");
 			System.out.println("5) View Volunteers in a park that I manage");
-			System.out.println("6) Back");  
-			System.out.println("7) Exit");
+			System.out.println("6) Logout");  
+			System.out.println("7) Exit Program");
 			System.out.print(">> ");
 			input = scanner.nextLine();
 			switch(input) {
@@ -129,13 +129,11 @@ public class ConsoleParkManager {
 				viewVolunteersInPark();
 				break;
 			case "6":
-				printThumbsUp();
 				ConsoleMain console = new ConsoleMain();
 				console.run();
 				break;
 			case "7":
 				System.out.println("Exiting...");
-				printThumbsUp();
 				break;
 			}
 		} while(input.compareTo("7") != 0 && input.compareTo("6") != 0);
@@ -365,7 +363,7 @@ public class ConsoleParkManager {
 				System.out.println("5) Light Max");
 				System.out.println("6) Medium Max");
 				System.out.println("7) Heavy Max");
-				System.out.println("8) Back");
+				System.out.println("8) Logout");
 				System.out.print(">> ");
 				input = scanner.nextLine();
 				switch(input) {
@@ -474,18 +472,6 @@ public class ConsoleParkManager {
 		System.out.print(jobs.getSummariesMyParks(parks, (ParkManager) user));
 		pause();
 	}
-	/**
-	 * Ascii Art thumbs up
-	 */
-	private void printThumbsUp() {
 
-		System.out.println("	    ../---)");
-		System.out.println("	...../..../");
-		System.out.println("	..../ ....(_____ _");
-		System.out.println("	[L]........((_| ___))");
-		System.out.println("	[I].........((_ |____))");
-		System.out.println("	[K]........((_| ___))");
-		System.out.println("	[E]--....((_|__ )) ");
 
-	}
 }
