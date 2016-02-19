@@ -31,23 +31,23 @@ public class ParkList {
 	
 	/**
 	 * Add a park to the system.
-	 * @param park The park to be added to our system.
+	 * @param inputPark The park to be added to our system.
 	 */
-    public void add(Park park) {
-    	if(park == null) {
+    public void add(Park inputPark) {
+    	if(inputPark == null) {
     		System.out.println("Invalid Park Entry!");
     	}
-    	parks.add(park);
+    	parks.add(inputPark);
     }
     
     /**
      * Find the index of which a park exists in the system
-     * @param park Park to be found
+     * @param inputPark Park to be found
      * @return Returns the index of where the park exists inside of the arraylist.
      */
-    public int findIndex(Park park) {
+    public int findIndex(Park inputPark) {
     	for(int i = 0; i < parks.size(); i++) {
-    		if(parks.get(i).equals(park)) {
+    		if(parks.get(i).equals(inputPark)) {
     			return i;
     		}
     	}
@@ -91,14 +91,14 @@ public class ParkList {
      * @return Compares each park's toString methods in array's order.
      */
     @Override
-    public boolean equals(Object inputParks) {
-        if (inputParks == null) { //check null
+    public boolean equals(Object inputParkList) {
+        if (inputParkList == null) { //check null
             return false;
         }
-        if (this.getClass() != inputParks.getClass()) { //check class
+        if (this.getClass() != inputParkList.getClass()) { //check class
             return false;
         }
-        ParkList otherParkList = (ParkList) inputParks;
+        ParkList otherParkList = (ParkList) inputParkList;
         ArrayList<Park> otherParks = otherParkList.getArrayList();
         if (parks.size() != otherParks.size()) { //check size
             return false;

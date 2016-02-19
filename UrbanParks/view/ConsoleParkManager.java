@@ -59,10 +59,10 @@ public class ConsoleParkManager {
 	/**
 	 * Constructs the Park Manager console for the current user.
 	 * 
-	 * @param currentUser the user that has logged in
+	 * @param inputUser the user that has logged in
 	 */
-	public ConsoleParkManager(User currentUser, FileIO inputFileIO) {
-		user = currentUser;
+	public ConsoleParkManager(User inputUser, FileIO inputFileIO) {
+		user = inputUser;
 		fileIO = inputFileIO;
 		jobs = fileIO.getJobs();
 		users = fileIO.getUsers();

@@ -52,12 +52,12 @@ public class ConsoleVolunteer {
 	/**
 	 * Constructs the volunteer console for the current user.
 	 * 
-	 * @param currentUser the user that has logged in
+	 * @param inputUser the user that has logged in
 	 * @param fileIO 
 	 */
-	public ConsoleVolunteer(User currentUser, FileIO inputFileIO) {
+	public ConsoleVolunteer(User inputUser, FileIO inputFileIO) {
 		scanner.useDelimiter("\\n");
-		user = currentUser;
+		user = inputUser;
 		fileIO = inputFileIO;
 		users = fileIO.getUsers();
 		jobs = fileIO.getJobs();
