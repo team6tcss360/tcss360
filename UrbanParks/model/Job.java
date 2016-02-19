@@ -360,12 +360,12 @@ public class Job implements Serializable {
 	/**
 	 * Checks if the User is the park manager for this job.
 	 * 
-	 * @param inputParks the ParkList that contains all the parks
+	 * @param inputParkList the ParkList that contains all the parks
 	 * @param inputUser the User to check
 	 * @return true if first name and last name match the park manager's
 	 */
-	public boolean isParkManager(ParkList inputParks, User inputUser) {
-		Park currentPark = inputParks.getPark(parkName);
+	public boolean isParkManager(ParkList inputParkList, User inputUser) {
+		Park currentPark = inputParkList.getPark(parkName);
 		return currentPark.isParkManager(inputUser);
 	}
 

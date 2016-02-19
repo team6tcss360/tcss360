@@ -61,17 +61,17 @@ public class FileIO {
     /**
      * Saves the input users and jobs to file.
      * 
-     * @param inputUsers the current state of the UserList object
-     * @param inputJobs the current state of the JobList object
-     * @param inputParks the current state of the ParkList object
+     * @param inputUserList the current state of the UserList object
+     * @param inputJobList the current state of the JobList object
+     * @param inputParkList the current state of the ParkList object
      */
-    public void save(UserList inputUsers, JobList inputJobs, ParkList inputParks) {
+    public void save(UserList inputUserList, JobList inputJobList, ParkList inputParkList) {
        try { // write objects to file
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(inputUsers.getArrayList()); //write users
-            oos.writeObject(inputJobs.getArrayList()); //write jobs
-            oos.writeObject(inputParks.getArrayList()); //write parks
+            oos.writeObject(inputUserList.getArrayList()); //write users
+            oos.writeObject(inputJobList.getArrayList()); //write jobs
+            oos.writeObject(inputParkList.getArrayList()); //write parks
             oos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

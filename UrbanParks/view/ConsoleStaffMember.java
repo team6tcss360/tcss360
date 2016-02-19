@@ -55,12 +55,12 @@ public class ConsoleStaffMember {
 	/**
 	 * Constructs the Staff Member console for the current user.
 	 * 
-	 * @param currentUser the user that has logged in
+	 * @param inputUser the user that has logged in
 	 * @param fileIO 
 	 */
-	public ConsoleStaffMember(User currentUser, FileIO inputFileIO) {
+	public ConsoleStaffMember(User inputUser, FileIO inputFileIO) {
 		scanner.useDelimiter("\\n");
-		user = currentUser;
+		user = inputUser;
 		fileIO = inputFileIO;
 		users = fileIO.getUsers();
 		jobs = fileIO.getJobs();
@@ -180,14 +180,14 @@ public class ConsoleStaffMember {
 	}
 	/**
 	 * Searches volunteer by last name
-	 * @param inputName
+	 * @param inputLastName
 	 */
-	public void searchVolunteer(String inputName) {
+	public void searchVolunteer(String inputLastName) {
 		int index = 0;
 		boolean isFound = false;
 		for(int i = 0; i < users.size(); i++) {
 			if(users.getArrayList().get(i) instanceof Volunteer) {
-				if (users.getArrayList().get(i).getLastName().toLowerCase().compareTo(inputName.toLowerCase()) == 0) {
+				if (users.getArrayList().get(i).getLastName().toLowerCase().compareTo(inputLastName.toLowerCase()) == 0) {
 					System.out.println("Volunteer found!");
 					index = i;
 					isFound = true;

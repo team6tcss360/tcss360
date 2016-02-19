@@ -33,8 +33,8 @@ public class UserList {
     /**
      * Adds a user to the collection.
      */
-    public void add(User user) {
-        users.add(user);
+    public void add(User inputUser) {
+        users.add(inputUser);
     }
 
     /**
@@ -123,14 +123,14 @@ public class UserList {
      * @return Compares each user's toString methods in array's order.
      */
     @Override
-    public boolean equals(Object inputUsers) {
-        if (inputUsers == null) { //check null
+    public boolean equals(Object inputUserList) {
+        if (inputUserList == null) { //check null
             return false;
         }
-        if (this.getClass() != inputUsers.getClass()) { //check class
+        if (this.getClass() != inputUserList.getClass()) { //check class
             return false;
         }
-        UserList otherUserList = (UserList) inputUsers;
+        UserList otherUserList = (UserList) inputUserList;
         ArrayList<User> otherUsers = otherUserList.getArrayList();
         if (users.size() != otherUsers.size()) { //check size
             return false;

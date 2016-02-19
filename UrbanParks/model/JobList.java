@@ -44,24 +44,24 @@ public class JobList {
 	/**
 	 * Reconstructs the JobList from the inputArray.
 	 */
-	public JobList(ArrayList<Job> inputArray) {
-		jobs = inputArray;
+	public JobList(ArrayList<Job> inputArrayList) {
+		jobs = inputArrayList;
 	}
 
 	/**
-     * @param job to add to the ArrayList
+     * @param inputJob to add to the ArrayList
 	 * @throws ParseException if invalid date format
      */
-	public void add(Job job) throws ParseException {
-		if(job == null) {
+	public void add(Job inputJob) throws ParseException {
+		if(inputJob == null) {
 			System.out.println("Invalid Job!");
 		}
-		String startDate = formatDate(job.getStartDate());
-		String endDate = formatDate(job.getStartDate());
+		String startDate = formatDate(inputJob.getStartDate());
+		String endDate = formatDate(inputJob.getStartDate());
 		
 		//check all business rules before adding job
 		if (passesBusinessRules(startDate, endDate)) {
-		    jobs.add(job);
+		    jobs.add(inputJob);
 		}
 	}
 	
@@ -69,13 +69,13 @@ public class JobList {
 	 * @return true if all business rules pass
      * @throws ParseException if invalid date format
      */
-	public boolean passesBusinessRules(String startDate, String endDate) throws ParseException {
+	public boolean passesBusinessRules(String inputStartDate, String intputEndDate) throws ParseException {
 	    if (!hasMaxJobs() 
-	            && !hasMaxJobsInWeek(startDate, endDate) 
-	            && hasValidDuration(startDate, endDate) 
-                && !hasEndBeforeStart(startDate, endDate) 
-                && !isTooFarInFuture(startDate) 
-                && !hasPastDate(startDate) ) {
+	            && !hasMaxJobsInWeek(inputStartDate, intputEndDate) 
+	            && hasValidDuration(inputStartDate, intputEndDate) 
+                && !hasEndBeforeStart(inputStartDate, intputEndDate) 
+                && !isTooFarInFuture(inputStartDate) 
+                && !hasPastDate(inputStartDate) ) {
             return true;
         }
 	    return false;
@@ -86,25 +86,25 @@ public class JobList {
      * @throws ParseException if invalid date format
      */
     @SuppressWarnings("unchecked")
-    public boolean passesBusinessRulesEdit(Job inputJob, String startDate, String endDate) throws ParseException {
+    public boolean passesBusinessRulesEdit(Job inputJob, String inputStartDate, String inputEndDate) throws ParseException {
         JobList tempJobs = new JobList((ArrayList<Job>) jobs.clone()); //shallow copy
         tempJobs.remove(inputJob); //don't want to double count edited job
         if (!tempJobs.hasMaxJobs() 
-                && !tempJobs.hasMaxJobsInWeek(startDate, endDate) 
-                && tempJobs.hasValidDuration(startDate, endDate) 
-                && !tempJobs.hasEndBeforeStart(startDate, endDate) 
-                && !tempJobs.isTooFarInFuture(startDate) 
-                && !tempJobs.hasPastDate(startDate) ) {
+                && !tempJobs.hasMaxJobsInWeek(inputStartDate, inputEndDate) 
+                && tempJobs.hasValidDuration(inputStartDate, inputEndDate) 
+                && !tempJobs.hasEndBeforeStart(inputStartDate, inputEndDate) 
+                && !tempJobs.isTooFarInFuture(inputStartDate) 
+                && !tempJobs.hasPastDate(inputStartDate) ) {
             return true;
         }
         return false;
     }
 
 	/**
-	 * @param job to remove from the ArrayList
+	 * @param inputJob to remove from the ArrayList
 	 */
-	public void remove(Job job) {
-		int index = findIndex(job);
+	public void remove(Job inputJob) {
+		int index = findIndex(inputJob);
 		if(index == -1) {
 			System.out.println("Job doesn't exist");
 		} else {
@@ -115,9 +115,9 @@ public class JobList {
 	/**
 	 * @return the Job's index in the ArrayList.
 	 */
-	public int findIndex(Job job) {
+	public int findIndex(Job inputJob) {
 		for(int i = 0; i < jobs.size(); i++) {
-			if(jobs.get(i).equals(job)) {
+			if(jobs.get(i).equals(inputJob)) {
 				return i;
 			}
 		}
@@ -169,16 +169,16 @@ public class JobList {
     /**
      * Gets a list of summaries only for parks that the User is Park Manager of.
      * 
-     * @param inputParks the ParkList for parks to check
-     * @param inputUser the User that is the Park Manager
+     * @param inputParkList the ParkList for parks to check
+     * @param inputParkManager the User that is the Park Manager
      * @return summaries for parks that the User is Park Manager of.
      */
-    public String getSummariesMyParks(ParkList inputParks, ParkManager inputUser) {
+    public String getSummariesMyParks(ParkList inputParkList, ParkManager inputParkManager) {
         String str = "";
         for(int i = 0; i < jobs.size(); i++) {
             Job currentJob = jobs.get(i);
             //check if they are park manager for that job and it is not in the past
-            if (currentJob.isParkManager(inputParks, inputUser) && !currentJob.isInPast()) {
+            if (currentJob.isParkManager(inputParkList, inputParkManager) && !currentJob.isInPast()) {
                 str += jobs.get(i).getSummary() + "\n"; //add job if they are
             }
         }
@@ -188,15 +188,15 @@ public class JobList {
     /**
      * Gets a list of summaries only for jobs that the User is signed up for.
      * 
-     * @param inputUser the User to get jobs for
+     * @param inputVolunteer the User to get jobs for
      * @return summaries for jobs that the User is signed up for.
      */
-    public String getSummariesMyVolunteerJobs(Volunteer inputUser) {
+    public String getSummariesMyVolunteerJobs(Volunteer inputVolunteer) {
         String str = "";
         for(int i = 0; i < jobs.size(); i++) {
             Job currentJob = jobs.get(i);
             //check if they are volunteered for that job and it is not in the past
-            if (currentJob.isVolunteer(inputUser) && !currentJob.isInPast()) {
+            if (currentJob.isVolunteer(inputVolunteer) && !currentJob.isInPast()) {
                 str += jobs.get(i).getSummary() + "\n"; //add job if they are
             }
         } 
@@ -254,9 +254,9 @@ public class JobList {
 	 * Business rule #4: A job may not be scheduled that lasts more than two days.
 	 * @throws ParseException if invalid date format
 	 */
-	public boolean hasValidDuration(String startDate, String endDate) throws ParseException {
-	    GregorianCalendar startTemp = convertToCalender(startDate);
-        GregorianCalendar endTemp = convertToCalender(endDate);
+	public boolean hasValidDuration(String inputStartDate, String inputEndDate) throws ParseException {
+	    GregorianCalendar startTemp = convertToCalender(inputStartDate);
+        GregorianCalendar endTemp = convertToCalender(inputEndDate);
         zeroOutTime(startTemp);
 		startTemp.add(Calendar.DAY_OF_MONTH, MAX_JOB_LENGTH);
         if (endTemp.after(startTemp)) {
@@ -269,9 +269,9 @@ public class JobList {
      * Business rule #4B: A job may not end before it starts.
 	 * @throws ParseException if invalid date format
      */
-    public boolean hasEndBeforeStart(String startDate, String endDate) throws ParseException {
-        GregorianCalendar startTemp = convertToCalender(startDate);
-        GregorianCalendar endTemp = convertToCalender(endDate);
+    public boolean hasEndBeforeStart(String inputStartDate, String inputEndDate) throws ParseException {
+        GregorianCalendar startTemp = convertToCalender(inputStartDate);
+        GregorianCalendar endTemp = convertToCalender(inputEndDate);
         if (endTemp.before(startTemp)) {
             return true;
         }
@@ -283,8 +283,8 @@ public class JobList {
 	 * Business rule #5 A job may not be added that is in the more than 90 days in the future. 
 	 * @throws ParseException if invalid date format
 	 */
-	public boolean isTooFarInFuture(String startDate) throws ParseException {
-	    GregorianCalendar startTemp = convertToCalender(startDate);
+	public boolean isTooFarInFuture(String inputStartDate) throws ParseException {
+	    GregorianCalendar startTemp = convertToCalender(inputStartDate);
         GregorianCalendar now = new GregorianCalendar();
 		now.add(Calendar.DAY_OF_MONTH, MAX_SCHEDULING_IN_FUTURE);
         if (startTemp.after(now)) {
@@ -298,8 +298,8 @@ public class JobList {
 	 * Business rule #6: A volunteer may not sign up for a job that has passed.
 	 * @throws ParseException if invalid date format
 	 */
-	public boolean hasPastDate(String startDate) throws ParseException {
-	    GregorianCalendar startTemp = convertToCalender(startDate);
+	public boolean hasPastDate(String inputStartDate) throws ParseException {
+	    GregorianCalendar startTemp = convertToCalender(inputStartDate);
         GregorianCalendar now = new GregorianCalendar();
         if (startTemp.before(now)) {
 			return true;
@@ -400,14 +400,14 @@ public class JobList {
      * @return Compares each job's toString methods in array's order.
      */
     @Override
-    public boolean equals(Object inputJobs) {
-        if (inputJobs == null) { //check null
+    public boolean equals(Object inputJobList) {
+        if (inputJobList == null) { //check null
             return false;
         }
-        if (this.getClass() != inputJobs.getClass()) { //check class
+        if (this.getClass() != inputJobList.getClass()) { //check class
             return false;
         }
-        JobList otherJobList = (JobList) inputJobs;
+        JobList otherJobList = (JobList) inputJobList;
         ArrayList<Job> otherJobs = otherJobList.getArrayList();
         if (jobs.size() != otherJobs.size()) { //check size
             return false;
