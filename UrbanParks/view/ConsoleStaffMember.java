@@ -50,7 +50,7 @@ public class ConsoleStaffMember {
 	 * Contains the parks that Urban Parks application will use.
 	 */
 	@SuppressWarnings("unused") //may need it later
-    private ParkList parks;
+	private ParkList parks;
 
 	/**
 	 * Constructs the Staff Member console for the current user.
@@ -75,20 +75,20 @@ public class ConsoleStaffMember {
 		String myInput;
 		System.out.println("Login Success!");
 		do {
-		    System.out.println();
-            System.out.println("----------------------Main Menu------------------------");
-	        System.out.println("*******************************************************");
-	        System.out.println("*                                                     *");
-	        System.out.println("*               Urban Parks Staff Menu!               *");
-	        System.out.println("*                                                     *");
-	        System.out.println("*******************************************************");
-		    System.out.println("Urban Parks Staff: " + user.getFirstName() + " " + user.getLastName());
-	        System.out.println();
-	        System.out.println("Please Enter a Command:");
-	        System.out.println("1) Display all volunteers");
+			System.out.println();
+			System.out.println("----------------------Main Menu------------------------");
+			System.out.println("*******************************************************");
+			System.out.println("*                                                     *");
+			System.out.println("*               Urban Parks Staff Menu!               *");
+			System.out.println("*                                                     *");
+			System.out.println("*******************************************************");
+			System.out.println("Urban Parks Staff: " + user.getFirstName() + " " + user.getLastName());
+			System.out.println();
+			System.out.println("Please Enter a Command:");
+			System.out.println("1) Display all volunteers");
 			System.out.println("2) Search volunteers by last name");
 			System.out.println("3) View a summary of all upcoming jobs");
-			
+
 			System.out.println("4) Display summary of a job by job ID");
 			System.out.println("5) Logout"); 
 			System.out.println("6) Exit Program");  
@@ -96,54 +96,54 @@ public class ConsoleStaffMember {
 			myInput = scanner.nextLine(); //Get user input
 			int jobID = 0;
 			switch(myInput) {
-    			case "1":
-    				System.out.println("*******************************************************");
-    				System.out.println("*                    Display Volunteers               *");
-    				System.out.println("*******************************************************");
-                    displayVolunteers();
-                    break;
-                    
-    			case "2":
-    				System.out.println("*******************************************************");
-    				System.out.println("*                    Search for Volunteers            *");
-    				System.out.println("*******************************************************");
-    				System.out.println("Enter in the last name you are looking for.");
-    				System.out.print(">> ");
-    	            String lastName = scanner.nextLine();
-    				searchVolunteer(lastName);
-    				break;
-    				
-    			case "3":
-    				System.out.println("*******************************************************");
-    				System.out.println("*                    Display Jobs                     *");
-    				System.out.println("*******************************************************");
-    				displayJobs();
-    				break;
+			case "1":
+				System.out.println("*******************************************************");
+				System.out.println("*                    Display Volunteers               *");
+				System.out.println("*******************************************************");
+				displayVolunteers();
+				break;
 
-    			case "4":
-    				System.out.println("*******************************************************");
-    				System.out.println("*                    View Job by ID                   *");
-    				System.out.println("*******************************************************");
-    				System.out.println("Enter job ID:");
-    				System.out.print(">> ");
-    				String string_jobID = scanner.nextLine();
-    				try {
-    				jobID = Integer.parseInt(string_jobID);
-    				} catch(NumberFormatException e) {
-    					System.out.println("Invalid Input");
-    					break;
-    				}
-    				getJob(jobID);
-    				break;
-    				
-    			case "5":
-    				ConsoleMain console = new ConsoleMain();
-    				console.run();
-    				break;
-    				
-    			case "6":
-    			    System.out.println("Exiting...");
-    			    break;
+			case "2":
+				System.out.println("*******************************************************");
+				System.out.println("*                    Search for Volunteers            *");
+				System.out.println("*******************************************************");
+				System.out.println("Enter in the last name you are looking for.");
+				System.out.print(">> ");
+				String lastName = scanner.nextLine();
+				searchVolunteer(lastName);
+				break;
+
+			case "3":
+				System.out.println("*******************************************************");
+				System.out.println("*                    Display Jobs                     *");
+				System.out.println("*******************************************************");
+				displayJobs();
+				break;
+
+			case "4":
+				System.out.println("*******************************************************");
+				System.out.println("*                    View Job by ID                   *");
+				System.out.println("*******************************************************");
+				System.out.println("Enter job ID:");
+				System.out.print(">> ");
+				String string_jobID = scanner.nextLine();
+				try {
+					jobID = Integer.parseInt(string_jobID);
+				} catch(NumberFormatException e) {
+					System.out.println("Invalid Input");
+					break;
+				}
+				getJob(jobID);
+				break;
+
+			case "5":
+				ConsoleMain console = new ConsoleMain();
+				console.run();
+				break;
+
+			case "6":
+				System.out.println("Exiting...");
+				break;
 			}
 		} while(myInput.compareTo("6") != 0 && myInput.compareTo("5") != 0);
 	}
@@ -165,7 +165,7 @@ public class ConsoleStaffMember {
 	 * Displays all volunteers
 	 */
 	public void displayVolunteers() {
-	    System.out.println("Volunteers: ");
+		System.out.println("Volunteers: ");
 		for(int i = 0; i < users.size(); i++) {
 			if(users.getArrayList().get(i) instanceof Volunteer) {
 				System.out.println(users.getArrayList().get(i).toString());
@@ -202,18 +202,15 @@ public class ConsoleStaffMember {
 		}
 		pause();
 	}
-	
-	/**
-     * Pause the console until user is ready.
-     */
-    private void pause() {
-        System.out.println("<<Press any key to continue>>");
-        scanner.nextLine();        
-    }
-    /**
-     * Ascii Art Penguin
-     */
 
-    
+	/**
+	 * Pause the console until user is ready.
+	 */
+	private void pause() {
+		System.out.println("<<Press any key to continue>>");
+		scanner.nextLine();        
+	}
+
+
 }
 

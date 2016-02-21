@@ -169,7 +169,7 @@ public class ConsoleParkManager {
 		if(jobs.hasMaxJobs()) {
 			System.out.println("There are already too many total jobs!"); 
 		} else {
-			
+
 			String startDate = getStartDate();
 			String endDate = getEndDate(startDate);
 			String parkName = getParkName();
@@ -180,7 +180,7 @@ public class ConsoleParkManager {
 			int heavy = getHeavyVolunteers();  
 			int jobID = getValidJobID();
 			createJob(jobID, startDate, endDate, parkName, details, light, medium, heavy);
-		
+
 		}
 	}
 	/**
@@ -213,7 +213,7 @@ public class ConsoleParkManager {
 		} else {
 			System.out.println("There are too many jobs in that week!");
 		}
-		
+
 	}
 
 	/**
@@ -418,7 +418,7 @@ public class ConsoleParkManager {
 			System.out.println(TIME_FORMAT_STRING);
 		}
 
-		
+
 	}
 	/**
 	 * Pause the console until user is ready.
