@@ -169,137 +169,51 @@ public class ConsoleParkManager {
 		if(jobs.hasMaxJobs()) {
 			System.out.println("There are already too many total jobs!"); 
 		} else {
-			System.out.println();
-			System.out.println();
-			String startDate = "";
-			while (true) {
-				System.out.println(TIME_FORMAT_STRING);
-				System.out.print("Enter the start date & time: ");
-				try {
-					startDate = scanner.nextLine();
-					if (jobs.hasPastDate(startDate)) {
-						System.out.println("You can't create a job in the past!");
-						continue;
-					} 
-					if (jobs.isTooFarInFuture(startDate)) {
-						System.out.println("You can't create a job " 
-								+ JobList.MAX_SCHEDULING_IN_FUTURE + "+ days in the future!");
-						continue;
-					} else {
-						break;
-					}
-				} catch (ParseException e) {
-					System.out.println("Invalid date format.  Use:");
-					continue;
-				}
-			}
 
-			String endDate = ""; 
-			while (true) {
-				System.out.println(TIME_FORMAT_STRING);
-				System.out.print("Enter the end date & time: ");
-				try {
-					endDate = scanner.nextLine();
-					if (jobs.hasEndBeforeStart(startDate, endDate)) {
-						System.out.println("You can't end before the start!");
-						continue;
-					}
-					if (!jobs.hasValidDuration(startDate, endDate)) {
-						System.out.println("Your job cannot be more than " + JobList.MAX_JOB_LENGTH + " days!");
-						continue;
-					} else {
-						break;
-					}
-				} catch (ParseException e) {
-					System.out.println("Invalid date format.  Use:");
-					continue;
-				}
-			}
-
-			String parkName = "";
-			while (true) {
-				System.out.print("Enter the park name: ");
-				parkName = scanner.nextLine();
-				Park thePark = parks.getPark(parkName);
-				if (thePark == null) {
-					System.out.println("Park Not Found.");
-					continue;
-				} else if (!thePark.isParkManager(user)) {
-					System.out.println("You are not the manager of that park.");
-					continue;
-				} else {
-					break; //valid park is found
-				}
-			}
-
+			String startDate = getStartDate();
+			String endDate = getEndDate(startDate);
+			String parkName = getParkName();
 			System.out.print("Enter in the details of the job: ");
 			String details = scanner.nextLine();
+			int light = getLightVolunteers();  
+			int medium = getMediumVolunteers();  
+			int heavy = getHeavyVolunteers();  
+			int jobID = getValidJobID();
+			createJob(jobID, startDate, endDate, parkName, details, light, medium, heavy);
 
-			int light = 0;  
-			while (true) {
-				System.out.print("Enter in the number of people for the light category: ");
-				try {
-					String string_light = scanner.nextLine();
-					light = Integer.parseInt(string_light);
-					break;
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid number.");
-					continue;
-				}
-			}		
-
-			int medium = 0;  
-			while (true) {
-				System.out.print("Enter in the number of people for the medium category: ");
-				try {
-					String string_medium = scanner.nextLine();
-					medium = Integer.parseInt(string_medium);
-					break;
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid number.");
-					continue;
-				}
-			}   
-
-			int heavy = 0;  
-			while (true) {
-				System.out.print("Enter in the number of people for the heavy category: ");
-				try {
-					String string_heavy = scanner.nextLine();
-					heavy = Integer.parseInt(string_heavy);
-					break;
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid number.");
-					continue;
-				}
-			}   
-
-			int jobID = 1; //start search at 1
-			while (true) { //finds next available unique jobID
-				if (jobs.isJobIDtaken(jobID)) { //check if taken
-					jobID++; //check next int
-					continue;
-				} else { //found a good one
-					break;
-				}
-			}
-
-			if (!jobs.hasMaxJobsInWeek(startDate, endDate)) {
-				//create job and save
-				int beforeSize = jobs.size();
-				Job job = new Job(jobID, startDate, endDate, parkName, details, light, medium, heavy);
-				jobs.add(job);
-				fileIO.save(users, jobs, parks);  
-				if (jobs.size() > beforeSize) {
-					System.out.println("Job successfully added as job number " + jobID +".");
-				} else {
-					System.out.println("Job creation failed.");
-				}
-				pause();
-			} else {
-				System.out.println("There are too many jobs in that week!");
-			}
 		}
+	}
+	/**
+	 * 
+	 * @param jobID valid job id
+	 * @param startDate start date of the job
+	 * @param endDate end date of the job
+	 * @param parkName park name
+	 * @param details details of what the job will do.
+	 * @param light number of "light" volunteers required
+	 * @param medium number of "medium" volunteers required
+	 * @param heavy number of "heavy" volunteers required
+	 * @throws ParseException throws the exception if text isn't valid input
+	 * Creates a new job and adds it to the file system after all the user input is parsed.
+	 */
+	public void createJob(int jobID, String startDate, String endDate, String parkName, String details, int light,
+			int medium, int heavy) throws ParseException {
+		if (!jobs.hasMaxJobsInWeek(startDate, endDate)) {
+			//create job and save
+			int beforeSize = jobs.size();
+			Job job = new Job(jobID, startDate, endDate, parkName, details, light, medium, heavy);
+			jobs.add(job);
+			fileIO.save(users, jobs, parks);  
+			if (jobs.size() > beforeSize) {
+				System.out.println("Job successfully added as job number " + jobID +".");
+			} else {
+				System.out.println("Job creation failed.");
+			}
+			pause();
+		} else {
+			System.out.println("There are too many jobs in that week!");
+		}
+
 	}
 
 	/**
@@ -359,94 +273,39 @@ public class ConsoleParkManager {
 				System.out.println("1) Start Date");
 				System.out.println("2) End Date");
 				System.out.println("3) Park Name");
-				System.out.println("4) Description");
+				System.out.println("4) Details");
 				System.out.println("5) Light Max");
 				System.out.println("6) Medium Max");
 				System.out.println("7) Heavy Max");
-				System.out.println("8) Logout");
+				System.out.println("8) Previous Menu");
 				System.out.print(">> ");
 				input = scanner.nextLine();
 				switch(input) {
 				case "1":
-					System.out.println(TIME_FORMAT_STRING);
-					System.out.println("Enter the start date & time: ");
-					System.out.print(">> ");
-					try {
-						String startDate = scanner.nextLine();
-						String endDate = jobs.formatDate(currentJob.getEndDate());
-						if (jobs.passesBusinessRulesEdit(currentJob, startDate, endDate)) {
-							currentJob.setStartDate(startDate);
-						} else {
-							System.out.println("Invalid date.");
-						}
-					} catch (ParseException e) {
-						System.out.println("Invalid date format.  Use:");
-						System.out.println(TIME_FORMAT_STRING);
-					}
+					editStartDate(currentJob);
 					break;
-
 				case "2":
-					System.out.println(TIME_FORMAT_STRING);
-					System.out.print("Enter the end date & time: ");
-					System.out.print(">> ");
-					try {
-						String endDate = scanner.nextLine();
-						String startDate = jobs.formatDate(currentJob.getStartDate());
-						if (jobs.passesBusinessRulesEdit(currentJob, startDate, endDate)) {
-							currentJob.setEndDate(endDate);
-						} else {
-							System.out.println("Invalid date.");
-							pause();
-						}
-					} catch (ParseException e) {
-						System.out.println("Invalid date format.  Use:");
-						System.out.println(TIME_FORMAT_STRING);
-					}
+					editEndDate(currentJob);
 					break;
 
 				case "3":
-					System.out.print("Enter the park name: ");
-					String parkName = scanner.nextLine();
-					Park thePark = parks.getPark(parkName);
-					if (thePark == null) {
-						System.out.println("Park Not Found.");
-					} else if (!thePark.isParkManager(user)) {
-						System.out.println("You are not the manager of that park.");
-					} else {
-						currentJob.setParkName(parkName);
-					} 
+					editParkName(currentJob);
 					break;
 
 				case "4":
-					System.out.print("Enter in the details of the job: ");
-					currentJob.setDetails(scanner.nextLine());
+					editParkDetails(currentJob);
 					break;
 
 				case "5":
-					System.out.print("Enter in the number of volunteers of the light category: ");
-					try { 
-						currentJob.setLightMax(scanner.nextInt());
-					} catch (InputMismatchException e) {
-						System.out.println("Invalid input.");
-					}
+					editLightVolunteers(currentJob);
 					break;
 
 				case "6":
-					System.out.print("Enter in the number of volunteers of the medium category: ");
-					try { 
-						currentJob.setMedMax(scanner.nextInt());
-					} catch (InputMismatchException e) {
-						System.out.println("Invalid input.");
-					}
+					editMediumVolunteers(currentJob);
 					break;
 
 				case "7":
-					System.out.print("Enter in the number of volunteers of the heavy category: ");
-					try { 
-						currentJob.setHeavyMax(scanner.nextInt());
-					} catch (InputMismatchException e) {
-						System.out.println("Invalid input.");
-					}
+					editHeavyVolunteers(currentJob);
 					break;
 
 				case "8":
@@ -456,7 +315,111 @@ public class ConsoleParkManager {
 		}
 		fileIO.save(users, jobs, parks);
 	}
+	/**
+	 * Edits the number of heavy volunteers
+	 * @param currentJob is the current job instance
+	 */
+	public void editHeavyVolunteers(Job currentJob) {
+		System.out.print("Enter in the number of volunteers of the heavy category: ");
+		try { 
+			currentJob.setHeavyMax(scanner.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid input.");
+		}
+	}
+	/**
+	 * Edits the number of medium volunteers
+	 * @param currentJob is the current job instance
+	 */
+	public void editMediumVolunteers(Job currentJob) {
+		System.out.print("Enter in the number of volunteers of the medium category: ");
+		try { 
+			currentJob.setMedMax(scanner.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid input.");
+		}
+	}
+	/**
+	 * Edits the number of light volunteers
+	 * @param currentJob is the current job instance
+	 */
+	public void editLightVolunteers(Job currentJob) {
+		System.out.print("Enter in the number of volunteers of the light category: ");
+		try { 
+			currentJob.setLightMax(scanner.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid input.");
+		}
+	}
+	/**
+	 * Edits the park details of what the job is going to be about.
+	 * @param currentJob is the current job instance
+	 */
+	public void editParkDetails(Job currentJob) {
+		System.out.print("Enter in the details of the job: ");
+		currentJob.setDetails(scanner.nextLine());
+	}
+	/**
+	 * Edits the park name
+	 * @param currentJob is the current job instance
+	 */
+	public void editParkName(Job currentJob) {
+		System.out.print("Enter the park name: ");
+		String parkName = scanner.nextLine();
+		Park thePark = parks.getPark(parkName);
+		if (thePark == null) {
+			System.out.println("Park Not Found.");
+		} else if (!thePark.isParkManager(user)) {
+			System.out.println("You are not the manager of that park.");
+		} else {
+			currentJob.setParkName(parkName);
+		} 
+	}
+	/**
+	 * Edits the end date of the job
+	 * @param currentJob is the current job instance
+	 */
+	public void editEndDate(Job currentJob) {
+		System.out.println(TIME_FORMAT_STRING);
+		System.out.print("Enter the end date & time: ");
+		System.out.print(">> ");
+		try {
+			String endDate = scanner.nextLine();
+			String startDate = jobs.formatDate(currentJob.getStartDate());
+			if (jobs.passesBusinessRulesEdit(currentJob, startDate, endDate)) {
+				currentJob.setEndDate(endDate);
+			} else {
+				System.out.println("Invalid date.");
+				pause();
+			}
+		} catch (ParseException e) {
+			System.out.println("Invalid date format.  Use:");
+			System.out.println(TIME_FORMAT_STRING);
+		}
+	}
+	/**
+	 * Edits the start date of the job
+	 * @param currentJob is the current job instance
+	 */
+	public void editStartDate(Job currentJob) {
+		System.out.println(TIME_FORMAT_STRING);
+		System.out.println("Enter the start date & time: ");
+		System.out.print(">> ");
+		try {
+			String startDate = scanner.nextLine();
+			String endDate = jobs.formatDate(currentJob.getEndDate());
+			if (jobs.passesBusinessRulesEdit(currentJob, startDate, endDate)) {
+				currentJob.setStartDate(startDate);
+			} else {
+				System.out.println("Invalid date.");
+			}
+		} catch (ParseException e) {
+			System.out.println("Invalid date format.  Use:");
+			System.out.println(TIME_FORMAT_STRING);
+		}
 
+
+	}
 	/**
 	 * Pause the console until user is ready.
 	 */
@@ -472,6 +435,155 @@ public class ConsoleParkManager {
 		System.out.print(jobs.getSummariesMyParks(parks, (ParkManager) user));
 		pause();
 	}
-
-
+	/**
+	 * Gets the start date of the job
+	 * @return the start date of a job. 
+	 */
+	public String getStartDate() {
+		System.out.println();
+		System.out.println();
+		String startDate = "";
+		while (true) {
+			System.out.println(TIME_FORMAT_STRING);
+			System.out.print("Enter the start date & time: ");
+			try {
+				startDate = scanner.nextLine();
+				if (jobs.hasPastDate(startDate)) {
+					System.out.println("You can't create a job in the past!");
+					continue;
+				} 
+				if (jobs.isTooFarInFuture(startDate)) {
+					System.out.println("You can't create a job " 
+							+ JobList.MAX_SCHEDULING_IN_FUTURE + "+ days in the future!");
+					continue;
+				} else {
+					break;
+				}
+			} catch (ParseException e) {
+				System.out.println("Invalid date format.  Use:");
+				continue;
+			}
+		}
+		return startDate;
+	}
+	/**
+	 * Gets the end date of the job
+	 * @param startDate is the start date of the same job, a job can only last at most two days.
+	 * @return a valid end date.
+	 */
+	public String getEndDate(String startDate) {
+		String endDate = ""; 
+		while (true) {
+			System.out.println(TIME_FORMAT_STRING);
+			System.out.print("Enter the end date & time: ");
+			try {
+				endDate = scanner.nextLine();
+				if (jobs.hasEndBeforeStart(startDate, endDate)) {
+					System.out.println("You can't end before the start!");
+					continue;
+				}
+				if (!jobs.hasValidDuration(startDate, endDate)) {
+					System.out.println("Your job cannot be more than " + JobList.MAX_JOB_LENGTH + " days!");
+					continue;
+				} else {
+					break;
+				}
+			} catch (ParseException e) {
+				System.out.println("Invalid date format.  Use:");
+				continue;
+			}
+		}
+		return endDate;
+	}
+	/**
+	 * Gets the park name
+	 * @return the park name for a job
+	 */
+	public String getParkName() {
+		String parkName = "";
+		while (true) {
+			System.out.print("Enter the park name: ");
+			parkName = scanner.nextLine();
+			Park thePark = parks.getPark(parkName);
+			if (thePark == null) {
+				System.out.println("Park Not Found.");
+				continue;
+			} else if (!thePark.isParkManager(user)) {
+				System.out.println("You are not the manager of that park.");
+				continue;
+			} else {
+				break; //valid park is found
+			}
+		}
+		return parkName;
+	}
+	/**
+	 * Gets the number of light level volunteers
+	 * @return number of light volunteers
+	 */
+	public int getLightVolunteers() {
+		int light = 0;  
+		while (true) {
+			System.out.print("Enter in the number of people for the light category: ");
+			try {
+				String string_light = scanner.nextLine();
+				light = Integer.parseInt(string_light);
+				break;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid number.");
+				continue;
+			}
+		}
+		return light;
+	}
+	public int getMediumVolunteers() {
+		int medium = 0;
+		while (true) {
+			System.out.print("Enter in the number of people for the medium category: ");
+			try {
+				String string_medium = scanner.nextLine();
+				medium = Integer.parseInt(string_medium);
+				break;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid number.");
+				continue;
+			}
+		}   
+		return medium;
+	}
+	/**
+	 * Gets the number of heavy volunteers
+	 * @return the number of heavy volunteers
+	 */
+	public int getHeavyVolunteers() {
+		int heavy = 0;
+		while (true) {
+			System.out.print("Enter in the number of people for the heavy category: ");
+			try {
+				String string_heavy = scanner.nextLine();
+				heavy = Integer.parseInt(string_heavy);
+				break;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid number.");
+				continue;
+			}
+		}
+		return heavy;
+	}
+	/**
+	 * Gets a valid job id to make sure that the job actually exists.
+	 * @return a valid job id.
+	 */
+	public int getValidJobID() {
+		int jobID = 1;
+		while (true) { //finds next available unique jobID
+			if (jobs.isJobIDtaken(jobID)) { //check if taken
+				jobID++; //check next int
+				continue;
+			} else { //found a good one
+				break;
+			}
+		}
+		return jobID;
+	}
 }

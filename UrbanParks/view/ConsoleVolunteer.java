@@ -177,17 +177,9 @@ public class ConsoleVolunteer {
 	 * @param inputJobID
 	 */
 	public void signUpForJob(int inputJobID) {
-		Job temp = jobs.getJob(inputJobID);
 		String level = "";
-		if(temp == null) {
-			System.out.println("Job doesn't exist.");
-		} else if (temp.isVolunteer((Volunteer) user)) {
-			System.out.println("You are already signed up for this job!");
-		} else if (temp.isInPast()) {
-			System.out.println("This job already happened!");
-		} else if (jobs.hasJobOnSameDay((Volunteer) user, temp)) {
-			System.out.println("You are already signed up for a job on that day!");
-		} else if (temp != null){
+		boolean isValid = isValidJob(inputJobID);
+		if(isValid){
 			System.out.println("What level of difficulty would you like?");
 			System.out.println("1) Light");
 			System.out.println("2) Medium");
@@ -196,33 +188,15 @@ public class ConsoleVolunteer {
 			level = scanner.nextLine();
 			switch(level) {
 			case "1":
-				if (jobs.getJob(inputJobID).hasLightMax()) {
-					System.out.println("That category is full!");
-				} else {
-					jobs.getJob(inputJobID).addLightVolunteer((Volunteer) user); 
-					System.out.println("You signed up for job " + inputJobID 
-							+ " in the light category!");
-				}
+				signUpForLight(inputJobID);
 				break;
 
 			case "2":
-				if (jobs.getJob(inputJobID).hasMedMax()) {
-					System.out.println("That category is full!");
-				} else {
-					jobs.getJob(inputJobID).addMedVolunteer((Volunteer) user);
-					System.out.println("You signed up for job " + inputJobID 
-							+ " in the medium category!");
-				}
+				signUpForMedium(inputJobID);
 				break;
 
 			case "3":
-				if (jobs.getJob(inputJobID).hasHeavyMax()) {
-					System.out.println("That category is full!");
-				} else {
-					jobs.getJob(inputJobID).addHeavyVolunteer((Volunteer) user);
-					System.out.println("You signed up for job " + inputJobID 
-							+ " in the heavy category!");
-				}
+				signUpForHeavy(inputJobID);
 				break;
 
 			default: 
@@ -233,7 +207,67 @@ public class ConsoleVolunteer {
 		fileIO.save(users, jobs, parks);
 		pause();
 	}
-
+	/**
+	 * Signs the user up for a heavy level job
+	 * @param inputJobID
+	 */
+	public void signUpForHeavy(int inputJobID) {
+		if (jobs.getJob(inputJobID).hasHeavyMax()) {
+			System.out.println("That category is full!");
+		} else {
+			jobs.getJob(inputJobID).addHeavyVolunteer((Volunteer) user);
+			System.out.println("You signed up for job " + inputJobID 
+					+ " in the heavy category!");
+		}
+	}
+	/**
+	 * Signs the user up for a medium level job.
+	 * @param inputJobID
+	 */
+	public void signUpForMedium(int inputJobID) {
+		if (jobs.getJob(inputJobID).hasMedMax()) {
+			System.out.println("That category is full!");
+		} else {
+			jobs.getJob(inputJobID).addMedVolunteer((Volunteer) user);
+			System.out.println("You signed up for job " + inputJobID 
+					+ " in the medium category!");
+		}
+	}
+	/**
+	 * Signs the user up for a light level job.
+	 * @param inputJobID
+	 */
+	public void signUpForLight(int inputJobID) {
+		if (jobs.getJob(inputJobID).hasLightMax()) {
+			System.out.println("That category is full!");
+		} else {
+			jobs.getJob(inputJobID).addLightVolunteer((Volunteer) user); 
+			System.out.println("You signed up for job " + inputJobID 
+					+ " in the light category!");
+		}
+	}
+	/**
+	 * Checks to see if the job ID exists and is a valid job.
+	 * @param inputJobID
+	 * @return boolean value if job ID actually corresponds to a real job.
+	 */
+	public boolean isValidJob(int inputJobID) {
+		boolean valid = false;
+		Job temp = jobs.getJob(inputJobID);
+		if(temp == null) {
+			System.out.println("Job doesn't exist.");
+		} else if (temp.isVolunteer((Volunteer) user)) {
+			System.out.println("You are already signed up for this job!");
+		} else if (temp.isInPast()) {
+			System.out.println("This job already happened!");
+		} else if (jobs.hasJobOnSameDay((Volunteer) user, temp)) {
+			System.out.println("You are already signed up for a job on that day!");
+		} else if (temp != null){
+			valid = true;
+		}
+		
+		return valid;
+	}
 	/**
 	 * Displays the jobs that the user is signed up for.
 	 */
