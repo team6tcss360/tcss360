@@ -1,4 +1,6 @@
 package view;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -17,7 +19,7 @@ import model.UserList;
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 3, 2016
+ * @version February 26, 2016
  */
 public class ConsoleParkManager {
 
@@ -72,8 +74,11 @@ public class ConsoleParkManager {
 	/**
 	 * Runs the Park Manager console screen.
 	 * @throws ParseException if invalid date format
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found 
 	 */
-	public void run() throws ParseException {
+	public void run() throws ParseException, FileNotFoundException, ClassNotFoundException, IOException {
 		String input = " ";
 		System.out.println("Login Success!");
 
@@ -163,9 +168,12 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Submits a job.
+	 * 
 	 * @throws ParseException if invalid date format
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
 	 */
-	public void submitJob() throws ParseException {
+	public void submitJob() throws ParseException, FileNotFoundException, IOException {
 		if(jobs.hasMaxJobs()) {
 			System.out.println("There are already too many total jobs!"); 
 		} else {
@@ -184,7 +192,8 @@ public class ConsoleParkManager {
 		}
 	}
 	/**
-	 * 
+	 * Creates a new job and adds it to the file system after all the user input is parsed.
+	 *      
 	 * @param jobID valid job id
 	 * @param startDate start date of the job
 	 * @param endDate end date of the job
@@ -194,10 +203,11 @@ public class ConsoleParkManager {
 	 * @param medium number of "medium" volunteers required
 	 * @param heavy number of "heavy" volunteers required
 	 * @throws ParseException throws the exception if text isn't valid input
-	 * Creates a new job and adds it to the file system after all the user input is parsed.
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
 	 */
 	public void createJob(int jobID, String startDate, String endDate, String parkName, String details, int light,
-			int medium, int heavy) throws ParseException {
+			int medium, int heavy) throws ParseException, FileNotFoundException, IOException {
 		if (!jobs.hasMaxJobsInWeek(startDate, endDate)) {
 			//create job and save
 			int beforeSize = jobs.size();
@@ -218,8 +228,11 @@ public class ConsoleParkManager {
 
 	/**
 	 * Removes a job from the job list.
+	 * 
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
 	 */
-	public void deleteJob() {
+	public void deleteJob() throws FileNotFoundException, IOException {
 		System.out.println("Enter the job ID you want to delete:");
 		System.out.print(">> ");
 		int jobID = 0;
@@ -243,8 +256,11 @@ public class ConsoleParkManager {
 
 	/**
 	 * Edits a job.
+	 * 
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
 	 */
-	public void editJob() {
+	public void editJob() throws FileNotFoundException, IOException {
 		System.out.println("Enter the job ID you want to edit");
 		System.out.print(">> ");
 		int jobID = 0;
