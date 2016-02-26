@@ -1,5 +1,10 @@
 package test;
 import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,56 +28,37 @@ import model.Volunteer;
  */
 public class FileIOTest {
 
-    /** 
-     * The location of a file to test writing/reading data.
-     */
-    private static final String FILE_WORKING_COPY = "UrbanParks/data/UrbanParksDataTest.txt";
+    /** The location of a file to test writing/reading data. */
+    private static final String FILE_WORKING_COPY = "UrbanParks/test/UrbanParksDataTest.txt";
     
-//    /** 
-//     * Contains a copy of the actual Urban Parks data file.
-//     */
-//    private static final String FILE_ORIGINAL_COPY = "UrbanParks/data/UrbanParksDataCopy.txt";
-//    
-//    /** 
-//     * Contains an empty Urban Parks data file.
-//     */
-//    private static final String FILE_EMPTY = "UrbanParks/data/UrbanParksDataTestEmpty.txt";
-//    
-//    /**
-//     * A file name with a typo (so that it is not found).
-//     */
-//    private static final String FILE_TYPO = "UrbanParks/data/UrbanParksDDKJHKDJ.txt";
+    /** Contains an empty Urban Parks data file. */
+    private static final String FILE_EMPTY = "UrbanParks/test/UrbanParksDataTestEmpty.txt";
     
-    /**
-     * A FileIO object with expected contents.
-     */
+    /** A file name with a typo (so that it is not found). */
+    private static final String FILE_TYPO = "UrbanParks/test/UrbanParksDDKJHKDJ.txt";
+    
+    /** A FileIO object with expected contents. */
     private FileIO workingFileIO;
     
-//    /**
-//     * A FileIO object with no contents.
-//     */
-//    private FileIO emptyFileIO;
-    
-    /**
-     * Contains the users that Urban Parks application will use.
-     */
+    /** Contains the users that Urban Parks application will use. */
     private UserList users;
 
-    /**
-     * Contains the jobs that Urban Parks application will use.
-     */
+    /** Contains the jobs that Urban Parks application will use. */
     private JobList jobs;
     
-    /**
-     * Contains the parks that Urban Parks application will use.
-     */
+    /** Contains the parks that Urban Parks application will use. */
     private ParkList parks;
     
     /**
-     * @throws java.lang.Exception
+     * Sets up test cases.
+     * 
+     * @throws ParseException if invalid date format is passed
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found 
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws ParseException, FileNotFoundException, ClassNotFoundException, IOException {
         users = new UserList();
         jobs = new JobList();  
         parks = new ParkList(); 
@@ -88,26 +74,19 @@ public class FileIOTest {
         jobs.add(new Job(1, "03-01-16 2:00PM", "03-01-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0));
         jobs.add(new Job(2, "04-02-16 9:00AM", "04-03-16 5:00PM", "Mount Rainier", "The volunteers will repair a bridge.", 0, 0, 5));
         jobs.add(new Job(3, "02-22-16 1:00PM", "02-22-16 4:00PM", "Dash Point", "The volunteers will help clean the beach.", 5, 0, 0));   
-//        emptyFileIO = new FileIO(FILE_EMPTY);
         workingFileIO = new FileIO(FILE_WORKING_COPY);
     }
 
-//    /**
-//     * Test method for {@link FileIO#FileIO(java.lang.String)}.
-//     * Test FileIO constructor with a file that does not exist (has a typo).
-//     * This should cause a FileNotFoundException.
-//     */
-//    @Test (expected = FileNotFoundException.class)
-//    public void testFileIOFileNotFound() {
-//        FileIO typo = new FileIO(FILE_TYPO);
-//    }
-    
     /**
      * Test method for {@link FileIO#save(UserList, JobList, ParkList)} and
-     * {@link FileIO#load()}.
+     * {@link FileIO#load()}.  Checks if loaded data is the same as saved data.
+     * 
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found  
      */
     @Test
-    public void testSaveLoad() {
+    public void testSaveAndLoadOnNormalContents() throws FileNotFoundException, IOException, ClassNotFoundException {
         workingFileIO.save(users, jobs, parks);
         workingFileIO = new FileIO(FILE_WORKING_COPY);
         UserList loadedUsers = workingFileIO.getUsers(); 
@@ -117,37 +96,32 @@ public class FileIOTest {
         assertEquals(loadedJobs, jobs);
         assertEquals(loadedParks, parks);
     }
-
+    
     /**
-     * Test method for {@link FileIO#getUsers()}.
+     * Test method for {@link FileIO#save(UserList, JobList, ParkList)} and
+     * {@link FileIO#load()}.  Checks that a FileNotFoundException is thrown
+     * when a bad file name is given.
+     * 
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found  
      */
-    @Test
-    public void testGetUsers() {
-        workingFileIO.save(users, jobs, parks);
-        workingFileIO = new FileIO(FILE_WORKING_COPY);
-        UserList loadedUsers = workingFileIO.getUsers();
-        assertEquals(loadedUsers, users);
+    @Test (expected = FileNotFoundException.class)
+    public void testLoadOnFileWithTypo() throws FileNotFoundException, IOException, ClassNotFoundException {
+        workingFileIO = new FileIO(FILE_TYPO);
     }
-
+    
     /**
-     * Test method for {@link FileIO#getJobs()}.
+     * Test method for {@link FileIO#save(UserList, JobList, ParkList)} and
+     * {@link FileIO#load()}.  Checks that an IOException is thrown when a valid
+     * file name is given, but it does not have a proper serial format.
+     * 
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found  
      */
-    @Test
-    public void testGetJobs() {
-        workingFileIO.save(users, jobs, parks);
-        workingFileIO = new FileIO(FILE_WORKING_COPY);
-        JobList loadedJobs = workingFileIO.getJobs();   
-        assertEquals(loadedJobs, jobs);
-    }
-
-    /**
-     * Test method for {@link FileIO#getParks()}.
-     */
-    @Test
-    public void testGetParks() {
-        workingFileIO.save(users, jobs, parks);
-        workingFileIO = new FileIO(FILE_WORKING_COPY); 
-        ParkList loadedParks = workingFileIO.getParks();
-        assertEquals(loadedParks, parks);
+    @Test (expected = IOException.class)
+    public void testLoadOnEmptyFile() throws FileNotFoundException, IOException, ClassNotFoundException {
+        workingFileIO = new FileIO(FILE_EMPTY);
     }
 }

@@ -1,4 +1,6 @@
 package view;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -18,45 +20,37 @@ import model.Volunteer;
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 3, 2016
+ * @version February 26, 2016
  */
 public class ConsoleMain {
     
-    /**
-     * The file name for the Urban Park Application's data.
-     */
+    /** The file name for the Urban Park Application's data. */
     private static final String FILE_NAME = "UrbanParks/data/UrbanParksData.txt";
     
-    /**
-     * A scanner to use for console input.
-     */
+    /** A scanner to use for console input. */
     private static final Scanner scanner = new Scanner(System.in);
     
-    /**
-     * The file input/output object.
-     */
+    /** The file input/output object. */
     private FileIO fileIO;
     
-    /**
-     * Contains the users that Urban Parks application will use.
-     */
+    /** Contains the users that Urban Parks application will use. */
     private UserList users;
 
-    /**
-     * Contains the jobs that Urban Parks application will use.
-     */
+    /** Contains the jobs that Urban Parks application will use. */
     private JobList jobs;
     
-    /**
-     * Contains the parks that Urban Parks application will use.
-     */
+    /**  Contains the parks that Urban Parks application will use. */
     private ParkList parks;
     
     /**
      * Constructs the ConsoleMain for the Urban Parks application.
+     * 
      * @throws ParseException if invalid date format
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found 
      */
-    public ConsoleMain() throws ParseException {
+    public ConsoleMain() throws ParseException, FileNotFoundException, ClassNotFoundException, IOException {
         fileIO = new FileIO(FILE_NAME); //create fileIO object   
         users = fileIO.getUsers();      //initialize users
         jobs = fileIO.getJobs();        //initialize jobs
@@ -64,19 +58,18 @@ public class ConsoleMain {
 //        addManualData();
 //        fileIO.save(users, jobs, parks);
     }
-    
-    /**
-     * Saves the current state of the application to file.
-     */
-    protected void save() {
-        fileIO.save(users, jobs, parks);
-    }
 
     /**
-     * Begins the ConsoleMain console interface.
+     * Begins the ConsoleMain console interface. It asks for the user's email and
+     * checks the UserList for that user.  If found, it will initialize the 
+     * appropriate Console class - based on user type.
+     * 
      * @throws ParseException if invalid date format
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found 
      */
-    public void run() throws ParseException {
+    public void run() throws ParseException, FileNotFoundException, ClassNotFoundException, IOException {
         System.out.println("*******************************************************");
         System.out.println("*                                                     *");
         System.out.println("*      Welcome to the Urban Parks Application!        *");
@@ -116,6 +109,7 @@ public class ConsoleMain {
     /**
      * Adds manual data to the user, job, and park lists.  In case we want to inject more
      * users, jobs, or parks.
+     * 
      * @throws ParseException if invalid date format
      */
     @SuppressWarnings("unused") //just in case we want to manually inject data

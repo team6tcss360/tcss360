@@ -20,28 +20,20 @@ import model.UserList;
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 3, 2016
+ * @version February 26, 2016
  */
 public class FileIO {
     
-    /**
-     * The file name for the Urban Park Application's data.
-     */
+    /** The file name for the file that holds the Urban Parks serial data. */
     private String fileName;
 
-    /**
-     * The users that Urban Parks application will use.
-     */
+    /** The users that Urban Parks application will use. */
     private UserList users;
 
-    /**
-     * The jobs that Urban Parks application will use.
-     */
+    /** The jobs that Urban Parks application will use. */
     private JobList jobs;
     
-    /**
-     * The parks that Urban Parks application will use.
-     */
+    /** The parks that Urban Parks application will use. */
     private ParkList parks;
     
     /**
@@ -49,89 +41,67 @@ public class FileIO {
      * 
      * @param inputFile the String address to the file that contains the Urban 
      * Parks data
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found 
      */
-    public FileIO(String inputFile) {
+    public FileIO(String inputFile) throws FileNotFoundException, ClassNotFoundException, IOException {
         fileName = inputFile;
         users = new UserList();
         jobs = new JobList();
         parks = new ParkList();
-        load();
+        load(); //initializes lists with states that were saved in data file
     }
 
     /**
-     * Saves the input users and jobs to file.
+     * Saves the input users, jobs, and parks to file.
      * 
      * @param inputUserList the current state of the UserList object
      * @param inputJobList the current state of the JobList object
      * @param inputParkList the current state of the ParkList object
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
      */
-    public void save(UserList inputUserList, JobList inputJobList, ParkList inputParkList) {
-       try { // write objects to file
+    public void save(UserList inputUserList, JobList inputJobList, ParkList inputParkList) 
+            throws FileNotFoundException, IOException {
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(inputUserList.getArrayList()); //write users
             oos.writeObject(inputJobList.getArrayList()); //write jobs
             oos.writeObject(inputParkList.getArrayList()); //write parks
             oos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new Error(e);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new Error(e);
-        }
     }
     
     /**
-     * Loads the FileIO object with the class that was saved to file.
+     * Loads the FileIO object with the users, jobs, and parks that were saved to
+     * the data file.
      * 
-     * @param inputFile the file that contains the Urban Parks data
+     * @throws FileNotFoundException if provided file was not found
+     * @throws IOException if error reading or writing to file
+     * @throws ClassNotFoundException if model classes are not found
      */
     @SuppressWarnings("unchecked") //they are the object types in save method
-    protected void load() {
-        try {
-            // read object from file
-            FileInputStream fis = new FileInputStream(fileName);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            users = new UserList((ArrayList<User>) ois.readObject());
-            jobs = new JobList((ArrayList<Job>) ois.readObject());
-            parks = new ParkList((ArrayList<Park>) ois.readObject());
-            ois.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new Error(e);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new Error(e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new Error(e);
-        }
+    protected void load() throws FileNotFoundException, IOException, ClassNotFoundException {
+        // read object from file
+        FileInputStream fis = new FileInputStream(fileName);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        users = new UserList((ArrayList<User>) ois.readObject());
+        jobs = new JobList((ArrayList<Job>) ois.readObject());
+        parks = new ParkList((ArrayList<Park>) ois.readObject());
+        ois.close();
     }
     
-    /**
-     * Returns the users.
-     * 
-     * @return the UserList that the IO loaded
-     */
+    /** @return the UserList that the FileIO loaded from its data file. */
     public UserList getUsers() {
         return users;
     }
     
-    /**
-     * Returns the jobs.
-     * 
-     * @return the JobList that the IO loaded
-     */
+    /** @return the JobList that the FileIO loaded from its data file. */
     public JobList getJobs() {
         return jobs;
     }
 
-    /**
-     * Returns the parks.
-     * 
-     * @return the ParkList that the IO loaded
-     */
+    /** @return the ParkList that the FileIO loaded from its data file. */
     public ParkList getParks() {
         return parks;
     }    
