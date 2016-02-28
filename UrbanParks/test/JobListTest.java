@@ -13,6 +13,9 @@ import org.junit.Test;
 
 import model.Job;
 import model.JobList;
+import model.Park;
+import model.ParkList;
+import model.ParkManager;
 
 /**
  * Tests for JobsList class.
@@ -62,6 +65,10 @@ public class JobListTest {
 	private String goodStart;
 	private String goodEnd;
 	private Job badJob;
+	
+	private ParkManager pm1;
+	private Park park1;
+	private ParkList pList1;
 
 	/**
 	 * @throws java.lang.Exception
@@ -93,6 +100,9 @@ public class JobListTest {
 		j5 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		//        jobArray= {j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j20, j21, j22, j23, j24, j25, j26, j27, j28, j29};
 
+		pm1 = new ParkManager("Michael", "Ford", "fordm13@uw.edu", "9494125944");
+		park1 = new Park("Point Defiance", "Tacoma", "Michael", "Ford");
+		pList1 = new ParkList();
 	}
 
 
@@ -175,10 +185,11 @@ public class JobListTest {
 		jobList1.add(j1);
 		jobList1.add(j2);
 		jobList1.add(j3);
-		jobList3.add(j1);
-		jobList3.add(j2);
-		jobList3.add(j3);
-		jobList2.add(j3);
+		jobList1.add(j4);
+		jobList1.add(j5);
+		pList1.add(park1);
+		String sum = jobList1.getSummariesMyParks(pList1, pm1);
+		System.out.println(sum);
 		//TODO
 	}
 
