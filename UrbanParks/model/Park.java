@@ -131,7 +131,7 @@ public class Park implements Serializable {
     @Override
     public String toString() {
         return "Park: " + parkName + ", Location: " + location + ", Park Manager: "
-                + parkManagerFirstName + " " + parkManagerFirstName;
+                + parkManagerFirstName + " " + parkManagerLastName;
     }
     
     /**
