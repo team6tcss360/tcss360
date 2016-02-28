@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 3, 2016
+ * @version February 28, 2016
  */
 public class Volunteer extends User implements Serializable {
 
@@ -17,7 +17,7 @@ public class Volunteer extends User implements Serializable {
     private static final long serialVersionUID = 6857145170865256803L;
     
     /**
-     * Creates a volunteer through the User constructor.
+     * Constructs a Volunteer object from the abstract User Class.
      */
     public Volunteer(String inputFirstName, String inputLastName, 
             String inputEmail, String inputPhone) {

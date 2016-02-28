@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 3, 2016
+ * @version February 28, 2016
  */
 public abstract class User implements Serializable {
 
@@ -37,12 +37,12 @@ public abstract class User implements Serializable {
     private String phone;
     
     /**
-     * Creates a User based upon input data.
+     * Constructs an abstract User object.
      * 
-     * @param firstName user's first name
-     * @param lastName user's last name
-     * @param email user's email address
-     * @param phone user's phone number
+     * @param firstName the String that will be the User's first name.
+     * @param lastName the String that will be the User's last name.
+     * @param email the String that will be the User's email address.
+     * @param phone the String that will be the User's phone number.
      */
     public User(String inputFirstName, String inputLastName, String inputEmail, 
             String inputPhone) {
@@ -85,33 +85,30 @@ public abstract class User implements Serializable {
     }
     
     /**
-     * Gets the user's first name.
+     * @return the first name of the User.
      */
     public String getFirstName() {
         return firstName;
     }
     
-    /**
-     * Gets the user's last name.
-     */
+    /** @return the last name of the User. */
     public String getLastName() {
         return lastName;
     }
     
-    /**
-     * Gets the user's email.
-     */
+    /** @return the email address of the User. */
     public String getEmail() {
         return email;
     }
     
-    /**
-     * Gets the user's phone number.
-     */
+   /** @return the phone number of the User. */
     public String getPhone() {
         return phone;
     }
     
+    /**
+     * An overridden toString.
+     */
     @Override
     public String toString(){
 		String toReturn = "Name: "+ firstName+ " "+ lastName + " | Email: " + email + " | Phone: " + phone;
@@ -132,9 +129,7 @@ public abstract class User implements Serializable {
         return this.toString().compareTo(inputUser.toString()) == 0;
     }
     
-    /**
-     * @return toString's hashCode
-     */
+    /** @return toString's hashCode. */
     @Override
     public int hashCode() {
         return this.toString().hashCode();
