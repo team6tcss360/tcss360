@@ -256,7 +256,7 @@ public class ConsoleVolunteer {
 	/**
 	 * Checks to see if the job ID exists and is a valid job.
 	 * @param inputJobID
-	 * @return boolean value if job ID actually corresponds to a real job.
+	 * @return valid
 	 */
 	public boolean isValidJob(int inputJobID) {
 		boolean valid = false;
