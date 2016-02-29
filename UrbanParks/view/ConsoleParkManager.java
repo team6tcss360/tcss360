@@ -453,7 +453,7 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Gets the start date of the job
-	 * @return the start date of a job. 
+	 * @return startDate 
 	 */
 	public String getStartDate() {
 		System.out.println();
@@ -485,7 +485,7 @@ public class ConsoleParkManager {
 	/**
 	 * Gets the end date of the job
 	 * @param startDate is the start date of the same job, a job can only last at most two days.
-	 * @return a valid end date.
+	 * @return endDate
 	 */
 	public String getEndDate(String startDate) {
 		String endDate = ""; 
@@ -513,7 +513,7 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Gets the park name
-	 * @return the park name for a job
+	 * @return parkName
 	 */
 	public String getParkName() {
 		String parkName = "";
@@ -535,7 +535,7 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Gets the number of light level volunteers
-	 * @return number of light volunteers
+	 * @return light
 	 */
 	public int getLightVolunteers() {
 		int light = 0;  
@@ -569,7 +569,7 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Gets the number of heavy volunteers
-	 * @return the number of heavy volunteers
+	 * @return medium
 	 */
 	public int getHeavyVolunteers() {
 		int heavy = 0;
@@ -588,7 +588,7 @@ public class ConsoleParkManager {
 	}
 	/**
 	 * Gets a valid job id to make sure that the job actually exists.
-	 * @return a valid job id.
+	 * @return jobID
 	 */
 	public int getValidJobID() {
 		int jobID = 1;
