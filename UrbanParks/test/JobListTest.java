@@ -3,9 +3,14 @@
  */
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -59,13 +64,14 @@ public class JobListTest {
 	private Job j29;
 	private Job j30;
 	private Job j31;
-	private Job[] jobArray;
 	private String badStart;
 	private String badEnd;
 	private String goodStart;
 	private String goodEnd;
 	private Job badJob;
-	
+	private Job mJob;
+	private JobList maxJobs;
+
 	private ParkManager pm1;
 	private Park park1;
 	private ParkList pList1;
@@ -90,19 +96,45 @@ public class JobListTest {
 		jobList1 = new JobList();
 		jobList2 = new JobList();
 		jobList3 = new JobList();
-
-
+		maxJobs = new JobList();
+		mJob = new Job(5, "04-12-16 2:00PM", "04-12-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+		Job[] jobArr = new Job[29];
+		for(int i = 0; i< 5; i++){
+			jobArr[i] = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
+		}
+		for(int i = 5; i<10; i++){
+			jobArr[i] = new Job(4, "03-15-16 2:00PM", "03-15-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
+		}
+		
+		for(int i = 10; i< 15 ; i++){
+			jobArr[i] = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+		}
+		
+		for(int i = 15; i < 20; i++){
+			jobArr[i] = new Job(5, "03-29-16 2:00PM", "03-29-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+		}
+		for(int i = 20; i< 25; i++){
+			jobArr[i] = new Job(5, "04-05-16 2:00PM", "04-05-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+		}
+		
+		for(int i = 25; i< 29; i++){
+			jobArr[i] = new Job(5, "04-12-16 2:00PM", "04-12-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+		}
+		
 		badJob = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		j1 = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		j2 = new Job(2, "03-10-16 9:00AM", "03-10-16 5:00PM", "Mount Rainier", "The volunteers will repair a bridge.", 0, 0, 5);
 		j3 = new Job(3, "03-11-16 1:00PM", "03-12-16 4:00PM", "Dash Point", "The volunteers will help clean the beach.", 5, 0, 0);
 		j4 = new Job(4, "03-13-16 2:00PM", "03-13-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		j5 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
-		//        jobArray= {j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j20, j21, j22, j23, j24, j25, j26, j27, j28, j29};
-
+		j6 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+//		jobArray= {j1, j2, j3, j4, j5};
 		pm1 = new ParkManager("Michael", "Ford", "fordm13@uw.edu", "9494125944");
 		park1 = new Park("Point Defiance", "Tacoma", "Michael", "Ford");
 		pList1 = new ParkList();
+		for(int i = 0; i < jobArr.length; i++){
+			maxJobs.add(jobArr[i]);
+		}
 	}
 
 
@@ -188,8 +220,8 @@ public class JobListTest {
 		jobList1.add(j4);
 		jobList1.add(j5);
 		pList1.add(park1);
-		String sum = jobList1.getSummariesMyParks(pList1, pm1);
-		System.out.println(sum);
+//		String sum = jobList1.getSummariesMyParks(pList1, pm1);
+//		System.out.println(sum);
 		//TODO
 	}
 
@@ -205,10 +237,13 @@ public class JobListTest {
 
 	/**
 	 * Test method for {@link model.JobList#hasMaxJobs()}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testHasMaxJobs() {
-		fail("Not yet implemented"); // TODO
+	public void testHasMaxJobs() throws ParseException {
+		assertFalse(maxJobs.hasMaxJobs());
+		maxJobs.add(mJob);
+		assertTrue(maxJobs.hasMaxJobs());
 	}
 
 	/**
@@ -267,7 +302,7 @@ public class JobListTest {
 	 */
 	@Test
 	public void testIsJobIDtaken() throws ParseException {
-		
+
 		assertFalse(jobList1.isJobIDtaken(j1.getJobID()));
 		jobList1.add(j1);
 		assertTrue(jobList1.isJobIDtaken(badJob.getJobID()));
