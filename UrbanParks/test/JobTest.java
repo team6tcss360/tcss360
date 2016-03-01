@@ -6,7 +6,6 @@ package test;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import model.Job;
@@ -20,7 +19,7 @@ import model.Volunteer;
  * 
  * @author Group 6, TCSS 360, Winter 2016
  * @author Jonathan Hughes, Michael Ford, Weiwei Shi, Chris Vishoot
- * @version February 19, 2016
+ * @version February 29, 2016
  */
 public class JobTest {
 
@@ -30,10 +29,9 @@ public class JobTest {
 	private Job job1;
 	private Job job2;
 	private Job job3;
-	private Job job4;
 
 	/**
-	 * JobList for testing.
+	 * ParkList for testing.
 	 */
 	private ParkList parks;
 
@@ -43,6 +41,7 @@ public class JobTest {
 	private Volunteer v0;
 	private Volunteer v1;
 	private Volunteer v2;
+
 
 	/**
 	 * Park object for testing
@@ -54,12 +53,6 @@ public class JobTest {
 	 */
 	private ParkManager pm1;
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -69,10 +62,10 @@ public class JobTest {
 		v0 = new Volunteer("Michael", "Ford", "fordm13@uw.edu", "2061234567");
 		v1 = new Volunteer("Weiwei", "Shi", "shi@uw.edu", "2061552535");
 		v2 = new Volunteer("Chris", "Vishoot", "vishoot@uw.edu", "2535556253");
+
 		job1 = new Job(1, "02-01-16 2:00PM", "02-01-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
 		job2 = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
-		job3 = new Job(3, "03-01-17 2:00PM", "03-01-17 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
-		job4 = new Job(1, "02-01-16 2:00PM", "02-01-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
+		job3 = new Job(1, "02-01-16 2:00PM", "02-01-16 4:00PM", "South Park", "The volunteers will help pickup trash on the trails.", 3, 3, 3);
 
 		parks = new ParkList();
 
@@ -81,301 +74,217 @@ public class JobTest {
 		pm1 = new ParkManager("Peter","Parker","p@p.com","9876547590");
 	}
 
-
-
-
-
+	//------------------------------------------------------Test addLightVolunteer() method----------------------------------------------------
 	/**
-	 * Test method for {@link model.Job#addLightVolunteer(model.Volunteer)}.
+	 * Test method for addLightVolunteer:
+	 * Case 1: if not reach the max of light job volunteers, hasLightMax() will return false.
 	 */
 	@Test
-	public void testAddLightVolunteer() {
-		fail("Not yet implemented"); // TODO
+	public void testAddLightVolunteerNotReachMax() {
+		job1.addLightVolunteer(v0);
+		job1.addLightVolunteer(v1);
+		//we add two volunteers to the light job right now, the max volunteer of light job for job1 is 3.
+		assertFalse(job1.hasLightMax());
 	}
 
 	/**
-	 * Test method for {@link model.Job#addMedVolunteer(model.Volunteer)}.
+	 * Test method for addLightVolunteer:
+	 * Case 2: if it reaches the max of light job volunteers, hasLightMax() will return true.
 	 */
 	@Test
-	public void testAddMedVolunteer() {
-		fail("Not yet implemented"); // TODO
+	public void testAddLightVolunteerReachMax() {
+		job1.addLightVolunteer(v0);
+		job1.addLightVolunteer(v1);
+		job1.addLightVolunteer(v2);
+		//we add 3 volunteers to the light job right now, the max volunteer of light job for job1 is 3.
+		assertTrue(job1.hasLightMax());
+	}
+
+	//------------------------------------------------------Test addMedVolunteer() method------------------------------------------------------
+	/**
+	 * Test method for addMedVolunteer:
+	 * Case 1: if not reach the max of medium job volunteers, hasMedMax() will return false.
+	 */
+	@Test
+	public void testAddMedVolunteerNotReachMax() {
+		job1.addMedVolunteer(v0);
+		job1.addMedVolunteer(v1);
+		//hasMedMax() will return false since we only have 2 volunteers for med job, the max is 3
+		assertFalse(job1.hasMedMax());	
 	}
 
 	/**
-	 * Test method for {@link model.Job#addHeavyVolunteer(model.Volunteer)}.
+	 * Test method for addMedVolunteer:
+	 * Case 2: if it reaches the max of medium job volunteers, hasMedMax() will return true.
 	 */
 	@Test
-	public void testAddHeavyVolunteer() {
-		fail("Not yet implemented"); // TODO
+	public void testAddMedVolunteerReachMax() {
+		job1.addMedVolunteer(v0);
+		job1.addMedVolunteer(v1);
+		job1.addMedVolunteer(v2);
+		//hasMedMax() will return true since we have 3 volunteers for med job now, the max is 3
+		assertTrue(job1.hasMedMax());	
+	}
+
+	//------------------------------------------------------Test addHeavyVolunteer() method----------------------------------------------------
+	/**
+	 * Test method for addHeavyVolunteer:
+	 * Case 1: if not reach the max of heavy job volunteers, hasHeavyMax() will return false.
+	 */
+	@Test
+	public void testAddHeavyVolunteerNotReachMax() {
+		job1.addHeavyVolunteer(v0);
+		job1.addHeavyVolunteer(v1);
+		//hasHeavyMax() will return false since we only have 2 volunteers for heavy job, the max is 3
+		assertFalse(job1.hasHeavyMax());	
+	}
+
+	/**
+	 * Test method for addHeavyVolunteer:
+	 * Case 2: if it reaches the max of heavy job volunteers, hasHeavyMax() will return true.
+	 */
+	@Test
+	public void testAddHeavyVolunteerReachMax() {
+		job1.addHeavyVolunteer(v0);
+		job1.addHeavyVolunteer(v1);
+		job1.addHeavyVolunteer(v2);
+		//hasHeavyMax() will return true since we have 3 volunteers for med job now, the max is 3
+		assertTrue(job1.hasHeavyMax());	
+	}
+
+	//----------------------------------------------------Test volunteerListToString() method--------------------------------------------------
+	/**
+	 * Test method for volunteerListToString()
+	 * Case 1: if no volunteer be added to the job, it will print "None"
+	 */
+	@Test
+	public void testVolunteerListToStringNull() {
+		assertEquals("Volunteers: None", job1.volunteerListToString());
+	}
+
+	/**
+	 * Test method for volunteerListToString()
+	 * Case 2: if there is a volunteer added to the job, it will return a list of volunteer.
+	 */
+	@Test
+	public void testVolunteerListToStringNotNull() {
+		job1.addLightVolunteer(v0);
+		assertEquals("Volunteers: Michael Ford", job1.volunteerListToString());
+	}
+
+	/**
+	 * Test method for volunteerListToString()
+	 * Case 3: if there is more than one volunteer added to the job, it will return a list of volunteer with
+	 * "," between two volunteers.
+	 */
+	@Test
+	public void testVolunteerListToStringNotNullMoreThan1() {
+		job1.addLightVolunteer(v0);
+		job1.addLightVolunteer(v1);
+		assertEquals("Volunteers: Michael Ford, Weiwei Shi", job1.volunteerListToString());
 	}
 
 
-
+	//------------------------------------------------------Test isParkManager() method-------------------------------------------------------
 	/**
-	 * Test method for {@link model.Job#volunteerListToString()}.
-	 */
-	@Test
-	public void testVolunteerListToString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-
-	/**
-	 * Test method for {@link model.Job#isParkManager(model.ParkList, model.User)}.
+	 * Test method for isParkManager():
+	 * Case 1: if the user is the park manger of the park: isParkManger will return true
+	 * 
 	 */
 	@Test
 	public void testIsParkManager() {
-		fail("Not yet implemented"); // TODO
+		parks.getPark("Point Defiance");
+		assertTrue(park1.isParkManager(pm1));
 	}
 
 	/**
-	 * Test method for {@link model.Job#isVolunteer(model.Volunteer)}.
+	 * Test method for isParkManager():
+	 * Case 2: if the user is not the park manger of the park: isParkManger will return false
+	 * 
+	 */
+	@Test
+	public void testIsNotParkManager() {
+		parks.getPark("Point Defiance");
+		assertFalse(park1.isParkManager(v0));
+	}
+
+	//------------------------------------------------------Test isVolunteer() method---------------------------------------------------------
+	/**
+	 * Test method for isVolunteer():
+	 * Case 1: if the volunteer signed up for the job, isVolunteer() will return true.
 	 */
 	@Test
 	public void testIsVolunteer() {
 		job1.addLightVolunteer(v0);
-		job1.addLightVolunteer(v1);
-		assertFalse(job1.isVolunteer(v2));
-		assertTrue(job1.isVolunteer(v1));
+		assertTrue(job1.isVolunteer(v0));
 	}
 
 	/**
-	 * Test method for {@link model.Job#isInPast()}.
+	 * Test method for isVolunteer():
+	 * Case 2: if the volunteer didn't sign up for the job, isVolunteer() will return false.
+	 */
+	@Test
+	public void testIsNotVolunteer() {
+		job1.addLightVolunteer(v0);
+		assertFalse(job1.isVolunteer(v1));
+	}
+
+	//------------------------------------------------------Test isInPast() method------------------------------------------------------------
+	/**
+	 * Test method for isInPast():
+	 * Case 1: if the job is in the past, isInPast() will return true.
 	 */
 	@Test
 	public void testIsInPast() {
-
-		assertFalse(job2.isInPast());
 		assertTrue(job1.isInPast());
 	}
 
 	/**
-	 * Test method for {@link model.Job#hasVolunteers()}.
+	 * Test method for isInPast():
+	 * Case 2: if the job is not in the past, isInPast() will return false.
+	 */
+	@Test
+	public void testIsNotInPast() {
+		assertFalse(job2.isInPast());
+	}
+
+	//------------------------------------------------------Test hasVolunteers() method-------------------------------------------------------
+	/**
+	 * Test method for hasVolunteers():
+	 * Case 1: is the size of the volunteerList > 0, hasVolunteer() will return true
 	 */
 	@Test
 	public void testHasVolunteers() {
-		assertFalse(job1.hasVolunteers());
 		job1.addLightVolunteer(v1);
 		assertTrue(job1.hasVolunteers());
 	}
 
-
-
 	/**
-	 * Test method for {@link model.Job#equals(java.lang.Object)}.
+	 * Test method for hasVolunteers():
+	 * Case 2: is the size of the volunteerList = 0, hasVolunteer() will return false
+	 * Case 3: is the size of the volunteerList < 0, it doesn't make sense to test this case.
 	 */
 	@Test
-	public void testEqualsObject() {
-		assertTrue(job1.equals(job4));
-		assertFalse(job1.equals(job2));
+	public void testHasZeroVolunteers() {
+		assertFalse(job1.hasVolunteers());
 	}
 
-	//	/**
-	//	 * Test method for {@link model.Job#hashCode()}.
-	//	 */
-	//	@Test
-	//	public void testHashCode() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
+	//------------------------------------------------------Test equals() method--------------------------------------------------------------
+	/**
+	 * Test method for equals():
+	 * Case 1: compare to two same object, equals() will return true.
+	 */
+	@Test
+	public void testEquals() {
+		assertTrue(job1.equals(job3));
+	}
 
-	//	/**
-	//	 * Test method for {@link model.Job#Job(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, int, int)}.
-	//	 */
-	//	@Test
-	//	public void testJob() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setLightMax(int)}.
-	//	 */
-	//	@Test
-	//	public void testSetLightMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setMedMax(int)}.
-	//	 */
-	//	@Test
-	//	public void testSetMedMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setHeavyMax(int)}.
-	//	 */
-	//	@Test
-	//	public void testSetHeavyMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setStartDate(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetStartDate() {
-	//		fail("Not yet implemented");
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setEndDate(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetEndDate() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setParkName(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetParkName() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#setDetails(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testSetDetails() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getJobID()}.
-	//	 */
-	//	@Test
-	//	public void testGetJobID() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getStartDate()}.
-	//	 */
-	//	@Test
-	//	public void testGetStartDate() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getEndDate()}.
-	//	 */
-	//	@Test
-	//	public void testGetEndDate() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getParkName()}.
-	//	 */
-	//	@Test
-	//	public void testGetParkName() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getJobDetails()}.
-	//	 */
-	//	@Test
-	//	public void testGetJobDetails() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getLightMax()}.
-	//	 */
-	//	@Test
-	//	public void testGetLightMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getMedMax()}.
-	//	 */
-	//	@Test
-	//	public void testGetMedMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getHeavyMax()}.
-	//	 */
-	//	@Test
-	//	public void testGetHeavyMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getSummary()}.
-	//	 */
-	//	@Test
-	//	public void testGetSummary() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getDateFormat()}.
-	//	 */
-	//	@Test
-	//	public void testGetDateFormat() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#getVolunteerList()}.
-	//	 */
-	//	@Test
-	//	public void testGetVolunteerList() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#hasLightMax()}.
-	//	 */
-	//	@Test
-	//	public void testHasLightMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#hasMedMax()}.
-	//	 */
-	//	@Test
-	//	public void testHasMedMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#hasHeavyMax()}.
-	//	 */
-	//	@Test
-	//	public void testHasHeavyMax() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#convertToCalender(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testConvertToCalender() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#formatDate(java.util.GregorianCalendar)}.
-	//	 */
-	//	@Test
-	//	public void testFormatDate() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.Job#toString()}.
-	//	 */
-	//	@Test
-	//	public void testToString() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
+	/**
+	 * Test method for equals():
+	 * Case 1: compare to different object, equals() will return false.
+	 */
+	@Test
+	public void testNotEquals() {
+		assertFalse(job1.equals(job2));
+	}
 }
