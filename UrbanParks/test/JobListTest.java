@@ -68,6 +68,8 @@ public class JobListTest {
 	private String badEnd;
 	private String goodStart;
 	private String goodEnd;
+	private String pastStart;
+	private String futureStart;
 	private Job badJob;
 	private Job mJob;
 	private JobList maxJobs;
@@ -89,6 +91,8 @@ public class JobListTest {
 	@Before
 	public void setUp() throws Exception {
 		badStart = "03-10-16 2:00PM";
+		pastStart = "02-27-16 2:00PM";
+		futureStart = "12-25-16 2:00PM";
 		badEnd = "03-12-16 2:00PM";
 		goodStart = badStart;
 		goodEnd = "03-11-16 1:00PM";
@@ -222,7 +226,7 @@ public class JobListTest {
 		pList1.add(park1);
 //		String sum = jobList1.getSummariesMyParks(pList1, pm1);
 //		System.out.println(sum);
-		//TODO
+		fail("not yet implemented");//TODO
 	}
 
 	/**
@@ -274,18 +278,23 @@ public class JobListTest {
 
 	/**
 	 * Test method for {@link model.JobList#isTooFarInFuture(java.lang.String)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testIsTooFarInFuture() {
-		fail("Not yet implemented"); // TODO
+	public void testIsTooFarInFuture() throws ParseException {
+		assertTrue(jobList1.isTooFarInFuture(futureStart));
+		assertFalse(jobList1.isTooFarInFuture(goodStart));
+
 	}
 
 	/**
 	 * Test method for {@link model.JobList#hasPastDate(java.lang.String)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testHasPastDate() {
-		fail("Not yet implemented"); // TODO
+	public void testHasPastDate() throws ParseException {
+		assertFalse(jobList1.hasPastDate(goodStart));
+		assertTrue(jobList1.hasPastDate(pastStart));
 	}
 
 	/**
