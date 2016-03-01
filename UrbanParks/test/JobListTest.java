@@ -270,10 +270,12 @@ public class JobListTest {
 
 	/**
 	 * Test method for {@link model.JobList#hasEndBeforeStart(java.lang.String, java.lang.String)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testHasEndBeforeStart() {
-		fail("Not yet implemented"); // TODO
+	public void testHasEndBeforeStart() throws ParseException {
+		assertTrue(jobList1.hasEndBeforeStart(goodEnd, goodStart));
+		assertFalse(jobList1.hasEndBeforeStart(goodStart, goodEnd));
 	}
 
 	/**
