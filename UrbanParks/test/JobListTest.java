@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -21,6 +20,7 @@ import model.JobList;
 import model.Park;
 import model.ParkList;
 import model.ParkManager;
+import model.Volunteer;
 
 /**
  * Tests for JobsList class.
@@ -39,6 +39,7 @@ public class JobListTest {
 	private Job j4;
 	private Job j5;
 	private Job j6;
+	private Job j7;
 
 	private String badStart;
 	private String badEnd;
@@ -46,6 +47,9 @@ public class JobListTest {
 	private String goodEnd;
 	private String pastStart;
 	private String futureStart;
+	private String job1Start;
+	private String job1End;
+	
 	private Job badJob;
 	private Job mJob;
 	private JobList maxJobs;
@@ -53,6 +57,7 @@ public class JobListTest {
 	private ParkManager pm1;
 	private Park park1;
 	private ParkList pList1;
+	private Volunteer v1;
 
 	/**
 	 * @throws java.lang.Exception
@@ -77,6 +82,8 @@ public class JobListTest {
 		jobList2 = new JobList();
 		jobList3 = new JobList();
 		maxJobs = new JobList();
+		
+		
 		mJob = new Job(5, "04-12-16 2:00PM", "04-12-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		Job[] jobArr = new Job[29];
 		for(int i = 0; i< 5; i++){
@@ -102,14 +109,20 @@ public class JobListTest {
 		}
 		
 		badJob = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
-		j1 = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
+		
+		job1Start = "03-08-16 2:00PM";
+		job1End = "03-08-16 4:00PM";
+		j1 = new Job(1, job1Start, job1End, "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		j2 = new Job(2, "03-10-16 9:00AM", "03-10-16 5:00PM", "Mount Rainier", "The volunteers will repair a bridge.", 0, 0, 5);
 		j3 = new Job(3, "03-11-16 1:00PM", "03-12-16 4:00PM", "Dash Point", "The volunteers will help clean the beach.", 5, 0, 0);
 		j4 = new Job(4, "03-13-16 2:00PM", "03-13-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		j5 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		j6 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
+		j7 = new Job(7, job1Start, job1End, "Mount Rainier", "Volunteers move stuff.", 5,2,3);
 //		jobArray= {j1, j2, j3, j4, j5};
 		pm1 = new ParkManager("Michael", "Ford", "fordm13@uw.edu", "9494125944");
+		
+		v1 = new Volunteer("Chris", "Vishoot", "cshoot@uw.edu", "2063456677");
 		park1 = new Park("Point Defiance", "Tacoma", "Michael", "Ford");
 		pList1 = new ParkList();
 		for(int i = 0; i < jobArr.length; i++){
@@ -134,10 +147,12 @@ public class JobListTest {
 
 	/**
 	 * Test method for {@link model.JobList#passesBusinessRulesEdit(model.Job, java.lang.String, java.lang.String)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testPassesBusinessRulesEdit() {
-		fail("Not yet implemented"); // TODO
+	public void testPassesBusinessRulesEdit() throws ParseException {
+		assertTrue(jobList1.passesBusinessRulesEdit(j1, job1Start, job1End));
+		assertFalse(jobList1.passesBusinessRulesEdit(j1, job1End, job1Start));
 	}
 
 	/**
@@ -228,10 +243,17 @@ public class JobListTest {
 
 	/**
 	 * Test method for {@link model.JobList#hasMaxJobsInWeek(java.lang.String, java.lang.String)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testHasMaxJobsInWeek() {
-		fail("Not yet implemented"); // TODO
+	public void testHasMaxJobsInWeek() throws ParseException {
+		jobList1.add(j1);
+		jobList1.add(j2);
+		jobList1.add(j3);
+		jobList1.add(j1);
+		assertFalse(jobList1.hasMaxJobsInWeek(goodStart, goodEnd));
+		jobList1.add(j2);
+		assertTrue(jobList1.hasMaxJobsInWeek(goodStart, goodEnd));
 	}
 
 	/**
@@ -277,10 +299,16 @@ public class JobListTest {
 
 	/**
 	 * Test method for {@link model.JobList#hasJobOnSameDay(model.Volunteer, model.Job)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testHasJobOnSameDay() {
-		fail("Not yet implemented"); // TODO
+	public void testHasJobOnSameDay() throws ParseException {
+		
+		j1.addLightVolunteer(v1);
+		
+		jobList1.add(j1);
+		assertTrue(jobList1.hasJobOnSameDay(v1, j7));
+		assertFalse(jobList1.hasJobOnSameDay(v1, j2));
 	}
 
 	/**
