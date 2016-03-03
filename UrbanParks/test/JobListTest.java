@@ -38,7 +38,6 @@ public class JobListTest {
 	private Job j3;
 	private Job j4;
 	private Job j5;
-	private Job j6;
 	private Job j7;
 
 	private String badStart;
@@ -49,13 +48,16 @@ public class JobListTest {
 	private String futureStart;
 	private String job1Start;
 	private String job1End;
-	
+
 	private Job badJob;
 	private Job mJob;
 	private JobList maxJobs;
 
 	private ParkManager pm1;
 	private Park park1;
+	private Park park2;
+	private Park park3;
+	private Park park4;
 	private ParkList pList1;
 	private Volunteer v1;
 
@@ -82,8 +84,8 @@ public class JobListTest {
 		jobList2 = new JobList();
 		jobList3 = new JobList();
 		maxJobs = new JobList();
-		
-		
+
+
 		mJob = new Job(5, "04-12-16 2:00PM", "04-12-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		Job[] jobArr = new Job[29];
 		for(int i = 0; i< 5; i++){
@@ -92,24 +94,24 @@ public class JobListTest {
 		for(int i = 5; i<10; i++){
 			jobArr[i] = new Job(4, "03-15-16 2:00PM", "03-15-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		}
-		
+
 		for(int i = 10; i< 15 ; i++){
 			jobArr[i] = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		}
-		
+
 		for(int i = 15; i < 20; i++){
 			jobArr[i] = new Job(5, "03-29-16 2:00PM", "03-29-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		}
 		for(int i = 20; i< 25; i++){
 			jobArr[i] = new Job(5, "04-05-16 2:00PM", "04-05-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		}
-		
+
 		for(int i = 25; i< 29; i++){
 			jobArr[i] = new Job(5, "04-12-16 2:00PM", "04-12-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		}
-		
+
 		badJob = new Job(1, "03-08-16 2:00PM", "03-08-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
-		
+
 		job1Start = "03-08-16 2:00PM";
 		job1End = "03-08-16 4:00PM";
 		j1 = new Job(1, job1Start, job1End, "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
@@ -117,19 +119,57 @@ public class JobListTest {
 		j3 = new Job(3, "03-11-16 1:00PM", "03-12-16 4:00PM", "Dash Point", "The volunteers will help clean the beach.", 5, 0, 0);
 		j4 = new Job(4, "03-13-16 2:00PM", "03-13-16 4:00PM", "Point Defiance", "The volunteers will help pickup trash on the trails.", 5, 5, 0);
 		j5 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
-		j6 = new Job(5, "03-22-16 2:00PM", "03-22-16 4:00PM", "South Park", "The volunteers will help clean the beach.", 3, 1, 1);
 		j7 = new Job(7, job1Start, job1End, "Mount Rainier", "Volunteers move stuff.", 5,2,3);
-//		jobArray= {j1, j2, j3, j4, j5};
+		//		jobArray= {j1, j2, j3, j4, j5};
 		pm1 = new ParkManager("Michael", "Ford", "fordm13@uw.edu", "9494125944");
-		
+
 		v1 = new Volunteer("Chris", "Vishoot", "cshoot@uw.edu", "2063456677");
 		park1 = new Park("Point Defiance", "Tacoma", "Michael", "Ford");
+		park2 = new Park("Mount Rainier", "Puyallup", "Weiwei", "Shi");
+		park3 = new Park("Dash Point", "Federal Way", "Weiwei", "Shi");
+		park4 = new Park("South Park", "Seattle", "Jonathan", "Hughes");
+		
 		pList1 = new ParkList();
 		for(int i = 0; i < jobArr.length; i++){
 			maxJobs.add(jobArr[i]);
 		}
 	}
 
+
+	/**
+	 * Test method for {@link model.JobList#getSummariesMyParks(model.ParkList, model.ParkManager)}.
+	 * @throws ParseException 
+	 */
+	@Test 
+	public void testGetSummariesMyParks() throws ParseException {
+		jobList1.add(j1);
+		jobList1.add(j2);
+		jobList1.add(j3);
+		jobList1.add(j4);
+		jobList1.add(j5);
+
+		jobList2.add(j1);
+		jobList2.add(j2);
+		jobList2.add(j3);
+		jobList2.add(j4);
+		jobList2.add(j5);
+		
+		jobList3.add(j3);
+
+
+		pList1.add(park1);
+		pList1.add(park2);
+		pList1.add(park3);
+		pList1.add(park4);
+		
+		String sum = jobList1.getSummariesMyParks(pList1, pm1);
+		String sum2 = jobList2.getSummariesMyParks(pList1, pm1);
+		String sum3 = jobList3.getSummariesMyParks(pList1, pm1);
+		System.out.println(sum);
+
+		assertTrue(sum.equals(sum2));
+		assertFalse(sum.equals(sum3));
+	}
 
 
 	/**
@@ -203,29 +243,21 @@ public class JobListTest {
 
 
 
-	/**
-	 * Test method for {@link model.JobList#getSummariesMyParks(model.ParkList, model.ParkManager)}.
-	 * @throws ParseException 
-	 */
-	@Test
-	public void testGetSummariesMyParks() throws ParseException {
-		jobList1.add(j1);
-		jobList1.add(j2);
-		jobList1.add(j3);
-		jobList1.add(j4);
-		jobList1.add(j5);
-		pList1.add(park1);
-//		String sum = jobList1.getSummariesMyParks(pList1, pm1);
-//		System.out.println(sum);
-		fail("not yet implemented");//TODO
-	}
+
 
 	/**
 	 * Test method for {@link model.JobList#getSummariesMyVolunteerJobs(model.Volunteer)}.
+	 * @throws ParseException 
 	 */
 	@Test
-	public void testGetSummariesMyVolunteerJobs() {
-		fail("Not yet implemented"); // TODO
+	public void testGetSummariesMyVolunteerJobs() throws ParseException {
+
+		j1.addMedVolunteer(v1);
+
+		jobList1.add(j1);
+		jobList2.add(j1);
+		String summaries = jobList1.getSummariesMyVolunteerJobs(v1);
+		assertEquals(summaries, jobList2.getSummariesMyVolunteerJobs(v1));
 	}
 
 
@@ -303,9 +335,9 @@ public class JobListTest {
 	 */
 	@Test
 	public void testHasJobOnSameDay() throws ParseException {
-		
+
 		j1.addLightVolunteer(v1);
-		
+
 		jobList1.add(j1);
 		assertTrue(jobList1.hasJobOnSameDay(v1, j7));
 		assertFalse(jobList1.hasJobOnSameDay(v1, j2));
