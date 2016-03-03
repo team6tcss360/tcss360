@@ -55,6 +55,9 @@ public class JobListTest {
 
 	private ParkManager pm1;
 	private Park park1;
+	private Park park2;
+	private Park park3;
+	private Park park4;
 	private ParkList pList1;
 	private Volunteer v1;
 
@@ -122,6 +125,10 @@ public class JobListTest {
 
 		v1 = new Volunteer("Chris", "Vishoot", "cshoot@uw.edu", "2063456677");
 		park1 = new Park("Point Defiance", "Tacoma", "Michael", "Ford");
+		park2 = new Park("Mount Rainier", "Puyallup", "Weiwei", "Shi");
+		park3 = new Park("Dash Point", "Federal Way", "Weiwei", "Shi");
+		park4 = new Park("South Park", "Seattle", "Jonathan", "Hughes");
+		
 		pList1 = new ParkList();
 		for(int i = 0; i < jobArr.length; i++){
 			maxJobs.add(jobArr[i]);
@@ -133,7 +140,7 @@ public class JobListTest {
 	 * Test method for {@link model.JobList#getSummariesMyParks(model.ParkList, model.ParkManager)}.
 	 * @throws ParseException 
 	 */
-	@Test (expected = NullPointerException.class)
+	@Test 
 	public void testGetSummariesMyParks() throws ParseException {
 		jobList1.add(j1);
 		jobList1.add(j2);
@@ -149,6 +156,10 @@ public class JobListTest {
 
 
 		pList1.add(park1);
+		pList1.add(park2);
+		pList1.add(park3);
+		pList1.add(park4);
+		
 		String sum = jobList1.getSummariesMyParks(pList1, pm1);
 		String sum2 = jobList2.getSummariesMyParks(pList1, pm1);
 		System.out.println(sum);
