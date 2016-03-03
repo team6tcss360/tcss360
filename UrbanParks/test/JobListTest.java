@@ -153,6 +153,8 @@ public class JobListTest {
 		jobList2.add(j3);
 		jobList2.add(j4);
 		jobList2.add(j5);
+		
+		jobList3.add(j3);
 
 
 		pList1.add(park1);
@@ -162,10 +164,11 @@ public class JobListTest {
 		
 		String sum = jobList1.getSummariesMyParks(pList1, pm1);
 		String sum2 = jobList2.getSummariesMyParks(pList1, pm1);
+		String sum3 = jobList3.getSummariesMyParks(pList1, pm1);
 		System.out.println(sum);
 
-		assertEquals(sum, sum2);
-		//		fail("not yet implemented");//TODO
+		assertTrue(sum.equals(sum2));
+		assertFalse(sum.equals(sum3));
 	}
 
 
