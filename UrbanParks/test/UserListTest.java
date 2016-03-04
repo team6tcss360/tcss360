@@ -21,13 +21,11 @@ import model.Volunteer;
  */
 
 public class UserListTest {
-	
 	/**UserLists for testing. */
 	UserList uList1;
 	UserList uList2;
 	UserList uList3;
 	ParkList pList1;
-	
 	
 	/** A volunteer for testing. */
 	private User vol2;
@@ -99,8 +97,6 @@ public class UserListTest {
         pList1 = new ParkList();
         
 	}
-
-
 
 	/**
 	 * Test method for {@link UserList#add(User)}.
@@ -177,55 +173,5 @@ public class UserListTest {
 		uList3.add(sm1);
 		assertTrue(uList2.equals(uList3));
 		assertFalse(uList2.equals(uList1));
-		
 	}
-
-	//	/**
-	//	 * Test method for {@link UserList#hashCode()}.
-	//	 */
-	//	@Test
-	//	public void testHashCode() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link UserList#UserList()}.
-	//	 */
-	//	@Test
-	//	public void testUserList() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link UserList#UserList(java.util.ArrayList)}.
-	//	 */
-	//	@Test
-	//	public void testUserListArrayListOfUser() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link UserList#size()}.
-	//	 */
-	//	@Test
-	//	public void testSize() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link UserList#getArrayList()}.
-	//	 */
-	//	@Test
-	//	public void testGetArrayList() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link UserList#toString()}.
-	//	 */
-	//	@Test
-	//	public void testToString() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
 }

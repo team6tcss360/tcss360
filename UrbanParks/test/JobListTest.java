@@ -128,13 +128,12 @@ public class JobListTest {
 		park2 = new Park("Mount Rainier", "Puyallup", "Weiwei", "Shi");
 		park3 = new Park("Dash Point", "Federal Way", "Weiwei", "Shi");
 		park4 = new Park("South Park", "Seattle", "Jonathan", "Hughes");
-		
+
 		pList1 = new ParkList();
 		for(int i = 0; i < jobArr.length; i++){
 			maxJobs.add(jobArr[i]);
 		}
 	}
-
 
 	/**
 	 * Test method for {@link model.JobList#getSummariesMyParks(model.ParkList, model.ParkManager)}.
@@ -153,7 +152,7 @@ public class JobListTest {
 		jobList2.add(j3);
 		jobList2.add(j4);
 		jobList2.add(j5);
-		
+
 		jobList3.add(j3);
 
 
@@ -161,7 +160,7 @@ public class JobListTest {
 		pList1.add(park2);
 		pList1.add(park3);
 		pList1.add(park4);
-		
+
 		String sum = jobList1.getSummariesMyParks(pList1, pm1);
 		String sum2 = jobList2.getSummariesMyParks(pList1, pm1);
 		String sum3 = jobList3.getSummariesMyParks(pList1, pm1);
@@ -170,7 +169,6 @@ public class JobListTest {
 		assertTrue(sum.equals(sum2));
 		assertFalse(sum.equals(sum3));
 	}
-
 
 	/**
 	 * Test method for {@link model.JobList#add(model.Job)}.
@@ -182,8 +180,6 @@ public class JobListTest {
 		assertEquals(1, jobList1.getArrayList().size());
 		assertFalse(j2.equals(jobList1.getJobAt(0)));
 	}
-
-
 
 	/**
 	 * Test method for {@link model.JobList#passesBusinessRulesEdit(model.Job, java.lang.String, java.lang.String)}.
@@ -204,9 +200,7 @@ public class JobListTest {
 	public void testRemove() throws ParseException {
 		jobList1.add(j1);
 		jobList1.add(j3);
-		//        for(Job j: jobList1.getArrayList()){
-		//        	System.out.println(j.toString());
-		//        }
+
 		assertEquals(2, jobList1.getArrayList().size());
 		jobList1.remove(j3);
 		assertEquals(1, jobList1.getArrayList().size());
@@ -224,8 +218,6 @@ public class JobListTest {
 		assertNotEquals(0, jobList1.findIndex(j1));
 	}
 
-
-
 	/**
 	 * Test method for {@link model.JobList#getJobAt(int)}.
 	 * @throws ParseException 
@@ -241,10 +233,6 @@ public class JobListTest {
 
 	}
 
-
-
-
-
 	/**
 	 * Test method for {@link model.JobList#getSummariesMyVolunteerJobs(model.Volunteer)}.
 	 * @throws ParseException 
@@ -259,8 +247,6 @@ public class JobListTest {
 		String summaries = jobList1.getSummariesMyVolunteerJobs(v1);
 		assertEquals(summaries, jobList2.getSummariesMyVolunteerJobs(v1));
 	}
-
-
 
 	/**
 	 * Test method for {@link model.JobList#hasMaxJobs()}.
@@ -355,7 +341,6 @@ public class JobListTest {
 		assertTrue(jobList1.isJobIDtaken(badJob.getJobID()));
 	}
 
-
 	/**
 	 * Test method for {@link model.JobList#equals(java.lang.Object)}.
 	 * @throws ParseException 
@@ -368,94 +353,4 @@ public class JobListTest {
 		assertTrue(jobList1.equals(jobList2));
 		assertFalse(jobList1.equals(jobList3));
 	}
-
-
-	//	/**
-	//	 * Test method for {@link model.JobList#formatDate(java.util.GregorianCalendar)}.
-	//	 */
-	//	@Test
-	//	public void testFormatDate() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#zeroOutTime(java.util.GregorianCalendar)}.
-	//	 */
-	//	@Test
-	//	public void testZeroOutTime() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#toString()}.
-	//	 */
-	//	@Test
-	//	public void testToString() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#getJob(int)}.
-	//	 */
-	//	@Test
-	//	public void testGetJob() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#size()}.
-	//	 */
-	//	@Test
-	//	public void testSize() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#getSummaries()}.
-	//	 */
-	//	@Test
-	//	public void testGetSummaries() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#getArrayList()}.
-	//	 */
-	//	@Test
-	//	public void testGetArrayList() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#hashCode()}.
-	//	 */
-	//	@Test
-	//	public void testHashCode() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-	//	/**
-	//	 * Test method for {@link model.JobList#JobList(java.util.ArrayList)}.
-	//	 */
-	//	@Test
-	//	public void testJobListArrayListOfJob() {
-	//		fail("Not yet implemented"); 
-	//	}
-
-
-	//	/**
-	//	 * Test method for {@link model.JobList#convertToCalender(java.lang.String)}.
-	//	 */
-	//	@Test
-	//	public void testConvertToCalender() {
-	//		fail("Not yet implemented");
-	//	}
-
-	//	 /**
-	//	  * Test method for {@link model.JobList#passesBusinessRules(java.lang.String, java.lang.String)}.
-	//	  */
-	//	 @Test
-	//	 public void testPassesBusinessRules() {
-	//		 fail("Not yet implemented"); 
-	//	 }
 }
