@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import model.Park;
 import model.ParkList;
-import model.ParkManager;
-import model.User;
 
 /**
  * A JUnit test class for ParkList Object.
@@ -34,23 +32,6 @@ public class ParkListTest {
 	private String park2Location;
 	private String park2FirstName;
 	private String park2LastName;
-
-	/** A third Park object for testing. */
-	private Park park3;
-
-	/** A User object for testing. */
-	private User pm1;
-	private String pm1FN;
-	private String pm1LN;
-	private String pm1EM;
-	private String pm1P;
-
-	/** A second park manager for testing. */
-	private User pm2;
-	private String pm2FN;
-	private String pm2LN;
-	private String pm2EM;
-	private String pm2P;
 	
 	private ParkList pList1;
 	
@@ -79,24 +60,10 @@ public class ParkListTest {
 		park2Name = "Discovery";
 		park2Location = "Seattle";
 		park2FirstName = "Michael";
-		park2LastName = "Ford";
-
-		pm1FN = "Chris";
-		pm1LN = "Vishoot";
-		pm1EM = "chris@mail.com";
-		pm1P  = "(206) 187-1492";
-
-		pm2FN = "Michael";
-		pm2LN = "Ford";
-		pm2EM = "fordm13@uw.edu";
-		pm2P = "(206) 123-4567";		
-
+		park2LastName = "Ford";		
 
 		park1 = new Park(park1Name, park1Location, park1FirstName, park1LastName);
 		park2 = new Park(park2Name, park2Location, park2FirstName, park2LastName);
-		park3 = new Park(park1Name, park1Location, park1FirstName, park1LastName);
-		pm1 = new ParkManager(pm1FN, pm1LN, pm1EM, pm1P);
-		pm2 = new ParkManager(pm2FN, pm2LN, pm2EM, pm2P);
 		
 		pList1 = new ParkList();
 		pList2 = new ParkList();
