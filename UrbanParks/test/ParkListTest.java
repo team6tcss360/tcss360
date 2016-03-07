@@ -155,45 +155,4 @@ public class ParkListTest {
 		assertTrue(pList1.equals(pList3));
 		assertFalse(pList1.equals(pList2));
 	}
-
-	//	/**
-	//	 * Test method for {@link ParkList#hashCode()}.
-	//	 */
-	//	@Test
-	//	public void testHashCode() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link ParkList#ParkList()}.
-	//	 */
-	//	@Test
-	//	public void testParkList() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link ParkList#ParkList(java.util.ArrayList)}.
-	//	 */
-	//	@Test
-	//	public void testParkListArrayListOfPark() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link ParkList#getArrayList()}.
-	//	 */
-	//	@Test
-	//	public void testGetArrayList() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
-	//	/**
-	//	 * Test method for {@link ParkList#toString()}.
-	//	 */
-	//	@Test
-	//	public void testToString() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-
 }
